@@ -1,4 +1,4 @@
-package br.com.fiap.postech.fastfood.adapter.outbound.database.entities
+package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities
 
 import jakarta.persistence.*
 import java.util.*
