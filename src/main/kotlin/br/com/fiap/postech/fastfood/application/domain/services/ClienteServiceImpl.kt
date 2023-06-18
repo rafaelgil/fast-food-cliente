@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.application.domain.services
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteDTO
+import br.com.fiap.postech.fastfood.application.domain.extension.toClienteModel
 import br.com.fiap.postech.fastfood.application.domain.models.Cliente
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.CPF
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.Email
@@ -13,11 +14,6 @@ class ClienteServiceImpl(
 ): ClienteServicePort {
 
     override fun cadastrar(clienteDTO: ClienteDTO) {
-        val cliente = Cliente(
-            cpf = CPF(clienteDTO.cpf),
-            nome = Nome(clienteDTO.nome),
-            email = Email(clienteDTO.email)
-        )
-        clienteRepositoryPort.cadastrar(cliente)
+        clienteRepositoryPort.cadastrar(clienteDTO.toClienteModel())
     }
 }
