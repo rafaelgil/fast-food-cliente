@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.8.21"
 	kotlin("plugin.spring") version "1.8.21"
 	kotlin("plugin.jpa") version "1.8.21"
+	id("org.flywaydb.flyway") version "9.19.4"
 }
 
 group = "br.com.fiap.postech"
@@ -25,7 +26,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.postgresql:postgresql:42.1.1")
+	implementation("org.postgresql:postgresql:42.2.1")
+	implementation("org.flywaydb:flyway-core:9.19.4")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -39,4 +41,10 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+flyway {
+	url = "jdbc:postgresql://localhost:5432/fast-food"
+	user = "postgres"
+	password = "Postgres2023!"
 }

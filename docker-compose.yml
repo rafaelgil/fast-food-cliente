@@ -4,6 +4,8 @@ services:
   postgres-compose:
     image: postgres
     environment:
+      POSTGRES_DB: fast-food
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "Postgres2023!"
     ports:
       - "5432:5432"
