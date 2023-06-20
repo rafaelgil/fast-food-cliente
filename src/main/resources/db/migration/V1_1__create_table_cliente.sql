@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS cliente (
-    id UUID NOT NULL default uuid_generate_v4(),
+    id UUID NOT NULL default gen_random_uuid(),
     cpf VARCHAR(11),
     nome VARCHAR(255),
     email VARCHAR(255),
