@@ -1,23 +1,25 @@
 package br.com.fiap.postech.fastfood.adapter.inbound
 
-import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteDTO
-import br.com.fiap.postech.fastfood.application.ports.interfaces.ClienteServicePort
+import br.com.fiap.postech.fastfood.application.domain.dtos.ProdutoDTO
+import br.com.fiap.postech.fastfood.application.ports.interfaces.ProdutoServicePort
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.UUID
 
 @RestController
 @RequestMapping("produto")
 class ProdutoController (
-    private val clienteServicePort: ClienteServicePort
+    private val produtoServicePort: ProdutoServicePort
 ) {
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun cadastrarCliente(@RequestBody cliente: ClienteDTO) {
-        clienteServicePort.cadastrar(cliente)
+    fun cadastrarProduto(@RequestBody produto: ProdutoDTO) {
+        produtoServicePort.cadastrar(produto)
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun update(@PathVariable id: UUID, @RequestBody produto: ProdutoDTO) {
+        produtoServicePort.atualizar(id, produto)
     }
 }
