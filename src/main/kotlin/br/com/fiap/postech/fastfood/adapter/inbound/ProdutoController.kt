@@ -22,4 +22,10 @@ class ProdutoController (
     fun update(@PathVariable id: UUID, @RequestBody produto: ProdutoDTO) {
         produtoServicePort.atualizar(id, produto)
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(@PathVariable id: UUID) {
+        produtoServicePort.remover(id)
+    }
 }

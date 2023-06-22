@@ -6,6 +6,6 @@ import java.util.UUID
 data class Produto (
     var id: UUID? = null,
     var descricao: Descricao,
-    var categoria: CategoriaProduto,
+    var categoria: Categoria,
     var preco: Preco
 )

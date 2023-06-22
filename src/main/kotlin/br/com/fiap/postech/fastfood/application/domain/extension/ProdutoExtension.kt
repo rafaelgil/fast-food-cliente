@@ -13,7 +13,7 @@ fun ProdutoDTO.toProdutoModel(id: UUID? = null) =
     Produto(
         id = id,
         descricao = Descricao(this.descricao),
-        categoria = CategoriaProduto.valueOf(Categoria(this.categoria).categoria.toUpperCase()),
+        categoria = Categoria(this.categoria),
         preco = Preco(this.preco)
     )
 
@@ -21,13 +21,13 @@ fun Produto.toProdutoEntity() =
     ProdutoEntity(
         id = this.id,
         descricao = this.descricao.descricao,
-        categoria = this.categoria.categoria,
+        categoria = CategoriaProduto.valueOf(this.categoria.categoria.toUpperCase()),
         preco = this.preco.valor
     )
 fun ProdutoEntity.toProdutoDTO() =
     ProdutoDTO(
         id = this.id,
         descricao = this.descricao,
-        categoria = this.categoria,
+        categoria = this.categoria.name,
         preco = this.preco
     )
