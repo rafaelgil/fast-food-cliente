@@ -12,7 +12,7 @@ class Descricao(val descricao: String) {
 
 class Categoria(val categoria: String) {
     init {
-        require(CategoriaProduto::class.java.enumConstants.any { it.categoria == categoria}) {
+        require(CategoriaProduto::class.java.enumConstants.any { it.name == categoria.toUpperCase()}) {
             "Categoria inválida"
         }
     }
@@ -25,9 +25,8 @@ class Preco(val valor: BigDecimal) {
         }
     }
 }
-
-enum class CategoriaProduto(val categoria: String){
-    LANCHE("Lanche"),
-    BEBIDA("Bebida"),
-    ACOMPANHAMENTO("Acompanhamento")
+enum class CategoriaProduto{
+    LANCHE,
+    BEBIDA,
+    ACOMPANHAMENTO
 }

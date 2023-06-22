@@ -6,4 +6,5 @@ import java.util.*
 interface ProdutoServicePort {
     fun cadastrar(produto: ProdutoDTO): ProdutoDTO
     fun atualizar(id: UUID, produto: ProdutoDTO): ProdutoDTO
+    fun remover(id: UUID)
 }

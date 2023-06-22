@@ -18,4 +18,8 @@ class ProdutoRepositoryImpl(
 
     override fun atualizar(produto: Produto) =
         produtoRepositorySpring.save(produto.toProdutoEntity())
+
+    override fun remover(id: UUID) {
+        produtoRepositorySpring.deleteById(id)
+    }
 }

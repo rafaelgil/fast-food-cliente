@@ -8,4 +8,5 @@ interface ProdutoRepositoryPort {
     fun cadastrar(produto: Produto): ProdutoEntity
     fun existeProduto(id: UUID): Boolean
     fun atualizar(produto: Produto): ProdutoEntity
+    fun remover(id: UUID)
 }

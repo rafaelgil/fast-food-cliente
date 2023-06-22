@@ -1,5 +1,7 @@
 package br.com.fiap.postech.fastfood.adapter.inbound.exception
 
+import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -19,4 +21,23 @@ class ControllerAdvice() {
         return ResponseEntity(erro, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 
+    @ExceptionHandler(NotFoundEntityException::class)
+    fun handleIllegalArgumentException(ex: NotFoundEntityException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.NOT_FOUND.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException::class)
+    fun handleIllegalArgumentException(ex: DataIntegrityViolationException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
 }
