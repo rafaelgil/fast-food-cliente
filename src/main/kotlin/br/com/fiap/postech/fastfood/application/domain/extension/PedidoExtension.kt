@@ -11,7 +11,9 @@ fun PedidoDTO.toPedidoModel() =
         lancheId = this.lancheId,
         bebidaId = this.bebidaId,
         acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
+        sobremesaId = this.sobremesaId,
+        dataPedido = this.dataPedido,
+        status = this.status,
     )
 
 fun Pedido.toPedidoEntity() =
@@ -20,17 +22,9 @@ fun Pedido.toPedidoEntity() =
         lancheId = this.lancheId,
         bebidaId = this.bebidaId,
         acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
-    )
-
-fun PedidoEntity.toPedidoDTO() =
-    PedidoDTO(
-        id = this.id,
-        clienteId = this.clienteId,
-        lancheId = this.lancheId,
-        bebidaId = this.bebidaId,
-        acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
+        sobremesaId = this.sobremesaId,
+        dataPedido = this.dataPedido,
+        status = this.status,
     )
 
 fun PedidoEntity.toPedidoModel(): Pedido {
@@ -40,7 +34,9 @@ fun PedidoEntity.toPedidoModel(): Pedido {
         lancheId = this.lancheId,
         bebidaId = this.bebidaId,
         acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
+        sobremesaId = this.sobremesaId,
+        dataPedido = this.dataPedido,
+        status = this.status,
     )
 }
 
@@ -51,6 +47,8 @@ fun Pedido.toPedidoDTO(): PedidoDTO {
         lancheId = this.lancheId,
         bebidaId = this.bebidaId,
         acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
+        sobremesaId = this.sobremesaId,
+        dataPedido = this.dataPedido,
+        status = this.status,
     )
 }

@@ -3,7 +3,9 @@ ALTER TABLE pedido
     ADD COLUMN lanche_id UUID,
     ADD COLUMN bebida_id UUID,
     ADD COLUMN acompanhamento_id UUID,
-    ADD COLUMN sobremesa_id UUID;
+    ADD COLUMN sobremesa_id UUID,
+    ADD COLUMN data_pedido TIMESTAMP,
+    ADD COLUMN status VARCHAR(50);
 
 ALTER TABLE pedido
     ADD CONSTRAINT fk_pedido_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id) ON DELETE SET NULL,
