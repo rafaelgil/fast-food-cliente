@@ -7,4 +7,5 @@ interface ProdutoServicePort {
     fun cadastrar(produto: ProdutoDTO): ProdutoDTO
     fun atualizar(id: UUID, produto: ProdutoDTO): ProdutoDTO
     fun remover(id: UUID)
+    fun buscarPorCategoria(categoria: String): List<ProdutoDTO>?
 }
