@@ -28,4 +28,9 @@ class ProdutoController (
     fun delete(@PathVariable id: UUID) {
         produtoServicePort.remover(id)
     }
+
+    @GetMapping("/categoria")
+    fun buscarPorCategoria(@RequestParam nome: String): List<ProdutoDTO>? {
+        return produtoServicePort.buscarPorCategoria(nome)
+    }
 }

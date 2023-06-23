@@ -3,6 +3,7 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.re
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.ProdutoRepositorySpring
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoEntity
 import br.com.fiap.postech.fastfood.application.domain.models.Produto
+import br.com.fiap.postech.fastfood.application.domain.valueObjets.CategoriaProduto
 import br.com.fiap.postech.fastfood.application.ports.repositories.ProdutoRepositoryPort
 import org.springframework.stereotype.Component
 import java.util.*
@@ -22,4 +23,7 @@ class ProdutoRepositoryImpl(
     override fun remover(id: UUID) {
         produtoRepositorySpring.deleteById(id)
     }
+
+    override fun buscarPorCategoria(categoria: CategoriaProduto) =
+        produtoRepositorySpring.findByCategoria(categoria)
 }
