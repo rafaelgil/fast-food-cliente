@@ -8,7 +8,6 @@ import br.com.fiap.postech.fastfood.application.domain.valueObjets.Categoria
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.CategoriaProduto
 import br.com.fiap.postech.fastfood.application.ports.interfaces.ProdutoServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.ProdutoRepositoryPort
-import java.lang.RuntimeException
 import java.util.*
 
 class ProdutoServiceImpl(
