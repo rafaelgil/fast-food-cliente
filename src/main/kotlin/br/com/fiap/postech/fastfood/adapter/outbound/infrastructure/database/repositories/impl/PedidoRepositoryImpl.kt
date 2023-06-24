@@ -1,13 +1,13 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.impl
 
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PedidoEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.PedidoRepositorySpring
-import br.com.fiap.postech.fastfood.application.domain.extension.toClienteEntity
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoEntity
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
-import br.com.fiap.postech.fastfood.application.domain.models.Cliente
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class PedidoRepositoryImpl(
@@ -21,5 +21,9 @@ class PedidoRepositoryImpl(
     override fun listar(): List<Pedido> {
         val pedidosEntities = pedidoRepositorySpring.findAll()
         return pedidosEntities.map { it.toPedidoModel() }
+    }
+
+    override fun busca(id: UUID): Optional<PedidoEntity> {
+        return pedidoRepositorySpring.findById(id)
     }
 }

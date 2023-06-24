@@ -52,9 +52,3 @@ fun Pedido.toPedidoDTO(): PedidoDTO {
         status = this.status,
     )
 }
-
-fun Pedido.toPedidoEntity(): PedidoEntity {
-    return PedidoEntity(
-        id = this.id
-    )
-}
