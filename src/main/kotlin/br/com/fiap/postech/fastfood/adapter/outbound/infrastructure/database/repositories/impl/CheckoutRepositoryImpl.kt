@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class CheckoutRepositoryImpl(
-        private val checkoutRepositorySpring: CheckoutRepositorySpring):
-    CheckoutRepositoryPort {
+        private val checkoutRepositorySpring: CheckoutRepositorySpring
+): CheckoutRepositoryPort {
 
     override fun enviaCheckout(checkout: Checkout) {
         checkoutRepositorySpring.save(checkout.toCheckoutEntity())

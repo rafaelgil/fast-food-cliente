@@ -33,7 +33,7 @@ class BeanConfiguration {
     }
 
     @Bean
-    fun checkoutService(checkoutRepositoryPort: CheckoutRepositoryPort): CheckoutServicePort {
-        return CheckoutServiceImpl(checkoutRepositoryPort)
+    fun checkoutService(checkoutRepositoryPort: CheckoutRepositoryPort, pedidoRepositoryPort: PedidoRepositoryPort): CheckoutServicePort {
+        return CheckoutServiceImpl(checkoutRepositoryPort, pedidoRepositoryPort)
     }
 }
