@@ -14,7 +14,8 @@ class CheckoutController (
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun enviaParaFila(@RequestBody checkout: CheckoutDTO) {
-        checkoutServicePort.enviaParaFila(checkout)
+    fun enviaParaFila(@RequestBody checkout: CheckoutDTO): CheckoutDTO {
+        var checkoutSended = checkoutServicePort.enviaParaFila(checkout)
+        return checkoutSended
     }
 }

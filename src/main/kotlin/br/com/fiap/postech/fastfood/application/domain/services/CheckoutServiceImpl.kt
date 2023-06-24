@@ -2,6 +2,7 @@ package br.com.fiap.postech.fastfood.application.domain.services
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
+import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutModel
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
 import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutServicePort
@@ -14,7 +15,7 @@ class CheckoutServiceImpl(
     private val pedidoRepositoryPort: PedidoRepositoryPort
 ): CheckoutServicePort {
 
-    override fun enviaParaFila(checkout: CheckoutDTO) {
+    override fun enviaParaFila(checkout: CheckoutDTO): CheckoutDTO {
 
         if (checkout.pedido?.id == null) {
             throw IllegalArgumentException("Pedido inválido!")
@@ -26,6 +27,7 @@ class CheckoutServiceImpl(
             throw NotFoundEntityException("Pedido não encontrado!")
         }
 
-        this.checkoutRepositoryPort.enviaCheckout(checkout.toCheckoutModel(pedido.get().toPedidoModel()))
+        var checkoutSended = this.checkoutRepositoryPort.enviaCheckout(checkout.toCheckoutModel(pedido.get().toPedidoModel()))
+        return checkoutSended.toCheckoutDTO()
     }
 }

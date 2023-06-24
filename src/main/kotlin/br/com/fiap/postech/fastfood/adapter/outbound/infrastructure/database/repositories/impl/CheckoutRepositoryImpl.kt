@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.impl
 
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.CheckoutEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.CheckoutRepositorySpring
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutEntity
 import br.com.fiap.postech.fastfood.application.domain.models.Checkout
@@ -11,7 +12,10 @@ class CheckoutRepositoryImpl(
         private val checkoutRepositorySpring: CheckoutRepositorySpring
 ): CheckoutRepositoryPort {
 
-    override fun enviaCheckout(checkout: Checkout) {
-        checkoutRepositorySpring.save(checkout.toCheckoutEntity())
+    override fun enviaCheckout(checkout: Checkout): CheckoutEntity {
+
+        var checkoutEntity = checkout.toCheckoutEntity()
+        checkoutRepositorySpring.save(checkoutEntity)
+        return checkoutEntity
     }
 }
