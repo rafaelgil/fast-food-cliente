@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface ClienteRepositorySpring : JpaRepository<ClienteEntity, UUID>
+interface ClienteRepositorySpring : JpaRepository<ClienteEntity, UUID> {
+    fun findByCpf(cpf: String): ClienteEntity
+}

@@ -12,4 +12,8 @@ class ClienteServiceImpl(
     override fun cadastrar(clienteDTO: ClienteDTO) {
         clienteRepositoryPort.cadastrar(clienteDTO.toClienteModel())
     }
+
+    override fun buscarClientePorCpf(cpf: String): ClienteDTO {
+        return clienteRepositoryPort.buscarClientePorCpf(cpf)
+    }
 }
