@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.application.domain.services
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
+import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequest
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutModel
@@ -15,19 +16,25 @@ class CheckoutServiceImpl(
     private val pedidoRepositoryPort: PedidoRepositoryPort
 ): CheckoutServicePort {
 
-    override fun enviaParaFila(checkout: CheckoutDTO): CheckoutDTO {
+    override fun enviaParaFila(checkoutRequest: CheckoutRequest): CheckoutDTO {
 
-        if (checkout.pedido?.id == null) {
+        var checkoutDto = checkoutRequest.toCheckoutDTO()
+
+        if (checkoutDto.idPedido == null) {
             throw IllegalArgumentException("Pedido inválido!")
         }
 
-        var pedido = pedidoRepositoryPort.busca(checkout.pedido.id!!)
+        var pedido = pedidoRepositoryPort.busca(checkoutDto.idPedido!!)
 
         if (pedido.isEmpty) {
             throw NotFoundEntityException("Pedido não encontrado!")
         }
 
-        var checkoutSended = this.checkoutRepositoryPort.enviaCheckout(checkout.toCheckoutModel(pedido.get().toPedidoModel()))
+//        if (this.checkoutRepositoryPort.existeCheckoutComPedido(pedido.id)) {
+//
+//        }
+
+        var checkoutSended = this.checkoutRepositoryPort.enviaCheckout(checkoutDto.toCheckoutModel(pedido.get().toPedidoModel()))
         return checkoutSended.toCheckoutDTO()
     }
 }
