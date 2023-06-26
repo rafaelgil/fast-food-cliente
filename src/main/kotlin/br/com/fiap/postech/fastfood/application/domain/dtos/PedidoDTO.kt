@@ -6,11 +6,11 @@ import java.util.*
 
 data class PedidoDTO (
     var id: UUID?,
-    var clienteId: UUID?,
-    var lancheId: UUID?,
-    var bebidaId: UUID?,
-    var acompanhamentoId: UUID?,
-    var sobremesaId: UUID?,
+    var lanche: ProdutoDTO?,
+    var bebida: ProdutoDTO?,
+    var acompanhamento: ProdutoDTO?,
+    var sobremesa: ProdutoDTO?,
     var dataPedido: LocalDateTime?,
-    var status: StatusPedido?
+    var status: StatusPedido?,
+    var cliente: ClienteDTO?
 )
