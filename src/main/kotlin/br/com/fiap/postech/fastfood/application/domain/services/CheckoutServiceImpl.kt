@@ -2,6 +2,7 @@ package br.com.fiap.postech.fastfood.application.domain.services
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequest
+import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutModel
@@ -37,13 +38,15 @@ class CheckoutServiceImpl(
 
         var checkoutFound = this.checkoutRepositoryPort.buscaCheckoutPeloPedido(pedidoFound.toPedidoEntity())
         if (checkoutFound.isPresent) {
-            var checkoutReprocessDto = checkoutFound.get().toCheckoutDTO()
-            checkoutReprocessDto.status = StatusCheckout.REENVIADO
-            checkoutReprocessDto.data = LocalDateTime.now()
-            return this.checkoutRepositoryPort.enviaCheckout(checkoutReprocessDto.toCheckoutModel(pedidoFound.toPedidoModel()))
-                .toCheckoutDTO()
+            checkoutDto = checkoutFound.get().toCheckoutDTO()
+            checkoutDto.status = StatusCheckout.REENVIADO
+            checkoutDto.data = LocalDateTime.now()
         }
-        return this.checkoutRepositoryPort.enviaCheckout(checkoutDto.toCheckoutModel(pedidoFound.toPedidoModel()))
+        return this.enviaCheckout(checkoutDto, pedidoFound)
+    }
+
+    private fun enviaCheckout(checkoutDTO: CheckoutDTO, pedidoDTO: PedidoDTO): CheckoutDTO {
+        return this.checkoutRepositoryPort.enviaCheckout(checkoutDTO.toCheckoutModel(pedidoDTO.toPedidoModel()))
             .toCheckoutDTO()
     }
 }
