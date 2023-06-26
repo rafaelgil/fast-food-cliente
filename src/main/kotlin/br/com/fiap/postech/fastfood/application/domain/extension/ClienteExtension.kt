@@ -22,3 +22,12 @@ fun Cliente.toClienteEntity(): ClienteEntity {
         email = this.email.email
     )
 }
+
+fun ClienteEntity.toClienteDTO(): ClienteDTO {
+    return ClienteDTO(
+        cpf = this.cpf,
+        nome = this.nome,
+        email = this.email
+    )
+}
+
