@@ -11,6 +11,7 @@ import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckou
 import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
+import java.time.LocalDateTime
 import java.util.*
 
 class CheckoutServiceImpl(
@@ -38,6 +39,7 @@ class CheckoutServiceImpl(
         if (checkoutFound.isPresent) {
             var checkoutReprocessDto = checkoutFound.get().toCheckoutDTO()
             checkoutReprocessDto.status = StatusCheckout.REENVIADO
+            checkoutReprocessDto.data = LocalDateTime.now()
             return this.checkoutRepositoryPort.enviaCheckout(checkoutReprocessDto.toCheckoutModel(pedidoFound.toPedidoModel()))
                 .toCheckoutDTO()
         }

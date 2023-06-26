@@ -2,6 +2,7 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.en
 
 import jakarta.persistence.*
 import jakarta.persistence.CascadeType.ALL
+import jakarta.persistence.CascadeType.MERGE
 import java.time.LocalDateTime
 import java.util.*
 
@@ -12,7 +13,7 @@ data class CheckoutEntity (
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @OneToOne(cascade = arrayOf(ALL))
+    @OneToOne(cascade = arrayOf(MERGE))
     @JoinColumn(name = "pedido_id")
     var pedido: PedidoEntity,
 
