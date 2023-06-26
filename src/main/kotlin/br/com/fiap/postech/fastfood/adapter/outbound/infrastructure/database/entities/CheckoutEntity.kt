@@ -2,6 +2,7 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.en
 
 import jakarta.persistence.*
 import jakarta.persistence.CascadeType.ALL
+import java.time.LocalDateTime
 import java.util.*
 
 @Entity(name = "checkout")
@@ -12,9 +13,12 @@ data class CheckoutEntity (
     var id: UUID? = null,
 
     @OneToOne(cascade = arrayOf(ALL))
-    @JoinColumn(name = "pedido_id", referencedColumnName = "id")
+    @JoinColumn(name = "pedido_id")
     var pedido: PedidoEntity,
 
     @Column(name = "status")
-    var status: String
+    var status: String,
+
+    @Column(name = "data")
+    var dataCheckout: LocalDateTime
 )

@@ -5,7 +5,9 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequest
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutModel
+import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoEntity
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
+import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
 import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
@@ -30,11 +32,16 @@ class CheckoutServiceImpl(
             throw NotFoundEntityException("Pedido não encontrado!")
         }
 
-//        if (this.checkoutRepositoryPort.existeCheckoutComPedido(pedido.id)) {
-//
-//        }
+        var pedidoFound = pedido.get()
 
-        var checkoutSended = this.checkoutRepositoryPort.enviaCheckout(checkoutDto.toCheckoutModel(pedido.get().toPedidoModel()))
-        return checkoutSended.toCheckoutDTO()
+        var checkoutFound = this.checkoutRepositoryPort.buscaCheckoutPeloPedido(pedidoFound.toPedidoEntity())
+        if (checkoutFound.isPresent) {
+            var checkoutReprocessDto = checkoutFound.get().toCheckoutDTO()
+            checkoutReprocessDto.status = StatusCheckout.REENVIADO
+            return this.checkoutRepositoryPort.enviaCheckout(checkoutReprocessDto.toCheckoutModel(pedidoFound.toPedidoModel()))
+                .toCheckoutDTO()
+        }
+        return this.checkoutRepositoryPort.enviaCheckout(checkoutDto.toCheckoutModel(pedidoFound.toPedidoModel()))
+            .toCheckoutDTO()
     }
 }

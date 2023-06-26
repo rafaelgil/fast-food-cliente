@@ -18,6 +18,7 @@ fun PedidoDTO.toPedidoModel() =
 
 fun Pedido.toPedidoEntity() =
     PedidoEntity(
+        id = this.id,
         clienteId = this.clienteId,
         lancheId = this.lancheId,
         bebidaId = this.bebidaId,
@@ -25,6 +26,7 @@ fun Pedido.toPedidoEntity() =
         sobremesaId = this.sobremesaId,
         dataPedido = this.dataPedido,
         status = this.status,
+        checkout = null
     )
 
 fun PedidoEntity.toPedidoModel(): Pedido {
@@ -50,5 +52,32 @@ fun Pedido.toPedidoDTO(): PedidoDTO {
         sobremesaId = this.sobremesaId,
         dataPedido = this.dataPedido,
         status = this.status,
+    )
+}
+
+fun PedidoEntity.toPedidoDTO(): PedidoDTO {
+    return PedidoDTO(
+        id = this.id,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId,
+        dataPedido = this.dataPedido,
+        status = this.status
+    )
+}
+
+fun PedidoDTO.toPedidoEntity(): PedidoEntity {
+    return PedidoEntity(
+        id = this.id,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId,
+        dataPedido = this.dataPedido,
+        status = this.status,
+        checkout = null
     )
 }

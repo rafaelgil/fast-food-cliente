@@ -31,5 +31,8 @@ data class PedidoEntity(
     var dataPedido: LocalDateTime?,
 
     @Column
-    var status: StatusPedido?
+    var status: StatusPedido?,
+
+    @OneToOne(mappedBy = "pedido")
+    var checkout: CheckoutEntity?
 )
