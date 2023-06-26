@@ -49,3 +49,12 @@ fun ProdutoEntity.toProdutoModel(): Produto {
         preco = Preco(this.preco)
     )
 }
+
+fun ProdutoDTO.toProdutoEntity(): ProdutoEntity {
+    return ProdutoEntity(
+        id = this.id,
+        descricao = this.descricao,
+        categoria = CategoriaProduto.valueOf(this.categoria.uppercase()),
+        preco = this.preco
+    )
+}

@@ -47,3 +47,10 @@ fun Cliente.toClienteDTO(): ClienteDTO {
     )
 }
 
+fun ClienteDTO.toClienteEntity(): ClienteEntity {
+    return ClienteEntity(
+        cpf = this.cpf.toString(),
+        nome = this.nome.toString(),
+        email = this.email.toString()
+    )
+}
