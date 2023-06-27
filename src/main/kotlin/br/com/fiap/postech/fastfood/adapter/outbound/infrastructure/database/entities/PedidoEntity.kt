@@ -4,6 +4,7 @@ import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPedido
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.UUID
+import jakarta.persistence.CascadeType.ALL
 
 @Entity(name="pedido")
 data class PedidoEntity(
@@ -12,23 +13,28 @@ data class PedidoEntity(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @Column
-    var clienteId: UUID?,
+    @OneToOne(cascade = [ALL])
+    @JoinColumn(name = "lanche_id", referencedColumnName = "id")
+    var lanche: ProdutoEntity?,
+
+    @OneToOne(cascade = [ALL])
+    @JoinColumn(name = "bebida_id", referencedColumnName = "id")
+    var bebida: ProdutoEntity?,
+
+    @OneToOne(cascade = [ALL])
+    @JoinColumn(name = "acompanhamento_id", referencedColumnName = "id")
+    var acompanhamento: ProdutoEntity?,
+
+    @OneToOne(cascade = [ALL])
+    @JoinColumn(name = "sobremesa_id", referencedColumnName = "id")
+    var sobremesa: ProdutoEntity?,
+
+    @OneToOne(cascade = arrayOf(ALL))
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    var cliente: ClienteEntity?,
 
     @Column
-    var lancheId: UUID?,
-
-    @Column
-    var bebidaId: UUID?,
-
-    @Column
-    var acompanhamentoId: UUID?,
-
-    @Column
-    var sobremesaId: UUID?,
-
-    @Column
-    var dataPedido: LocalDateTime?,
+    var data: LocalDateTime?,
 
     @Column
     var status: StatusPedido?,

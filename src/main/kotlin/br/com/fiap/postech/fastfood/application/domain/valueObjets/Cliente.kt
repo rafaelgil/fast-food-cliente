@@ -11,6 +11,10 @@ class CPF(val cpf: String) {
             "CPF deve ser válido"
         }
     }
+
+    override fun toString(): String {
+        return cpf
+    }
 }
 
 class Nome(val nome: String) {
@@ -18,6 +22,10 @@ class Nome(val nome: String) {
         require(!nome.isNullOrEmpty()) {
             "Nome deve ser informado"
         }
+    }
+
+    override fun toString(): String {
+        return nome
     }
 }
 
@@ -30,5 +38,9 @@ class Email(val email: String) {
         require(regex.containsMatchIn(email)) {
             "E-mail deve ser válido"
         }
+    }
+
+    override fun toString(): String {
+        return email
     }
 }

@@ -21,7 +21,7 @@ fun Produto.toProdutoEntity() =
     ProdutoEntity(
         id = this.id,
         descricao = this.descricao.descricao,
-        categoria = CategoriaProduto.valueOf(this.categoria.categoria.toUpperCase()),
+        categoria = CategoriaProduto.valueOf(this.categoria.categoria.uppercase()),
         preco = this.preco.valor
     )
 fun ProdutoEntity.toProdutoDTO() =
@@ -31,3 +31,30 @@ fun ProdutoEntity.toProdutoDTO() =
         categoria = this.categoria.name,
         preco = this.preco
     )
+
+fun Produto.toProdutoDTO(): ProdutoDTO {
+    return ProdutoDTO(
+        id = this.id,
+        descricao = this.descricao.descricao,
+        categoria = this.categoria.categoria,
+        preco = this.preco.valor
+    )
+}
+
+fun ProdutoEntity.toProdutoModel(): Produto {
+    return Produto(
+        id = this.id,
+        descricao = Descricao(this.descricao),
+        categoria = Categoria(this.categoria.name),
+        preco = Preco(this.preco)
+    )
+}
+
+fun ProdutoDTO.toProdutoEntity(): ProdutoEntity {
+    return ProdutoEntity(
+        id = this.id,
+        descricao = this.descricao,
+        categoria = CategoriaProduto.valueOf(this.categoria.uppercase()),
+        preco = this.preco
+    )
+}
