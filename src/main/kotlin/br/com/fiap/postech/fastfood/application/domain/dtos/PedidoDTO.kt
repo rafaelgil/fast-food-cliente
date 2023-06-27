@@ -10,7 +10,7 @@ data class PedidoDTO (
     var bebida: ProdutoDTO?,
     var acompanhamento: ProdutoDTO?,
     var sobremesa: ProdutoDTO?,
-    var dataPedido: LocalDateTime?,
+    var data: LocalDateTime?,
     var status: StatusPedido?,
     var cliente: ClienteDTO?
 )

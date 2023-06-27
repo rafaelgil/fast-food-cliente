@@ -34,7 +34,7 @@ data class PedidoEntity(
     var cliente: ClienteEntity?,
 
     @Column
-    var dataPedido: LocalDateTime?,
+    var data: LocalDateTime?,
 
     @Column
     var status: StatusPedido?,

@@ -12,7 +12,7 @@ fun PedidoDTO.toPedidoModel() =
         bebida = this.bebida?.toProdutoModel(),
         acompanhamento = this.acompanhamento?.toProdutoModel(),
         sobremesa = this.sobremesa?.toProdutoModel(),
-        dataPedido = this.dataPedido,
+        data = this.data,
         status = this.status,
     )
 
@@ -23,7 +23,7 @@ fun Pedido.toPedidoEntity() =
         bebida = this.bebida?.toProdutoEntity(),
         acompanhamento = this.acompanhamento?.toProdutoEntity(),
         sobremesa = this.sobremesa?.toProdutoEntity(),
-        dataPedido = this.dataPedido,
+        data = this.data,
         status = this.status,
         checkout = null
     )
@@ -36,7 +36,7 @@ fun PedidoEntity.toPedidoModel(): Pedido {
         bebida = this.bebida?.toProdutoModel(),
         acompanhamento = this.acompanhamento?.toProdutoModel(),
         sobremesa = this.sobremesa?.toProdutoModel(),
-        dataPedido = this.dataPedido,
+        data = this.data,
         status = this.status
     )
 }
@@ -49,7 +49,7 @@ fun Pedido.toPedidoDTO(): PedidoDTO {
         bebida = this.bebida?.toProdutoDTO(),
         acompanhamento = this.acompanhamento?.toProdutoDTO(),
         sobremesa = this.sobremesa?.toProdutoDTO(),
-        dataPedido = this.dataPedido,
+        data = this.data,
         status = this.status,
     )
 }
@@ -62,7 +62,7 @@ fun PedidoEntity.toPedidoDTO(): PedidoDTO {
         bebida = this.bebida?.toProdutoDTO(),
         acompanhamento = this.acompanhamento?.toProdutoDTO(),
         sobremesa = this.sobremesa?.toProdutoDTO(),
-        dataPedido = this.dataPedido,
+        data = this.data,
         status = this.status
     )
 }
@@ -75,7 +75,7 @@ fun PedidoDTO.toPedidoEntity(): PedidoEntity {
         bebida = this.bebida?.toProdutoEntity(),
         acompanhamento = this.acompanhamento?.toProdutoEntity(),
         sobremesa = this.sobremesa?.toProdutoEntity(),
-        dataPedido = this.dataPedido,
+        data = this.data,
         status = this.status,
         checkout = null
     )

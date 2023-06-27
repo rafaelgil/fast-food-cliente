@@ -11,6 +11,6 @@ data class Pedido(
     var bebida: Produto? = null,
     var acompanhamento: Produto? = null,
     var sobremesa: Produto? = null,
-    var dataPedido: LocalDateTime? = null,
+    var data: LocalDateTime? = null,
     var status: StatusPedido? = null
 )
