@@ -6,14 +6,26 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequest
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.models.Checkout
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
+import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
 import java.time.LocalDateTime
 
-fun CheckoutDTO.toCheckoutModel(pedido: Pedido): Checkout {
+fun CheckoutDTO.toCheckoutModel(): Checkout {
     return Checkout(
         id = this.id,
-        pedido = pedido,
+        pedido = Pedido(id = this.idPedido),
         status = this.status,
+        formaPagamento = FormaPagamento.QR_CODE,
+        data = this.data
+    )
+}
+
+fun Checkout.toCheckoutDTO(): CheckoutDTO {
+    return CheckoutDTO (
+        id = this.id,
+        idPedido = this.pedido?.id,
+        status = this.status,
+        formaPagamento = this.formaPagamento,
         data = this.data
     )
 }
@@ -21,8 +33,9 @@ fun CheckoutDTO.toCheckoutModel(pedido: Pedido): Checkout {
 fun Checkout.toCheckoutEntity(): CheckoutEntity {
     return CheckoutEntity(
         id = this.id,
-        pedido = this.pedido.toPedidoEntity(),
-        status = this.status.status,
+        pedido = this.pedido?.toPedidoEntity(),
+        status = this.status,
+        formaPagamento = this.formaPagamento,
         dataCheckout = this.data
     )
 }
@@ -30,8 +43,19 @@ fun Checkout.toCheckoutEntity(): CheckoutEntity {
 fun CheckoutEntity.toCheckoutDTO(): CheckoutDTO {
     return CheckoutDTO(
         id = this.id,
-        idPedido = this.pedido.id,
-        status = StatusCheckout.valueOf(this.status.uppercase()),
+        idPedido = this.pedido?.id,
+        status = this.status,
+        formaPagamento = this.formaPagamento,
+        data = this.dataCheckout
+    )
+}
+
+fun CheckoutEntity.toCheckoutModel(): Checkout {
+    return Checkout(
+        id = this.id,
+        pedido = this.pedido?.toPedidoModel(),
+        status = this.status,
+        formaPagamento = this.formaPagamento,
         data = this.dataCheckout
     )
 }
@@ -42,4 +66,8 @@ fun CheckoutRequest.toCheckoutDTO(): CheckoutDTO {
         status = StatusCheckout.ENVIADO,
         data = LocalDateTime.now()
     )
+}
+
+fun Checkout.estaProcessado(): Boolean {
+    return StatusCheckout.PAGAMENTO_APROVADO.equals(this.status)
 }

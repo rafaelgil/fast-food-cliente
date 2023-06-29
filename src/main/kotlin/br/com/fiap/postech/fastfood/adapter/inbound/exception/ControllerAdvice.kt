@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.inbound.exception
 
+import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcessedException
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.EmptyResultDataAccessException
@@ -50,5 +51,15 @@ class ControllerAdvice() {
         )
 
         return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(AlreadyProcessedException::class)
+    fun handleAlreadyProcessedException(ex: AlreadyProcessedException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            "Pagamento já efetuado"
+        )
+
+        return ResponseEntity(erro, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 }
