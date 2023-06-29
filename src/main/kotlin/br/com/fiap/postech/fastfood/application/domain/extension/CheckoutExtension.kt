@@ -2,7 +2,8 @@ package br.com.fiap.postech.fastfood.application.domain.extension
 
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.CheckoutEntity
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
-import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequestDTO
+import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequest
+import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.models.Checkout
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
@@ -59,7 +60,7 @@ fun CheckoutEntity.toCheckoutModel(): Checkout {
     )
 }
 
-fun CheckoutRequestDTO.toCheckoutDTO(): CheckoutDTO {
+fun CheckoutRequest.toCheckoutDTO(): CheckoutDTO {
     return CheckoutDTO(
         idPedido = this.idPedido,
         status = StatusCheckout.ENVIADO,

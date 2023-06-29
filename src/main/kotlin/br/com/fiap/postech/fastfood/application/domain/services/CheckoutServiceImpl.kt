@@ -1,7 +1,8 @@
 package br.com.fiap.postech.fastfood.application.domain.services
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
-import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequestDTO
+import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutRequest
+import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcessedException
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.extension.*
@@ -11,13 +12,14 @@ import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutService
 import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
 import java.time.LocalDateTime
+import java.util.*
 
 class CheckoutServiceImpl(
     private val checkoutRepositoryPort: CheckoutRepositoryPort,
     private val pedidoRepositoryPort: PedidoRepositoryPort
 ): CheckoutServicePort {
 
-    override fun enviaParaFila(checkoutRequest: CheckoutRequestDTO): CheckoutDTO {
+    override fun enviaParaFila(checkoutRequest: CheckoutRequest): CheckoutDTO {
 
         var checkoutDto = checkoutRequest.toCheckoutDTO()
 
