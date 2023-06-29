@@ -8,4 +8,6 @@ interface ClienteRepositoryPort {
     fun cadastrar(cliente: Cliente)
 
     fun buscarClientePorCpf(cpf: String): ClienteDTO
+
+    fun buscarCPFouEmailDuplicado(cpf: String, email: String): Boolean
 }

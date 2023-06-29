@@ -20,4 +20,8 @@ class ClienteRepositoryImpl(
     override fun buscarClientePorCpf(cpf: String): ClienteDTO {
         return clienteRepositorySpring.findByCpf(cpf).toClienteDTO()
     }
+
+    override fun buscarCPFouEmailDuplicado(cpf: String, email: String): Boolean {
+        return clienteRepositorySpring.existsCpfOrEmail(cpf,email)
+    }
 }
