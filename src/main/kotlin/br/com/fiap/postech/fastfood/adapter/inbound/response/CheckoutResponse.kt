@@ -1,13 +1,11 @@
-package br.com.fiap.postech.fastfood.application.domain.dtos
+package br.com.fiap.postech.fastfood.adapter.inbound.response
 
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
-import com.fasterxml.jackson.annotation.JsonProperty
-import org.apache.tomcat.util.buf.UDecoder
 import java.time.LocalDateTime
 import java.util.*
 
-data class CheckoutDTO(
+data class CheckoutResponse(
 
     var id: UUID? = null,
     var idPedido: UUID? = null,
