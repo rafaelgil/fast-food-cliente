@@ -13,15 +13,12 @@ class ProdutoController (
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun cadastrarProduto(@RequestBody produto: ProdutoDTO) {
+    fun cadastrarProduto(@RequestBody produto: ProdutoDTO) =
         produtoServicePort.cadastrar(produto)
-    }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun update(@PathVariable id: UUID, @RequestBody produto: ProdutoDTO) {
+    fun update(@PathVariable id: UUID, @RequestBody produto: ProdutoDTO) =
         produtoServicePort.atualizar(id, produto)
-    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

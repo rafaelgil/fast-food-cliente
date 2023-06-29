@@ -23,7 +23,11 @@ class ProdutoServiceImpl(
             throw NotFoundEntityException("Produto ${id} não encontrado")
         }
     override fun remover(id: UUID) {
-        produtoRepositoryPort.remover(id)
+        if(produtoRepositoryPort.existeProduto(id))
+            produtoRepositoryPort.remover(id)
+        else {
+            throw NotFoundEntityException("Produto ${id} não encontrado")
+        }
     }
 
     override fun buscarPorCategoria(categoria: String): List<ProdutoDTO>? {

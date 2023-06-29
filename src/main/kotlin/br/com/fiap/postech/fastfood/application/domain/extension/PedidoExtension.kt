@@ -18,6 +18,7 @@ fun PedidoDTO.toPedidoModel() =
 
 fun Pedido.toPedidoEntity() =
     PedidoEntity(
+        id = this.id,
         cliente = this.cliente?.toClienteEntity(),
         lanche = this.lanche?.toProdutoEntity(),
         bebida = this.bebida?.toProdutoEntity(),
