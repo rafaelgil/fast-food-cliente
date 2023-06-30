@@ -25,8 +25,8 @@ class PedidoRepositoryImpl(
         return pedidosEntities.map { it.toPedidoModel() }
     }
 
-    override fun busca(id: UUID): Optional<PedidoDTO> {
+    override fun busca(id: UUID): Optional<Pedido> {
         val pedidoEntity = pedidoRepositorySpring.findById(id)
-        return Optional.ofNullable(pedidoEntity.get().toPedidoDTO())
+        return Optional.ofNullable(pedidoEntity.get().toPedidoModel())
     }
 }
