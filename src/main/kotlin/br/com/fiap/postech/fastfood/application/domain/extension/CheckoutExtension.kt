@@ -32,32 +32,4 @@ fun Checkout.toCheckoutDTO(): CheckoutDTO {
     )
 }
 
-fun Checkout.toCheckoutEntity(): CheckoutEntity {
-    return CheckoutEntity(
-        id = this.id,
-        pedido = this.pedido?.toPedidoEntity(),
-        status = this.status,
-        pagamento = this.pagamento?.toPagamentoEntity(),
-        dataCheckout = this.data
-    )
-}
 
-fun CheckoutEntity.toCheckoutDTO(): CheckoutDTO {
-    return CheckoutDTO(
-        id = this.id,
-        pedido = this.pedido?.toPedidoDTO(),
-        status = this.status?.name,
-        pagamento = this.pagamento?.toPagamentoDTO(),
-        data = this.dataCheckout
-    )
-}
-
-fun CheckoutEntity.toCheckoutModel(): Checkout {
-    return Checkout(
-        id = this.id,
-        pedido = this.pedido?.toPedidoModel(),
-        status = this.status,
-        pagamento = this.pagamento?.toPagamentoModel(),
-        data = this.dataCheckout
-    )
-}
