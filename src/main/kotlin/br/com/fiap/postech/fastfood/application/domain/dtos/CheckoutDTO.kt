@@ -15,3 +15,12 @@ data class CheckoutDTO(
     var formaPagamento: FormaPagamento? = null,
     var data: LocalDateTime? = null
 )
+
+data class CheckoutRequest (
+
+    @JsonProperty("id_pedido")
+    var idPedido: UUID? = null,
+
+    @JsonProperty("forma_pagamento")
+    var formaPagamento: String? = null
+)
