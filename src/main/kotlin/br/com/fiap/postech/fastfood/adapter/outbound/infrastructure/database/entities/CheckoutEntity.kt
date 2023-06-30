@@ -1,9 +1,9 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities
 
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
 import jakarta.persistence.*
-import jakarta.persistence.CascadeType.*
+import jakarta.persistence.CascadeType.MERGE
+import jakarta.persistence.CascadeType.PERSIST
 import java.time.LocalDateTime
 import java.util.*
 
@@ -14,7 +14,7 @@ data class CheckoutEntity (
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @OneToOne(cascade = [MERGE, REFRESH])
+    @OneToOne(cascade = [MERGE])
     @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     var pedido: PedidoEntity? = null,
 

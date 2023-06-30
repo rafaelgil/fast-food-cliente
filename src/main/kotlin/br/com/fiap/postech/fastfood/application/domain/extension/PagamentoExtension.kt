@@ -15,6 +15,15 @@ fun Pagamento.toPagamentoEntity(): PagamentoEntity {
     )
 }
 
+fun Pagamento.toPagamentoDTO(): PagamentoDTO {
+    return PagamentoDTO(
+        id = this.id,
+        formaPagamento = this.formaPagamento?.name,
+        valor = this.valor,
+        status = this.status?.name
+    )
+}
+
 fun PagamentoDTO.toPagamentoModel(): Pagamento {
     return Pagamento(
         id = this.id,
