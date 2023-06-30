@@ -3,6 +3,7 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.re
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PedidoEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.PedidoRepositorySpring
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
+import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoEntity
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
@@ -27,6 +28,10 @@ class PedidoRepositoryImpl(
 
     override fun busca(id: UUID): Optional<Pedido> {
         val pedidoEntity = pedidoRepositorySpring.findById(id)
-        return Optional.ofNullable(pedidoEntity.get().toPedidoModel())
+        if (pedidoEntity.isPresent) {
+            var pedido = pedidoEntity.get()
+            return Optional.of(pedido.toPedidoModel())
+        }
+        return Optional.ofNullable(null)
     }
 }

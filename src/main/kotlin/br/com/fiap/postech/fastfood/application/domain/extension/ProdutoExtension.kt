@@ -17,6 +17,14 @@ fun ProdutoDTO.toProdutoModel(id: UUID? = null) =
         preco = Preco(this.preco)
     )
 
+fun ProdutoDTO.toProdutoModel() =
+    Produto(
+        id = this.id,
+        descricao = Descricao(this.descricao),
+        categoria = Categoria(this.categoria),
+        preco = Preco(this.preco)
+    )
+
 fun Produto.toProdutoEntity() =
     ProdutoEntity(
         id = this.id,

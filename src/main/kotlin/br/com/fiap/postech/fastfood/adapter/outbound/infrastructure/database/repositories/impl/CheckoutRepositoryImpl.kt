@@ -25,7 +25,11 @@ class CheckoutRepositoryImpl(
 
     override fun buscaCheckoutPeloPedido(pedido: Pedido): Optional<Checkout> {
         var checkoutResult = checkoutRepositorySpring.findByPedido(pedido.toPedidoEntity())
-        var checkout = checkoutResult.get()
-        return Optional.of(checkout.toCheckoutModel())
+
+        if (checkoutResult.isPresent) {
+            var checkout = checkoutResult.get()
+            return Optional.of(checkout.toCheckoutModel())
+        }
+        return Optional.ofNullable(null)
     }
 }

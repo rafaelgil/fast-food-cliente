@@ -4,20 +4,20 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PagamentoDTO
 import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcessedException
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
-import br.com.fiap.postech.fastfood.application.domain.extension.estaProcessado
-import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutDTO
-import br.com.fiap.postech.fastfood.application.domain.extension.toCheckoutModel
-import br.com.fiap.postech.fastfood.application.domain.extension.toPagamentoModel
+import br.com.fiap.postech.fastfood.application.domain.extension.*
 import br.com.fiap.postech.fastfood.application.domain.models.Checkout
+import br.com.fiap.postech.fastfood.application.domain.models.Pagamento
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
+import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPagamento
 import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutServicePort
 import br.com.fiap.postech.fastfood.application.ports.interfaces.PagamentoServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.util.*
 
 class CheckoutServiceImpl(
     private val checkoutRepositoryPort: CheckoutRepositoryPort,
@@ -31,35 +31,37 @@ class CheckoutServiceImpl(
             throw IllegalArgumentException("Pedido inválido!")
         }
 
-        var pedido = pedidoRepositoryPort.busca(checkoutDto.pedido!!.id!!)
-
-        if (pedido.isEmpty) {
-            throw NotFoundEntityException("Pedido não encontrado!")
-        }
-
-        var pedidoFound = pedido.get()
-
-        var checkoutFound = this.checkoutRepositoryPort.buscaCheckoutPeloPedido(pedido.get())
-        var checkout: Checkout? = null
+        var pedido = this.buscaPedido(checkoutDto.pedido!!.id!!)
+        var checkoutFound = this.checkoutRepositoryPort.buscaCheckoutPeloPedido(pedido)
+        var checkout: Checkout?
 
         if (checkoutFound.isPresent) {
             checkout = checkoutFound.get()
-//            validaCheckoutEncontrado(checkout)
             checkout.status = StatusCheckout.REENVIADO
             checkout.data = LocalDateTime.now()
         } else {
-            var valor = calculaValor(pedidoFound)
+            var valor = this.calculaValor(pedido)
             var pagamentoDTO = PagamentoDTO(
                 formaPagamento = FormaPagamento.QR_CODE.name,
                 valor = valor
             )
 
-            var pagamentoResult = pagamentoServicePort.efetuaPagamento(pagamentoDTO)
+            var pagamentoResult = efetuaPagamento(pagamentoDTO)
+            checkoutDto.pedido = pedido.toPedidoDTO()
 
             checkout = checkoutDto.toCheckoutModel()
-            checkout.pagamento = pagamentoResult.toPagamentoModel()
+            checkout.pagamento = pagamentoResult
         }
         return this.enviaCheckout(checkout)
+    }
+
+    private fun buscaPedido(idPedido: UUID): Pedido {
+        var pedidoFound = this.pedidoRepositoryPort.busca(idPedido)
+        if (pedidoFound.isPresent) {
+            return  pedidoFound.get()
+        } else {
+            throw NotFoundEntityException("Pedido não encontrado!")
+        }
     }
 
     private fun calculaValor(pedidoFound: Pedido): BigDecimal {
@@ -81,18 +83,31 @@ class CheckoutServiceImpl(
             valor = valor.add(pedidoFound?.sobremesa!!.preco.valor)
         }
 
-
         return valor
+    }
+
+    private fun efetuaPagamento(pagamentoDTO: PagamentoDTO): Pagamento {
+        var pagamentoResult = this.pagamentoServicePort.efetuaPagamento(pagamentoDTO)
+        validaPagamento(pagamentoResult)
+        return pagamentoResult
+    }
+
+    private fun validaPagamento(pagamento: Pagamento) {
+        if (pagamento == null || pagamento.id == null) {
+            throw IllegalArgumentException("Pagamento inválido.")
+        }
+
+        if (pagamento.status == null) {
+            throw IllegalArgumentException("Pagamento com status inválido.")
+        }
+
+        if (!StatusPagamento.APROVADO.equals(pagamento.status)) {
+            throw IllegalArgumentException("Pagamento Não aprovado")
+        }
     }
 
     private fun enviaCheckout(checkout: Checkout): CheckoutDTO {
         return this.checkoutRepositoryPort.enviaCheckout(checkout)
             .toCheckoutDTO()
-    }
-
-    private fun validaCheckoutEncontrado(checkout: Checkout) {
-        if(checkout.estaProcessado()) {
-            throw AlreadyProcessedException("Pagamento já efetuado")
-        }
     }
 }

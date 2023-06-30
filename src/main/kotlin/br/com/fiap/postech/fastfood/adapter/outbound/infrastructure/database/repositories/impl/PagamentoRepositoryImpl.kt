@@ -12,6 +12,7 @@ class PagamentoRepositoryImpl(
     private val pagamentoRepositorySpring: PagamentoRepositorySpring
 ): PagamentoRepositoryPort {
     override fun efetuaPagamento(pagamento: Pagamento): PagamentoEntity {
-        return pagamentoRepositorySpring.save(pagamento.toPagamentoEntity())
+        var pagamentoEntity = pagamentoRepositorySpring.save(pagamento.toPagamentoEntity())
+        return pagamentoEntity
     }
 }
