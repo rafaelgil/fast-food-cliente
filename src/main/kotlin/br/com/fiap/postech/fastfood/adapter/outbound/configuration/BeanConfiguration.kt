@@ -1,16 +1,11 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.configuration
 
-import br.com.fiap.postech.fastfood.application.domain.services.CheckoutServiceImpl
-import br.com.fiap.postech.fastfood.application.domain.services.ClienteServiceImpl
-import br.com.fiap.postech.fastfood.application.domain.services.PedidoServiceImpl
-import br.com.fiap.postech.fastfood.application.domain.services.ProdutoServiceImpl
+import br.com.fiap.postech.fastfood.application.domain.services.*
 import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutServicePort
 import br.com.fiap.postech.fastfood.application.ports.interfaces.ClienteServicePort
+import br.com.fiap.postech.fastfood.application.ports.interfaces.PagamentoServicePort
 import br.com.fiap.postech.fastfood.application.ports.interfaces.ProdutoServicePort
-import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort
-import br.com.fiap.postech.fastfood.application.ports.repositories.ClienteRepositoryPort
-import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
-import br.com.fiap.postech.fastfood.application.ports.repositories.ProdutoRepositoryPort
+import br.com.fiap.postech.fastfood.application.ports.repositories.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -32,8 +27,14 @@ class BeanConfiguration {
         return PedidoServiceImpl(pedidoRepositoryPort)
     }
 
+
     @Bean
-    fun checkoutService(checkoutRepositoryPort: CheckoutRepositoryPort, pedidoRepositoryPort: PedidoRepositoryPort): CheckoutServicePort {
-        return CheckoutServiceImpl(checkoutRepositoryPort, pedidoRepositoryPort)
+    fun checkoutService(checkoutRepositoryPort: CheckoutRepositoryPort, pedidoRepositoryPort: PedidoRepositoryPort, pagamentoServicePort: PagamentoServicePort): CheckoutServicePort {
+        return CheckoutServiceImpl(checkoutRepositoryPort, pedidoRepositoryPort, pagamentoServicePort)
+    }
+
+    @Bean
+    fun pagamentoService(pagamentoRepositoryPort: PagamentoRepositoryPort): PagamentoServicePort {
+        return PagamentoServiceImpl(pagamentoRepositoryPort)
     }
 }

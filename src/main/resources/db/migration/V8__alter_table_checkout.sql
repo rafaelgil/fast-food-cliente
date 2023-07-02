@@ -1,0 +1,3 @@
+ALTER TABLE checkout
+    ADD COLUMN forma_pagamento VARCHAR(20) NOT NULL,
+    ALTER COLUMN status TYPE VARCHAR(20);

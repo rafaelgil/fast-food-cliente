@@ -1,6 +1,8 @@
 package br.com.fiap.postech.fastfood.adapter.inbound.exception
 
+import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcessedException
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
+import br.com.fiap.postech.fastfood.application.domain.exception.ViolatesUniqueConstraintException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.HttpStatus
@@ -42,6 +44,16 @@ class ControllerAdvice() {
         return ResponseEntity(erro, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
+    @ExceptionHandler(ViolatesUniqueConstraintException::class)
+    fun handleViolatesUniqueConstraintException(ex: ViolatesUniqueConstraintException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.UNPROCESSABLE_ENTITY)
+    }
+
     @ExceptionHandler(EmptyResultDataAccessException::class)
     fun handleEmptyResultDataAccessException(ex: EmptyResultDataAccessException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val erro = ErrorResponse(
@@ -50,5 +62,15 @@ class ControllerAdvice() {
         )
 
         return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(AlreadyProcessedException::class)
+    fun handleAlreadyProcessedException(ex: AlreadyProcessedException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            "Pagamento já efetuado"
+        )
+
+        return ResponseEntity(erro, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 }

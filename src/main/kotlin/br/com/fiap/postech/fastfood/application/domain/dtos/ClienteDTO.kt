@@ -1,7 +1,17 @@
 package br.com.fiap.postech.fastfood.application.domain.dtos
 
-data class ClienteDTO (
+import java.util.*
 
+data class ClienteDTO (
+    var id: UUID? = null,
+    var cpf: String? = null,
+    var nome: String? = null,
+    var email: String? = null
+)
+
+data class ClienteResponseDTO (
+
+    var id: UUID? = null,
     var cpf: String? = null,
     var nome: String? = null,
     var email: String? = null

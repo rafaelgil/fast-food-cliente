@@ -1,6 +1,8 @@
 package br.com.fiap.postech.fastfood.application.domain.extension
 
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PedidoEntity
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteDTO
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteModel
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 
@@ -18,6 +20,7 @@ fun PedidoDTO.toPedidoModel() =
 
 fun Pedido.toPedidoEntity() =
     PedidoEntity(
+        id = this.id,
         cliente = this.cliente?.toClienteEntity(),
         lanche = this.lanche?.toProdutoEntity(),
         bebida = this.bebida?.toProdutoEntity(),

@@ -6,3 +6,4 @@ enum class StatusCheckout(val status: String) {
     RECEBIDO("Recebido"),
     CANCELADO("Cancelado")
 }
+
