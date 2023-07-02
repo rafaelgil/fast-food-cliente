@@ -10,6 +10,7 @@ import br.com.fiap.postech.fastfood.application.domain.extension.toClienteEntity
 import br.com.fiap.postech.fastfood.application.domain.models.Cliente
 import br.com.fiap.postech.fastfood.application.ports.repositories.ClienteRepositoryPort
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class ClienteRepositoryImpl(
@@ -23,6 +24,10 @@ class ClienteRepositoryImpl(
 
     override fun buscarClientePorCpf(cpf: String): ClienteResponseDTO {
         return clienteRepositorySpring.findByCpf(cpf).toClienteResponseDTO()
+    }
+
+    override fun buscarClientePorId(id: UUID): ClienteResponseDTO {
+        return clienteRepositorySpring.findById(id).get().toClienteResponseDTO()
     }
 
     override fun buscarCPFouEmailDuplicado(cpf: String, email: String): Boolean {

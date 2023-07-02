@@ -5,6 +5,8 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.UUID
 import jakarta.persistence.CascadeType.*
+import org.hibernate.annotations.Fetch
+import org.hibernate.annotations.FetchMode
 
 @Entity(name="pedido")
 data class PedidoEntity(
@@ -13,25 +15,41 @@ data class PedidoEntity(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @OneToOne(cascade = [PERSIST])
-    @JoinColumn(name = "lanche_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lanche_id", referencedColumnName = "id", insertable = false, updatable = false)
     var lanche: ProdutoEntity?,
 
-    @OneToOne(cascade = [PERSIST])
-    @JoinColumn(name = "bebida_id", referencedColumnName = "id")
+    @Column(name = "lanche_id")
+    var lancheId: UUID? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bebida_id", referencedColumnName = "id", insertable = false, updatable = false)
     var bebida: ProdutoEntity?,
 
-    @OneToOne(cascade = [PERSIST])
-    @JoinColumn(name = "acompanhamento_id", referencedColumnName = "id")
+    @Column(name = "bebida_id")
+    var bebidaId: UUID? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "acompanhamento_id", referencedColumnName = "id", insertable = false, updatable = false)
     var acompanhamento: ProdutoEntity?,
 
-    @OneToOne(cascade = [PERSIST])
-    @JoinColumn(name = "sobremesa_id", referencedColumnName = "id")
+    @Column(name = "acompanhamento_id")
+    var acompanhamentoId: UUID? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sobremesa_id", referencedColumnName = "id", insertable = false, updatable = false)
     var sobremesa: ProdutoEntity?,
 
-    @OneToOne(cascade = arrayOf(PERSIST))
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    var cliente: ClienteEntity?,
+    @Column(name = "sobremesa_id")
+    var sobremesaId: UUID? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @Fetch(FetchMode.JOIN)
+    var cliente: ClienteEntity? = null,
+
+    @Column(name = "cliente_id")
+    var clienteId: UUID? = null,
 
     @Column
     var data: LocalDateTime?,
@@ -40,5 +58,5 @@ data class PedidoEntity(
     var status: StatusPedido?,
 
     @OneToOne(mappedBy = "pedido")
-    var checkout: CheckoutEntity?
+    var checkout: CheckoutEntity?,
 )

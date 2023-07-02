@@ -9,6 +9,7 @@ import br.com.fiap.postech.fastfood.application.domain.valueObjets.Nome
 
 fun ClienteDTO.toClienteModel(): Cliente {
     return Cliente(
+        id = this.id,
         cpf = CPF(this.cpf ?: ""),
         nome = Nome(this.nome ?: ""),
         email = Email(this.email ?: "")

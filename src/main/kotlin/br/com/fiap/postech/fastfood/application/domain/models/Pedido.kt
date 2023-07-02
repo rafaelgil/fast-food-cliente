@@ -12,5 +12,10 @@ data class Pedido(
     var acompanhamento: Produto? = null,
     var sobremesa: Produto? = null,
     var data: LocalDateTime? = null,
-    var status: StatusPedido? = null
+    var status: StatusPedido? = null,
+    var clienteId: UUID? = null,
+    var lancheId: UUID? = null,
+    var bebidaId: UUID? = null,
+    var acompanhamentoId: UUID? = null,
+    var sobremesaId: UUID? = null,
 )

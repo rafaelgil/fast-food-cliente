@@ -7,7 +7,8 @@ import java.util.*
 
 interface PedidoRepositoryPort {
 
-    fun cadastrar(pedido: Pedido)
+    fun cadastrar(pedido: Pedido): PedidoDTO
+    fun atualizar(pedido: Pedido): PedidoDTO
     fun listar(): List<Pedido>
     fun busca(id: UUID): Optional<Pedido>
 }
