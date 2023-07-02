@@ -8,10 +8,7 @@ import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.to
 import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.ProdutoDTO
-import br.com.fiap.postech.fastfood.application.domain.extension.toClienteEntity
-import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoDTO
-import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoEntity
-import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoModel
+import br.com.fiap.postech.fastfood.application.domain.extension.*
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 import java.math.BigDecimal
 
@@ -26,6 +23,11 @@ fun Pedido.toPedidoEntity() =
         data = this.data,
         status = this.status,
         checkout = null,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId
     )
 
 fun PedidoEntity.toPedidoModel(): Pedido {
@@ -38,6 +40,11 @@ fun PedidoEntity.toPedidoModel(): Pedido {
         sobremesa = this.sobremesa?.toProdutoModel(),
         data = this.data,
         status = this.status,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId
     )
 }
 
@@ -51,19 +58,29 @@ fun PedidoEntity.toPedidoDTO(): PedidoDTO {
         sobremesa = this.sobremesa?.toProdutoDTO(),
         data = this.data,
         status = this.status,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId
     )
 }
 
 fun PedidoRequest.toPedidoDTO(): PedidoDTO {
     return PedidoDTO(
         id = null,
-        cliente = this.cliente?.toClienteDTO(),
+        cliente = null,
         lanche = null,
         bebida = null,
         acompanhamento = null,
         sobremesa = null,
         data = null,
         status = null,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId
     )
 }
 

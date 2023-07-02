@@ -1,12 +1,21 @@
 package br.com.fiap.postech.fastfood.adapter.inbound.request
 
-import br.com.fiap.postech.fastfood.adapter.inbound.response.ClienteResponse
-import br.com.fiap.postech.fastfood.adapter.inbound.response.ProdutoResponse
+import com.fasterxml.jackson.annotation.JsonProperty
+import java.util.*
 
 data class PedidoRequest(
-    var cliente: ClienteResponse? = null,
-    var lanche: ProdutoResponse? = null,
-    var bebida: ProdutoResponse? = null,
-    var acompanhamento: ProdutoResponse? = null,
-    var sobremesa: ProdutoResponse? = null,
+    @JsonProperty("id_cliente")
+    var clienteId: UUID? = null,
+
+    @JsonProperty("id_lanche")
+    var lancheId: UUID? = null,
+
+    @JsonProperty("id_bebida")
+    var bebidaId: UUID? = null,
+
+    @JsonProperty("id_acompanhamento")
+    var acompanhamentoId: UUID? = null,
+
+    @JsonProperty("id_sobremesa")
+    var sobremesaId: UUID? = null
 )

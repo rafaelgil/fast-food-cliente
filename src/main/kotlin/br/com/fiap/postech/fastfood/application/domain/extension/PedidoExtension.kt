@@ -15,6 +15,11 @@ fun PedidoDTO.toPedidoModel() =
         sobremesa = this.sobremesa?.toProdutoModel(),
         data = this.data,
         status = this.status,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId
     )
 
 fun Pedido.toPedidoDTO(): PedidoDTO {
@@ -27,5 +32,10 @@ fun Pedido.toPedidoDTO(): PedidoDTO {
         sobremesa = this.sobremesa?.toProdutoDTO(),
         data = this.data,
         status = this.status,
+        clienteId = this.clienteId,
+        lancheId = this.lancheId,
+        bebidaId = this.bebidaId,
+        acompanhamentoId = this.acompanhamentoId,
+        sobremesaId = this.sobremesaId
     )
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 
 fun CheckoutRequest.toCheckoutDTO(): CheckoutDTO {
     return CheckoutDTO(
-        pedido = PedidoDTO(id = this.idPedido, data = null, status = null, acompanhamento = null, bebida = null, cliente = null, lanche = null, sobremesa = null),
+        pedido = PedidoDTO(id = this.idPedido, data = null, status = null, acompanhamento = null, bebida = null, cliente = null, lanche = null, sobremesa = null, clienteId = null, lancheId = null, bebidaId = null, acompanhamentoId = null, sobremesaId = null),
         status = StatusCheckout.ENVIADO.name,
         data = LocalDateTime.now()
     )

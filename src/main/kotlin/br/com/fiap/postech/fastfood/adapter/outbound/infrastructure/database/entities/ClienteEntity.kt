@@ -17,5 +17,5 @@ class ClienteEntity (
     var nome: String,
 
     @Column
-    var email: String
+    var email: String,
 )

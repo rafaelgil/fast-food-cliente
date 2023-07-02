@@ -13,4 +13,9 @@ data class PedidoDTO (
     var data: LocalDateTime?,
     var status: StatusPedido?,
     var cliente: ClienteDTO?,
+    var clienteId: UUID?,
+    var lancheId: UUID?,
+    var bebidaId: UUID?,
+    var acompanhamentoId: UUID?,
+    var sobremesaId: UUID?
 )
