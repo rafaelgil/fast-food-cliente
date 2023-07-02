@@ -24,6 +24,13 @@ class PedidoController (
         return pedido
     }
 
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun atualizar(@RequestBody pedidoRequest: PedidoRequest): PedidoResponse {
+        var pedido = pedidoServicePort.atualizar(pedidoRequest.toPedidoDTO()).toPedidoResponse()
+        return pedido
+    }
+
     @GetMapping("/listar")
     @ResponseStatus(HttpStatus.OK)
     fun listar(): List<PedidoResponse> {

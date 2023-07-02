@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
 data class PedidoRequest(
+    @JsonProperty("id")
+    var id: UUID? = null,
+
     @JsonProperty("id_cliente")
     var clienteId: UUID? = null,
 

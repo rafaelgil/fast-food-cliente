@@ -21,6 +21,10 @@ class PedidoServiceImpl(
         return pedidoRepositoryPort.cadastrar(pedidoDTO.toPedidoModel())
     }
 
+    override fun atualizar(pedidoDTO: PedidoDTO): PedidoDTO {
+        return pedidoRepositoryPort.atualizar(pedidoDTO.toPedidoModel())
+    }
+
     override fun listar(): List<PedidoDTO> {
         val pedidos = pedidoRepositoryPort.listar()
         return pedidos.map { it.toPedidoDTO() }

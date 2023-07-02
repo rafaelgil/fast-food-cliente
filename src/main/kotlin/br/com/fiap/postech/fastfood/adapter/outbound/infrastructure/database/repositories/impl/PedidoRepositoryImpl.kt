@@ -32,6 +32,27 @@ class PedidoRepositoryImpl(
         return pedidoEntity.toPedidoDTO()
     }
 
+    override fun atualizar(pedido: Pedido): PedidoDTO {
+        val pedidoEntityOptional = pedido.id?.let { pedidoRepositorySpring.findById(it) }
+
+        if (pedidoEntityOptional != null) {
+            if (pedidoEntityOptional.isPresent) {
+                val pedidoEntity = pedidoEntityOptional.get()
+
+                pedidoEntity.cliente = if (pedido.clienteId != null) clienteRepositorySpring.findById(pedido.clienteId!!).orElse(null) else null
+                pedidoEntity.lanche = if (pedido.lancheId != null) produtoRepositorySpring.findById(pedido.lancheId!!).orElse(null) else null
+                pedidoEntity.bebida = if (pedido.bebidaId != null) produtoRepositorySpring.findById(pedido.bebidaId!!).orElse(null) else null
+                pedidoEntity.acompanhamento = if (pedido.acompanhamentoId != null) produtoRepositorySpring.findById(pedido.acompanhamentoId!!).orElse(null) else null
+                pedidoEntity.sobremesa = if (pedido.sobremesaId != null) produtoRepositorySpring.findById(pedido.sobremesaId!!).orElse(null) else null
+
+                val pedidoEntityUpdated: PedidoEntity = pedidoRepositorySpring.save(pedidoEntity)
+                return pedidoEntityUpdated.toPedidoDTO()
+            }
+        }
+
+        throw IllegalArgumentException("Pedido não encontrado")
+    }
+
     override fun listar(): List<Pedido> {
         val pedidosEntities = pedidoRepositorySpring.findAll()
         return pedidosEntities.map { it.toPedidoModel() }

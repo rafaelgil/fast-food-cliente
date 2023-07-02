@@ -7,5 +7,6 @@ import java.util.*
 interface PedidoServicePort {
 
     fun cadastrar(pedido: PedidoDTO): PedidoDTO
+    fun atualizar(pedido: PedidoDTO): PedidoDTO
     fun listar(): List<PedidoDTO>
 }

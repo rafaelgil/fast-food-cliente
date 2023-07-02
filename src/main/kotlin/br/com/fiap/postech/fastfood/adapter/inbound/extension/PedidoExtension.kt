@@ -68,7 +68,7 @@ fun PedidoEntity.toPedidoDTO(): PedidoDTO {
 
 fun PedidoRequest.toPedidoDTO(): PedidoDTO {
     return PedidoDTO(
-        id = null,
+        id = this.id,
         cliente = null,
         lanche = null,
         bebida = null,
