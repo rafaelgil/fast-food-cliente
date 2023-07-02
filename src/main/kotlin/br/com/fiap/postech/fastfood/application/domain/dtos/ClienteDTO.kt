@@ -9,6 +9,10 @@ data class ClienteDTO (
     var email: String? = null
 )
 
+data class ClienteRequestDTO (
+    var id: UUID? = null
+)
+
 data class ClienteResponseDTO (
 
     var id: UUID? = null,

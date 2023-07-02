@@ -7,6 +7,7 @@ import br.com.fiap.postech.fastfood.application.domain.exception.ViolatesUniqueC
 import br.com.fiap.postech.fastfood.application.domain.extension.toClienteModel
 import br.com.fiap.postech.fastfood.application.ports.repositories.ClienteRepositoryPort
 import br.com.fiap.postech.fastfood.application.ports.interfaces.ClienteServicePort
+import java.util.*
 
 class ClienteServiceImpl(
     private val clienteRepositoryPort: ClienteRepositoryPort
@@ -25,5 +26,9 @@ class ClienteServiceImpl(
 
     override fun buscarClientePorCpf(cpf: String): ClienteResponseDTO {
         return clienteRepositoryPort.buscarClientePorCpf(cpf)
+    }
+
+    override fun buscarClientePorId(id: UUID): ClienteResponseDTO {
+        return clienteRepositoryPort.buscarClientePorId(id)
     }
 }

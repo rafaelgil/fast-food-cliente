@@ -29,9 +29,9 @@ data class PedidoEntity(
     @JoinColumn(name = "sobremesa_id", referencedColumnName = "id")
     var sobremesa: ProdutoEntity?,
 
-    @OneToOne(cascade = arrayOf(PERSIST))
+    @ManyToOne(cascade = [PERSIST])
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    var cliente: ClienteEntity?,
+    var cliente: ClienteEntity? = null,
 
     @Column
     var data: LocalDateTime?,
@@ -40,5 +40,5 @@ data class PedidoEntity(
     var status: StatusPedido?,
 
     @OneToOne(mappedBy = "pedido")
-    var checkout: CheckoutEntity?
+    var checkout: CheckoutEntity?,
 )

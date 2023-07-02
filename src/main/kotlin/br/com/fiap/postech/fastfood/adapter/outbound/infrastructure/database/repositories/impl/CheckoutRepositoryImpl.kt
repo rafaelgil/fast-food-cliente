@@ -2,9 +2,9 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.re
 
 import br.com.fiap.postech.fastfood.adapter.inbound.extension.toCheckoutEntity
 import br.com.fiap.postech.fastfood.adapter.inbound.extension.toCheckoutModel
+import br.com.fiap.postech.fastfood.adapter.inbound.extension.toPedidoEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.CheckoutEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.CheckoutRepositorySpring
-import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoEntity
 import br.com.fiap.postech.fastfood.application.domain.models.Checkout
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort

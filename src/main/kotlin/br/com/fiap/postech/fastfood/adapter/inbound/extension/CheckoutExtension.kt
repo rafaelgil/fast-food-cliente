@@ -6,9 +6,6 @@ import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.ent
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toPagamentoEntity
-import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoDTO
-import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoEntity
-import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
 import br.com.fiap.postech.fastfood.application.domain.models.Checkout
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
 import java.time.LocalDateTime

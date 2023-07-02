@@ -12,5 +12,5 @@ data class PedidoDTO (
     var sobremesa: ProdutoDTO?,
     var data: LocalDateTime?,
     var status: StatusPedido?,
-    var cliente: ClienteDTO?
+    var cliente: ClienteDTO?,
 )
