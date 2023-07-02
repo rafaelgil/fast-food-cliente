@@ -10,17 +10,8 @@ import java.util.*
 data class CheckoutDTO(
 
     var id: UUID? = null,
-    var idPedido: UUID? = null,
-    var status: StatusCheckout? = null,
-    var formaPagamento: FormaPagamento? = null,
+    var pedido: PedidoDTO? = null,
+    var status: String? = null,
+    var pagamento: PagamentoDTO? = null,
     var data: LocalDateTime? = null
-)
-
-data class CheckoutRequest (
-
-    @JsonProperty("id_pedido")
-    var idPedido: UUID? = null,
-
-    @JsonProperty("forma_pagamento")
-    var formaPagamento: String? = null
 )

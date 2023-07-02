@@ -19,6 +19,7 @@ fun ClienteEntity.toClienteResponseDTO(): ClienteResponseDTO {
 
 fun ClienteEntity.toClienteModel(): Cliente {
     return Cliente(
+        id = this.id,
         cpf = CPF(this.cpf),
         nome = Nome(this.nome),
         email = Email(this.email)

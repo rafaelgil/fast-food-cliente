@@ -9,5 +9,5 @@ interface PedidoRepositoryPort {
 
     fun cadastrar(pedido: Pedido)
     fun listar(): List<Pedido>
-    fun busca(id: UUID): Optional<PedidoDTO>
+    fun busca(id: UUID): Optional<Pedido>
 }
