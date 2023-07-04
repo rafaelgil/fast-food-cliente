@@ -25,13 +25,6 @@ fun ProdutoDTO.toProdutoModel() =
         preco = Preco(this.preco)
     )
 
-fun Produto.toProdutoEntity() =
-    ProdutoEntity(
-        id = this.id,
-        descricao = this.descricao.descricao,
-        categoria = CategoriaProduto.valueOf(this.categoria.categoria.uppercase()),
-        preco = this.preco.valor
-    )
 fun ProdutoEntity.toProdutoDTO() =
     ProdutoDTO(
         id = this.id,
@@ -55,14 +48,5 @@ fun ProdutoEntity.toProdutoModel(): Produto {
         descricao = Descricao(this.descricao),
         categoria = Categoria(this.categoria.name),
         preco = Preco(this.preco)
-    )
-}
-
-fun ProdutoDTO.toProdutoEntity(): ProdutoEntity {
-    return ProdutoEntity(
-        id = this.id,
-        descricao = this.descricao,
-        categoria = CategoriaProduto.valueOf(this.categoria.uppercase()),
-        preco = this.preco
     )
 }

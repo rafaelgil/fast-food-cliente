@@ -16,26 +16,9 @@ fun ClienteDTO.toClienteModel(): Cliente {
     )
 }
 
-fun Cliente.toClienteEntity(): ClienteEntity {
-    return ClienteEntity(
-        id = this.id,
-        cpf = this.cpf.cpf,
-        nome = this.nome.nome,
-        email = this.email.email
-    )
-}
-
 fun Cliente.toClienteDTO(): ClienteDTO {
     return ClienteDTO(
         id = this.id,
-        cpf = this.cpf.toString(),
-        nome = this.nome.toString(),
-        email = this.email.toString()
-    )
-}
-
-fun ClienteDTO.toClienteEntity(): ClienteEntity {
-    return ClienteEntity(
         cpf = this.cpf.toString(),
         nome = this.nome.toString(),
         email = this.email.toString()

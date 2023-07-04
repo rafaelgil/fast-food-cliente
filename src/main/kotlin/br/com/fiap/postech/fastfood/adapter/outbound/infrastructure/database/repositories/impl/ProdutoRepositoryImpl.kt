@@ -1,7 +1,7 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.impl
 
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.ProdutoRepositorySpring
-import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoEntity
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toProdutoEntity
 import br.com.fiap.postech.fastfood.application.domain.models.Produto
 import br.com.fiap.postech.fastfood.application.domain.valueObjets.CategoriaProduto
 import br.com.fiap.postech.fastfood.application.ports.repositories.ProdutoRepositoryPort

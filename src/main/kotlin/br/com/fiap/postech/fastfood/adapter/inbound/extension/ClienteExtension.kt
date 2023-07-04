@@ -21,16 +21,6 @@ fun ClienteRequest.toClienteDTO(): ClienteDTO {
         email = this.email
     )
 }
-
-fun ClienteResponse.toClienteDTO(): ClienteDTO {
-    return ClienteDTO(
-        id = this.id,
-        cpf = this.cpf,
-        nome = this.nome,
-        email = this.email
-    )
-}
-
 fun ClienteDTO.toClienteResponse(): ClienteResponse {
     return ClienteResponse(
         id = this.id,

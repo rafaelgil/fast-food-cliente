@@ -1,14 +1,12 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.impl
 
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toPedidoDTO
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toPedidoEntity
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toPedidoModel
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toPedidoResponseDTO
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PedidoEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.ClienteRepositorySpring
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.PedidoRepositorySpring
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.ProdutoRepositorySpring
-import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toPedidoEntity
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toPedidoModel
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toPedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort

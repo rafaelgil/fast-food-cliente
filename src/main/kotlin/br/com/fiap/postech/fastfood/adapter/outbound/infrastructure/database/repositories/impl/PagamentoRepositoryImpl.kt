@@ -2,7 +2,7 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.re
 
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PagamentoEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.PagamentoRepositorySpring
-import br.com.fiap.postech.fastfood.application.domain.extension.toPagamentoEntity
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toPagamentoEntity
 import br.com.fiap.postech.fastfood.application.domain.models.Pagamento
 import br.com.fiap.postech.fastfood.application.ports.repositories.PagamentoRepositoryPort
 import org.springframework.stereotype.Component

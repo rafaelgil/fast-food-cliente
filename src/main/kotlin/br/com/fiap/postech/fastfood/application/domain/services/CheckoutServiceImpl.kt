@@ -1,6 +1,6 @@
 package br.com.fiap.postech.fastfood.application.domain.services
 
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toCheckoutDTO
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toCheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PagamentoDTO
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException

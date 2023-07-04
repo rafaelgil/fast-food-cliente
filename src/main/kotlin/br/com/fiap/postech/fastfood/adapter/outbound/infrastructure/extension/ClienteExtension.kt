@@ -33,3 +33,11 @@ fun ClienteEntity.toClienteDTO(): ClienteDTO {
         email = this.email
     )
 }
+fun Cliente.toClienteEntity(): ClienteEntity {
+    return ClienteEntity(
+        id = this.id,
+        cpf = this.cpf.cpf,
+        nome = this.nome.nome,
+        email = this.email.email
+    )
+}
