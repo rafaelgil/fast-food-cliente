@@ -24,10 +24,10 @@ class PedidoController (
         return pedido
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun atualizar(@RequestBody pedidoRequest: PedidoRequest): PedidoResponse {
-        var pedido = pedidoServicePort.atualizar(pedidoRequest.toPedidoDTO()).toPedidoResponse()
+    fun atualizar(@PathVariable id: UUID, @RequestBody pedidoRequest: PedidoRequest): PedidoResponse {
+        var pedido = pedidoServicePort.atualizar(id, pedidoRequest.toPedidoDTO()).toPedidoResponse()
         return pedido
     }
 

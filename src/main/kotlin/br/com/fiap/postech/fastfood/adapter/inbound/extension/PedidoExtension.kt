@@ -5,12 +5,11 @@ import br.com.fiap.postech.fastfood.adapter.inbound.response.PedidoResponse
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PedidoEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteDTO
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteModel
-import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteDTO
+import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
-import br.com.fiap.postech.fastfood.application.domain.dtos.ProdutoDTO
+import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.*
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
-import java.math.BigDecimal
 
 fun Pedido.toPedidoEntity() =
     PedidoEntity(
@@ -66,6 +65,19 @@ fun PedidoEntity.toPedidoDTO(): PedidoDTO {
     )
 }
 
+fun PedidoEntity.toPedidoResponseDTO(): PedidoResponseDTO {
+    return PedidoResponseDTO(
+        id = this.id,
+        cliente = this.cliente?.toClienteResponseDTO(),
+        lanche = this.lanche?.toProdutoDTO(),
+        bebida = this.bebida?.toProdutoDTO(),
+        acompanhamento = this.acompanhamento?.toProdutoDTO(),
+        sobremesa = this.sobremesa?.toProdutoDTO(),
+        data = this.data,
+        status = this.status,
+    )
+}
+
 fun PedidoRequest.toPedidoDTO(): PedidoDTO {
     return PedidoDTO(
         id = this.id,
@@ -85,6 +97,19 @@ fun PedidoRequest.toPedidoDTO(): PedidoDTO {
 }
 
 fun PedidoDTO.toPedidoResponse(): PedidoResponse {
+    return PedidoResponse(
+        id = this.id,
+        cliente = this.cliente?.toClienteResponse(),
+        lanche = this.lanche?.toProdutoResponse(),
+        bebida = this.bebida?.toProdutoResponse(),
+        acompanhamento = this.acompanhamento?.toProdutoResponse(),
+        sobremesa = this.sobremesa?.toProdutoResponse(),
+        data = this.data,
+        status = this.status,
+    )
+}
+
+fun PedidoResponseDTO.toPedidoResponse(): PedidoResponse {
     return PedidoResponse(
         id = this.id,
         cliente = this.cliente?.toClienteResponse(),

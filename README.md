@@ -113,7 +113,7 @@ curl --request POST \
 ### Atualizar Pedido
 ```bash 
 curl --request PUT \
-  --url http://localhost:8094/pedido \
+  --url http://localhost:8094/pedido/1cf5afc9-dbc2-40d6-876c-21214ac25388 \
   --header 'Content-Type: application/json' \
   --data '{
 	"id_cliente":"9f961b3d-1f4a-4f5a-a06e-9b6d21daad94",
