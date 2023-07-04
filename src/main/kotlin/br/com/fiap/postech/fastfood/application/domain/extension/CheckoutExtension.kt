@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 fun CheckoutDTO.toCheckoutModel(): Checkout {
     return Checkout(
         id = this.id,
-        pedido = this.pedido?.toPedidoModel(),
+        pedido = this.pedido?.toPedidoModel(this.pedido!!.id),
         status = this.status?.let { StatusCheckout.valueOf(it) },
         pagamento = this.pagamento?.toPagamentoModel(),
         data = this.data

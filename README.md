@@ -19,10 +19,6 @@ Sistema de controle de pedidos que permite aos clientes selecionar e fazer os pe
 OBS: Importante rodar esse comando antes de subir a aplicação pelo docker-compose
 
 ### Comandos para iniciar a aplicação
-Após qualquer alteração no projeto fast-fodd é importante atualizar a imagem deste. Então rodar o comando abaixo 
-```bash
-docker compose build
-```
 Iniciar a aplicação, a porta da aplicação é 8094(http://localhost:8094)
 ```bash
 docker compose up -d
