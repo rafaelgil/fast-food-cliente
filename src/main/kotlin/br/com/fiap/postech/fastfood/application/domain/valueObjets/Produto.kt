@@ -28,5 +28,6 @@ class Preco(val valor: BigDecimal) {
 enum class CategoriaProduto{
     LANCHE,
     BEBIDA,
-    ACOMPANHAMENTO
+    ACOMPANHAMENTO,
+    SOBREMESA
 }

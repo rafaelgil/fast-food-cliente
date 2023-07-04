@@ -12,12 +12,6 @@ Sistema de controle de pedidos que permite aos clientes selecionar e fazer os pe
 ## Banco de Dados
 * PostgreSQL
 
-### Build do projeto
-```bash
-./gradlew clean build
-```
-OBS: Importante rodar esse comando antes de subir a aplicação pelo docker-compose
-
 ### Comandos para iniciar a aplicação
 Iniciar a aplicação, a porta da aplicação é 8094(http://localhost:8094)
 ```bash
@@ -46,7 +40,6 @@ curl --request GET \
   --url 'http://localhost:8094/cliente?cpf=45612378952' \
   --header 'Content-Type: application/json'
 ```
-
 ### Cadastrar produto
 ```bash
 curl --location 'http://localhost:8094/produto' \
@@ -57,18 +50,7 @@ curl --location 'http://localhost:8094/produto' \
     "preco": "45.56"
 }'
 ```
-
-### Cadastrar produto
-```bash
-curl --location 'http://localhost:8094/produto' \
---header 'Content-Type: application/json' \
---data '{
-    "descricao": "X-Bacon",
-    "categoria": "Lanche",
-    "preco": "45.56"
-}'
-```
-OBS: As categorias aceitas são LANCHE, BEBIDA e ACOMPANHAMENTO
+OBS: As categorias aceitas são LANCHE, BEBIDA, ACOMPANHAMENTO e SOBREMESA
 
 ### Atualizar produto
 ```bash
@@ -102,7 +84,8 @@ curl --request POST \
 	"id_cliente":"9f961b3d-1f4a-4f5a-a06e-9b6d21daad94",
 	"id_lanche":"d8a0d839-62e6-4b27-a7db-00b58b745385",
 	"id_bebida":"71d73f33-1f1f-44de-baaa-f2b395d27d56",
-	"id_acompanhamento":"699e1dca-62e7-4cd2-8ebe-f82088db1625"
+	"id_acompanhamento":"699e1dca-62e7-4cd2-8ebe-f82088db1625",
+	"id_sobremesa":"699e1dca-62e7-4cd2-8ebe-f82088db1625"
 }'
 ```
 
@@ -115,7 +98,8 @@ curl --request PUT \
 	"id_cliente":"9f961b3d-1f4a-4f5a-a06e-9b6d21daad94",
 	"id_lanche":"d8a0d839-62e6-4b27-a7db-00b58b745385",
 	"id_bebida":"71d73f33-1f1f-44de-baaa-f2b395d27d56",
-	"id_acompanhamento":"699e1dca-62e7-4cd2-8ebe-f82088db1625"
+	"id_acompanhamento":"699e1dca-62e7-4cd2-8ebe-f82088db1625",
+	"id_sobremesa":"699e1dca-62e7-4cd2-8ebe-f82088db1625"
 }'
 ```
 
