@@ -4,7 +4,7 @@ import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPedido
 import java.time.LocalDateTime
 import java.util.*
 
-data class PedidoDTO (
+data class PedidoDTO(
     var id: UUID?,
     var lanche: ProdutoDTO?,
     var bebida: ProdutoDTO?,
@@ -18,4 +18,15 @@ data class PedidoDTO (
     var bebidaId: UUID?,
     var acompanhamentoId: UUID?,
     var sobremesaId: UUID?
+)
+
+data class PedidoResponseDTO(
+    var id: UUID?,
+    var lanche: ProdutoDTO?,
+    var bebida: ProdutoDTO?,
+    var acompanhamento: ProdutoDTO?,
+    var sobremesa: ProdutoDTO?,
+    var data: LocalDateTime?,
+    var status: StatusPedido?,
+    var cliente: ClienteResponseDTO?,
 )

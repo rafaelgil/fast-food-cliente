@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.application.domain.services
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
+import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
@@ -14,15 +15,15 @@ class PedidoServiceImpl(
     private val pedidoRepositoryPort: PedidoRepositoryPort,
 ): PedidoServicePort {
 
-    override fun cadastrar(pedidoDTO: PedidoDTO): PedidoDTO {
+    override fun cadastrar(pedidoDTO: PedidoDTO): PedidoResponseDTO {
         pedidoDTO.data = LocalDateTime.now()
         pedidoDTO.status = StatusPedido.INICIADO
 
         return pedidoRepositoryPort.cadastrar(pedidoDTO.toPedidoModel())
     }
 
-    override fun atualizar(pedidoDTO: PedidoDTO): PedidoDTO {
-        return pedidoRepositoryPort.atualizar(pedidoDTO.toPedidoModel())
+    override fun atualizar(id: UUID, pedidoDTO: PedidoDTO): PedidoResponseDTO {
+        return pedidoRepositoryPort.atualizar(pedidoDTO.toPedidoModel(id))
     }
 
     override fun listar(): List<PedidoDTO> {

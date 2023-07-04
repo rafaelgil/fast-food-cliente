@@ -1,13 +1,12 @@
 package br.com.fiap.postech.fastfood.application.domain.extension
 
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toPedidoDTO
-import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.models.Pedido
+import java.util.*
 
-fun PedidoDTO.toPedidoModel() =
+fun PedidoDTO.toPedidoModel(id: UUID? = null) =
     Pedido(
-        id = this.id,
+        id = id,
         cliente = this.cliente?.toClienteModel(),
         lanche = this.lanche?.toProdutoModel(),
         bebida = this.bebida?.toProdutoModel(),
