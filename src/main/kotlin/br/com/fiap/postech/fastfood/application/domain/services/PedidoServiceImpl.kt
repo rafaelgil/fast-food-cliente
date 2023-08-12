@@ -4,7 +4,7 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toPedidoModel
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPedido
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 import br.com.fiap.postech.fastfood.application.ports.interfaces.PedidoServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.PedidoRepositoryPort
 import java.time.LocalDateTime

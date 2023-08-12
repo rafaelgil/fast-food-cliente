@@ -1,4 +1,4 @@
-package br.com.fiap.postech.fastfood.application.domain.valueObjets
+package br.com.fiap.postech.fastfood.domain.valueObjets
 
 
 class CPF(val cpf: String) {

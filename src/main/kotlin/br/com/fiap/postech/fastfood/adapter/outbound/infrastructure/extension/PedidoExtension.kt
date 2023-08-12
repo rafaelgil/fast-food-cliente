@@ -5,7 +5,7 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoModel
-import br.com.fiap.postech.fastfood.application.domain.models.Pedido
+import br.com.fiap.postech.fastfood.domain.entity.Pedido
 
 fun Pedido.toPedidoEntity() =
     PedidoEntity(

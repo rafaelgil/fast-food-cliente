@@ -1,8 +1,7 @@
 package br.com.fiap.postech.fastfood.application.ports.repositories
 
-import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteResponseDTO
-import br.com.fiap.postech.fastfood.application.domain.models.Cliente
+import br.com.fiap.postech.fastfood.domain.entity.Cliente
 import java.util.UUID
 
 interface ClienteRepositoryPort {

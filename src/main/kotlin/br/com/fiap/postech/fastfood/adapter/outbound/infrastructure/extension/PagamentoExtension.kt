@@ -2,9 +2,9 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension
 
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PagamentoEntity
 import br.com.fiap.postech.fastfood.application.domain.dtos.PagamentoDTO
-import br.com.fiap.postech.fastfood.application.domain.models.Pagamento
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPagamento
+import br.com.fiap.postech.fastfood.domain.entity.Pagamento
+import br.com.fiap.postech.fastfood.domain.valueObjets.FormaPagamento
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPagamento
 
 fun Pagamento.toPagamentoEntity(): PagamentoEntity {
     return PagamentoEntity(

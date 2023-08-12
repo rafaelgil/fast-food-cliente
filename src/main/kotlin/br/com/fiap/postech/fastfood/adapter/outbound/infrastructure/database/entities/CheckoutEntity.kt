@@ -1,6 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities
 
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusCheckout
 import jakarta.persistence.*
 import jakarta.persistence.CascadeType.MERGE
 import jakarta.persistence.CascadeType.PERSIST

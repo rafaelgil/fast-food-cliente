@@ -5,8 +5,8 @@ import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.rep
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toCheckoutEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toCheckoutModel
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toPedidoEntity
-import br.com.fiap.postech.fastfood.application.domain.models.Checkout
-import br.com.fiap.postech.fastfood.application.domain.models.Pedido
+import br.com.fiap.postech.fastfood.domain.entity.Checkout
+import br.com.fiap.postech.fastfood.domain.entity.Pedido
 import br.com.fiap.postech.fastfood.application.ports.repositories.CheckoutRepositoryPort
 import org.springframework.stereotype.Component
 import java.util.*

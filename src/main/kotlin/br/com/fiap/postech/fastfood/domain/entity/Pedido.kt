@@ -1,6 +1,6 @@
-package br.com.fiap.postech.fastfood.application.domain.models
+package br.com.fiap.postech.fastfood.domain.entity
 
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPedido
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 import java.time.LocalDateTime
 import java.util.*
 

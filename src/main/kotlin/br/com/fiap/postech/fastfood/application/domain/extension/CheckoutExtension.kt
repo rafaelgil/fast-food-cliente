@@ -1,8 +1,8 @@
 package br.com.fiap.postech.fastfood.application.domain.extension
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
-import br.com.fiap.postech.fastfood.application.domain.models.Checkout
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
+import br.com.fiap.postech.fastfood.domain.entity.Checkout
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusCheckout
 
 fun CheckoutDTO.toCheckoutModel(): Checkout {
     return Checkout(

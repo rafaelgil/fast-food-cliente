@@ -4,8 +4,8 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.ProdutoDTO
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoModel
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.Categoria
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.CategoriaProduto
+import br.com.fiap.postech.fastfood.domain.valueObjets.Categoria
+import br.com.fiap.postech.fastfood.domain.valueObjets.CategoriaProduto
 import br.com.fiap.postech.fastfood.application.ports.interfaces.ProdutoServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.ProdutoRepositoryPort
 import java.util.*
