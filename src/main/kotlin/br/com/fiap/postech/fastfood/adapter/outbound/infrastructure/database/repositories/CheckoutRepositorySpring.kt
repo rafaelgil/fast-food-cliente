@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
-@Repository
-interface CheckoutRepositorySpring: JpaRepository<CheckoutEntity, UUID> {
-
-    fun findByPedido(pedidoEntity: PedidoEntity): Optional<CheckoutEntity>
-}
+//@Repository
+//interface CheckoutRepositorySpring: JpaRepository<CheckoutEntity, UUID> {
+//
+//    fun findByPedido(pedidoEntity: PedidoEntity): Optional<CheckoutEntity>
+//}

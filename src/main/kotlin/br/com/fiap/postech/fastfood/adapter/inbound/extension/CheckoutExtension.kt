@@ -4,7 +4,7 @@ import br.com.fiap.postech.fastfood.adapter.inbound.request.CheckoutRequest
 import br.com.fiap.postech.fastfood.adapter.inbound.response.CheckoutResponse
 import br.com.fiap.postech.fastfood.application.domain.dtos.CheckoutDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusCheckout
 import java.time.LocalDateTime
 
 fun CheckoutRequest.toCheckoutDTO(): CheckoutDTO {

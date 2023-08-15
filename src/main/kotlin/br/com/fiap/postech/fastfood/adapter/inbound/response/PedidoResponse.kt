@@ -1,8 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.inbound.response
 
-import br.com.fiap.postech.fastfood.application.domain.models.Cliente
-import br.com.fiap.postech.fastfood.application.domain.models.Produto
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPedido
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 import java.time.LocalDateTime
 import java.util.*
 

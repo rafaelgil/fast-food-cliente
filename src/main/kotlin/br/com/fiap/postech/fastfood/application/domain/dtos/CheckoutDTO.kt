@@ -1,7 +1,7 @@
 package br.com.fiap.postech.fastfood.application.domain.dtos
 
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
+import br.com.fiap.postech.fastfood.domain.valueObjets.FormaPagamento
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusCheckout
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.apache.tomcat.util.buf.UDecoder
 import java.time.LocalDateTime

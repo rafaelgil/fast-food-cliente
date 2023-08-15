@@ -3,10 +3,10 @@ package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.ClienteEntity
 import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteResponseDTO
-import br.com.fiap.postech.fastfood.application.domain.models.Cliente
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.CPF
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.Email
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.Nome
+import br.com.fiap.postech.fastfood.domain.entity.Cliente
+import br.com.fiap.postech.fastfood.domain.valueObjets.CPF
+import br.com.fiap.postech.fastfood.domain.valueObjets.Email
+import br.com.fiap.postech.fastfood.domain.valueObjets.Nome
 
 fun ClienteEntity.toClienteResponseDTO(): ClienteResponseDTO {
     return ClienteResponseDTO(

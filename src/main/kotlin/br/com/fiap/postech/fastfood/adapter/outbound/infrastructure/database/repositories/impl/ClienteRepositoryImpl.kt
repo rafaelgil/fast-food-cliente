@@ -5,7 +5,7 @@ import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.rep
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteEntity
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toClienteResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.dtos.ClienteResponseDTO
-import br.com.fiap.postech.fastfood.application.domain.models.Cliente
+import br.com.fiap.postech.fastfood.domain.entity.Cliente
 import br.com.fiap.postech.fastfood.application.ports.repositories.ClienteRepositoryPort
 import org.springframework.stereotype.Component
 import java.util.*

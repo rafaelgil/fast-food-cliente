@@ -1,7 +1,6 @@
-package br.com.fiap.postech.fastfood.application.domain.models
+package br.com.fiap.postech.fastfood.domain.entity
 
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.FormaPagamento
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusCheckout
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusCheckout
 import java.time.LocalDateTime
 import java.util.*
 

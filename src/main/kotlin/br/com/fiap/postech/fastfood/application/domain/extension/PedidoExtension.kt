@@ -1,7 +1,7 @@
 package br.com.fiap.postech.fastfood.application.domain.extension
 
 import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoDTO
-import br.com.fiap.postech.fastfood.application.domain.models.Pedido
+import br.com.fiap.postech.fastfood.domain.entity.Pedido
 import java.util.*
 
 fun PedidoDTO.toPedidoModel(id: UUID? = null) =

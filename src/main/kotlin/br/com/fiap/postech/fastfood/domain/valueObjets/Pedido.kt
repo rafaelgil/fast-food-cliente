@@ -1,4 +1,4 @@
-package br.com.fiap.postech.fastfood.application.domain.valueObjets
+package br.com.fiap.postech.fastfood.domain.valueObjets
 
 enum class StatusPedido(val status: String) {
     INICIADO("Iniciado"),

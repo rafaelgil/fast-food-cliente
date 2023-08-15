@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import java.math.BigDecimal
 import java.util.*
 
-@Entity(name = "pagamento")
+//@Entity(name = "pagamento")
 data class PagamentoEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

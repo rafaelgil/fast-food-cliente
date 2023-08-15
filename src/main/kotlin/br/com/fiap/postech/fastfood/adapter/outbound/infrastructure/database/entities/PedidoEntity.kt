@@ -1,6 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities
 
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.StatusPedido
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.UUID
@@ -8,7 +8,7 @@ import jakarta.persistence.CascadeType.*
 import org.hibernate.annotations.Fetch
 import org.hibernate.annotations.FetchMode
 
-@Entity(name="pedido")
+//@Entity(name="pedido")
 data class PedidoEntity(
 
     @Id
