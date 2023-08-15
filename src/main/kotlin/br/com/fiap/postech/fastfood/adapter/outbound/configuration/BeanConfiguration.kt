@@ -12,28 +12,28 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class BeanConfiguration {
 
-    @Bean
+//    @Bean
     fun clienteService(clienteRepositoryPort: ClienteRepositoryPort): ClienteServicePort {
         return ClienteServiceImpl(clienteRepositoryPort)
     }
 
-    @Bean
+//    @Bean
     fun produtoService(produtoRepositoryPort: ProdutoRepositoryPort): ProdutoServicePort {
         return ProdutoServiceImpl(produtoRepositoryPort)
     }
 
-    @Bean
+//    @Bean
     fun pedidoService(pedidoRepositoryPort: PedidoRepositoryPort): PedidoServiceImpl {
         return PedidoServiceImpl(pedidoRepositoryPort)
     }
 
 
-    @Bean
+//    @Bean
     fun checkoutService(checkoutRepositoryPort: CheckoutRepositoryPort, pedidoRepositoryPort: PedidoRepositoryPort, pagamentoServicePort: PagamentoServicePort): CheckoutServicePort {
         return CheckoutServiceImpl(checkoutRepositoryPort, pedidoRepositoryPort, pagamentoServicePort)
     }
 
-    @Bean
+//    @Bean
     fun pagamentoService(pagamentoRepositoryPort: PagamentoRepositoryPort): PagamentoServicePort {
         return PagamentoServiceImpl(pagamentoRepositoryPort)
     }

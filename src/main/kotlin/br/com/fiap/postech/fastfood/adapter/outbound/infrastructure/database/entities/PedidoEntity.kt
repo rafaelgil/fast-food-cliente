@@ -8,7 +8,7 @@ import jakarta.persistence.CascadeType.*
 import org.hibernate.annotations.Fetch
 import org.hibernate.annotations.FetchMode
 
-@Entity(name="pedido")
+//@Entity(name="pedido")
 data class PedidoEntity(
 
     @Id

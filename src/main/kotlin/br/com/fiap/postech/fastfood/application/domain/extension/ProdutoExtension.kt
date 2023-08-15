@@ -3,7 +3,6 @@ package br.com.fiap.postech.fastfood.application.domain.extension
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.ProdutoEntity
 import br.com.fiap.postech.fastfood.application.domain.dtos.ProdutoDTO
 import br.com.fiap.postech.fastfood.domain.entity.Produto
-import br.com.fiap.postech.fastfood.application.domain.valueObjets.*
 import br.com.fiap.postech.fastfood.domain.valueObjets.Categoria
 import br.com.fiap.postech.fastfood.domain.valueObjets.Descricao
 import br.com.fiap.postech.fastfood.domain.valueObjets.Preco

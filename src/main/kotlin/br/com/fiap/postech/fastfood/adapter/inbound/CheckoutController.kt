@@ -9,14 +9,14 @@ import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-@RestController
-@RequestMapping("checkout")
+//@RestController
+//@RequestMapping("checkout")
 class CheckoutController (
     private val checkoutServicePort: CheckoutServicePort
 ) {
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
     fun enviaParaFila(@RequestBody checkoutRequest: CheckoutRequest): CheckoutResponse {
         return checkoutServicePort.enviaParaFila(checkoutRequest.toCheckoutDTO()).toCheckoutResponse()
     }

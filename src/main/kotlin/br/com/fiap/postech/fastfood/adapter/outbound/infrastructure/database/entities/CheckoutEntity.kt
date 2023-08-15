@@ -7,7 +7,7 @@ import jakarta.persistence.CascadeType.PERSIST
 import java.time.LocalDateTime
 import java.util.*
 
-@Entity(name = "checkout")
+//@Entity(name = "checkout")
 data class CheckoutEntity (
 
     @Id
