@@ -1,7 +1,7 @@
 package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.impl
 
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.PedidoEntity
-//import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.ClienteRepositorySpring
+//import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ClienteRepositorySpring
 //import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.PedidoRepositorySpring
 //import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.repositories.ProdutoRepositorySpring
 import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.extension.toPedidoEntity

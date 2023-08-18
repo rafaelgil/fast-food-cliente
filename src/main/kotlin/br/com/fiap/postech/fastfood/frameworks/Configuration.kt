@@ -1,15 +1,14 @@
 package br.com.fiap.postech.fastfood.frameworks
 
+import br.com.fiap.postech.fastfood.adapter.gateway.ClienteRepositoryImpl
 import br.com.fiap.postech.fastfood.adapter.gateway.ProdutoRepositoryImpl
+import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ClienteRepositoryJpa
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ProdutoRepositoryJpa
-import br.com.fiap.postech.fastfood.application.domain.services.*
-import br.com.fiap.postech.fastfood.application.ports.interfaces.CheckoutServicePort
-import br.com.fiap.postech.fastfood.application.ports.interfaces.ClienteServicePort
-import br.com.fiap.postech.fastfood.application.ports.interfaces.PagamentoServicePort
-import br.com.fiap.postech.fastfood.application.ports.interfaces.ProdutoServicePort
-import br.com.fiap.postech.fastfood.application.ports.repositories.*
+import br.com.fiap.postech.fastfood.domain.repository.ClienteRepository
 import br.com.fiap.postech.fastfood.domain.repository.ProdutoRepository
-import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualzarProdutoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualizarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.BuscarProdutoPorCategoriaUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.CadastrarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.RemoverProdutoUseCase
@@ -25,13 +24,18 @@ class Configuration {
     }
 
     @Bean
+    fun clienteRepository(clienteRepositoryJpa: ClienteRepositoryJpa): ClienteRepository {
+        return ClienteRepositoryImpl(clienteRepositoryJpa)
+    }
+
+    @Bean
     fun cadastrarProdutoUseCase(produtoRepository: ProdutoRepository): CadastrarProdutoUseCase {
         return CadastrarProdutoUseCase(produtoRepository)
     }
 
     @Bean
-    fun atualzarProdutoUseCase(produtoRepository: ProdutoRepository): AtualzarProdutoUseCase {
-        return AtualzarProdutoUseCase(produtoRepository)
+    fun atualizarProdutoUseCase(produtoRepository: ProdutoRepository): AtualizarProdutoUseCase {
+        return AtualizarProdutoUseCase(produtoRepository)
     }
 
     @Bean
@@ -45,9 +49,19 @@ class Configuration {
     }
 
     @Bean
-    fun clienteService(clienteRepositoryPort: ClienteRepositoryPort): ClienteServicePort {
-        return ClienteServiceImpl(clienteRepositoryPort)
+    fun cadastrarClienteUseCase(clienteRepository: ClienteRepository): CadastrarClienteUseCase {
+        return CadastrarClienteUseCase(clienteRepository)
     }
+
+    @Bean
+    fun buscarClientePorCPFUseCase(clienteRepository: ClienteRepository): BuscarClientePorCPFUseCase {
+        return BuscarClientePorCPFUseCase(clienteRepository)
+    }
+
+//    @Bean
+//    fun clienteService(clienteRepositoryPort: ClienteRepositoryPort): ClienteServicePort {
+//        return ClienteServiceImpl(clienteRepositoryPort)
+//    }
 
 //    @Bean
 //    fun produtoService(produtoRepositoryPort: ProdutoRepositoryPort): ProdutoServicePort {

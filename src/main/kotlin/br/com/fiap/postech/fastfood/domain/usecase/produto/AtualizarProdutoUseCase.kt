@@ -4,7 +4,7 @@ import br.com.fiap.postech.fastfood.domain.entity.Produto
 import br.com.fiap.postech.fastfood.domain.repository.ProdutoRepository
 import java.util.*
 
-class AtualzarProdutoUseCase(
+class AtualizarProdutoUseCase(
     private val produtoRepository: ProdutoRepository
 ) {
     fun executa(id: UUID, produto: Produto): Produto {
