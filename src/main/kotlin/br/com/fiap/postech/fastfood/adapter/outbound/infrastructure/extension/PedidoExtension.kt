@@ -6,40 +6,41 @@ import br.com.fiap.postech.fastfood.application.domain.dtos.PedidoResponseDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoDTO
 import br.com.fiap.postech.fastfood.application.domain.extension.toProdutoModel
 import br.com.fiap.postech.fastfood.domain.entity.Pedido
+import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 
 fun Pedido.toPedidoEntity() =
     PedidoEntity(
         id = this.id,
         cliente = this.cliente?.toClienteEntity(),
-        lanche = this.lanche?.toProdutoEntity(),
-        bebida = this.bebida?.toProdutoEntity(),
-        acompanhamento = this.acompanhamento?.toProdutoEntity(),
-        sobremesa = this.sobremesa?.toProdutoEntity(),
+        lanche = null,
+        bebida = null,
+        acompanhamento = null,
+        sobremesa = null,
         data = this.data,
-        status = this.status,
+        status = StatusPedido.INICIADO,
         checkout = null,
-        clienteId = this.clienteId,
-        lancheId = this.lancheId,
-        bebidaId = this.bebidaId,
-        acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
+        //clienteId = this.clienteId,
+        //lancheId = this.lancheId,
+        //bebidaId = this.bebidaId,
+        //acompanhamentoId = this.acompanhamentoId,
+        //sobremesaId = this.sobremesaId
     )
 
 fun PedidoEntity.toPedidoModel(): Pedido {
     return Pedido(
         id = this.id,
         cliente = this.cliente?.toClienteModel(),
-        lanche = this.lanche?.toProdutoModel(),
-        bebida = this.bebida?.toProdutoModel(),
-        acompanhamento = this.acompanhamento?.toProdutoModel(),
-        sobremesa = this.sobremesa?.toProdutoModel(),
+        //lanche = this.lanche?.toProdutoModel(),
+        //bebida = this.bebida?.toProdutoModel(),
+        //acompanhamento = this.acompanhamento?.toProdutoModel(),
+        //sobremesa = this.sobremesa?.toProdutoModel(),
         data = this.data,
-        status = this.status,
-        clienteId = this.clienteId,
-        lancheId = this.lancheId,
-        bebidaId = this.bebidaId,
-        acompanhamentoId = this.acompanhamentoId,
-        sobremesaId = this.sobremesaId
+        status = "",
+        //clienteId = this.clienteId,
+        //lancheId = this.lancheId,
+        //bebidaId = this.bebidaId,
+        //acompanhamentoId = this.acompanhamentoId,
+        //sobremesaId = this.sobremesaId
     )
 }
 

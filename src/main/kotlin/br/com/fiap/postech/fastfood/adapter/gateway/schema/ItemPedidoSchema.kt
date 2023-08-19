@@ -1,11 +1,11 @@
 package br.com.fiap.postech.fastfood.adapter.gateway.schema
 
-import br.com.fiap.postech.fastfood.domain.valueObjets.CategoriaProduto
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.util.*
 
-@Entity(name = "produto")
+@Entity(name = "itempedido")
+@Table(name = "item_pedido")
 data class ItemPedidoSchema (
 
     @Id
@@ -18,11 +18,15 @@ data class ItemPedidoSchema (
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
-    var produtoSchema: ProdutoSchema,
+    var produto: ProdutoSchema,
 
     @Column
-    var valor: BigDecimal,
+    var preco: BigDecimal,
 
     @Column
     var quantidade: Int = 1
-)
+) {
+    override fun toString(): String {
+        return "ItemPedidoSchema(id=$id, pedido=${pedido.id}, produto=${produto.id}, preco=$preco, quantidade=$quantidade)"
+    }
+}

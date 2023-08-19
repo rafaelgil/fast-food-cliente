@@ -38,6 +38,7 @@ class ProdutoRepositoryImpl(
 
     override fun buscaPorId(id: UUID): Produto? {
         var produto = produtoRepositoryJpa.findById(id)
+
         if (produto.isPresent) {
             return produto.get().toProduto()
         }

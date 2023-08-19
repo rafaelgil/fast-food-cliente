@@ -8,7 +8,7 @@ import java.util.UUID
 data class Cliente (
 
     var id: UUID? = null,
-    var cpf: CPF,
-    var nome: Nome,
-    var email: Email
+    var cpf: CPF? = null,
+    var nome: Nome? = null,
+    var email: Email? = null
 )

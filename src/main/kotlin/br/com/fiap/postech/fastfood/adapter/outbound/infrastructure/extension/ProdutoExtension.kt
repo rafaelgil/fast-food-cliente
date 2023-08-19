@@ -7,7 +7,7 @@ import br.com.fiap.postech.fastfood.domain.valueObjets.CategoriaProduto
 fun Produto.toProdutoEntity() =
     ProdutoEntity(
         id = this.id,
-        descricao = this.descricao.descricao,
-        categoria = CategoriaProduto.valueOf(this.categoria.categoria.uppercase()),
-        preco = this.preco.valor
+        descricao = this.descricao!!.descricao,
+        categoria = CategoriaProduto.valueOf(this.categoria!!.categoria.uppercase()),
+        preco = this.preco!!.valor
     )

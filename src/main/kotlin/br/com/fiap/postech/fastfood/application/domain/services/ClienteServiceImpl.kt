@@ -16,7 +16,7 @@ class ClienteServiceImpl(
     override fun cadastrar(clienteDTO: ClienteDTO): ClienteResponseDTO {
         val cliente = clienteDTO.toClienteModel()
         val valorDuplicado = clienteRepositoryPort.buscarCPFouEmailDuplicado(
-            cliente.cpf.cpf, cliente.email.email
+            cliente.cpf!!.cpf, cliente.email!!.email
         )
         if (valorDuplicado) {
             throw ViolatesUniqueConstraintException("CPF ou E-mail já cadastrados!")

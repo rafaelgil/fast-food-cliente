@@ -12,22 +12,16 @@ import org.hibernate.annotations.FetchMode
 
 @Entity(name="pedido")
 data class PedidoSchema(
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @OneToMany
+    @OneToMany(mappedBy = "pedido", cascade = [CascadeType.ALL])
     var itens: List<ItemPedidoSchema> = mutableListOf(),
 
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "cliente_id", referencedColumnName = "id", insertable = false, updatable = false)
-//    @Fetch(FetchMode.JOIN)
-//    var cliente: ClienteEntity? = null,
-//
-//    @Column(name = "cliente_id")
-//    var clienteId: UUID? = null,
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    var cliente: ClienteSchema? = null,
 
     @Column
     var data: LocalDateTime?,
@@ -37,4 +31,7 @@ data class PedidoSchema(
 
 //    @OneToOne(mappedBy = "pedido")
 //    var checkout: CheckoutEntity?,
+
+
+
 )

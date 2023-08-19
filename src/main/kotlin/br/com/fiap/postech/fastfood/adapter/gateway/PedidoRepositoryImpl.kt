@@ -12,9 +12,8 @@ class PedidoRepositoryImpl(
 ): PedidoRepository {
     override fun cadastrar(pedido: Pedido) =
         pedidoRepositoryJpa.save(pedido.toPedidoSchema()).toPedido()
-    override fun atualizar(pedido: Pedido): Pedido {
-        TODO("Not yet implemented")
-    }
+    override fun atualizar(pedido: Pedido) =
+        this.cadastrar(pedido)
 
     override fun listar(): List<Pedido> {
         TODO("Not yet implemented")
@@ -22,7 +21,13 @@ class PedidoRepositoryImpl(
     }
 
     override fun busca(id: UUID): Optional<Pedido> {
-        TODO("Not yet implemented")
+        val opPedido = pedidoRepositoryJpa.findById(id)
+
+        if(opPedido.isPresent) {
+            return Optional.of(opPedido.get().toPedido())
+        }
+
+        return Optional.empty()
     }
 
     override fun existePedido(id: UUID): Boolean {

@@ -3,6 +3,8 @@ package br.com.fiap.postech.fastfood.adapter.inbound.exception
 import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcessedException
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.exception.ViolatesUniqueConstraintException
+import br.com.fiap.postech.fastfood.domain.exception.ClienteNotFoundException
+import br.com.fiap.postech.fastfood.domain.exception.ProdutoPrecoException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.HttpStatus
@@ -28,6 +30,26 @@ class ControllerAdvice() {
     fun handleIllegalArgumentException(ex: NotFoundEntityException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val erro = ErrorResponse(
             HttpStatus.NOT_FOUND.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(ClienteNotFoundException::class)
+    fun handleClienteNotFoundException(ex: ClienteNotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.NOT_FOUND.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(ProdutoPrecoException::class)
+    fun handleProdutoPrecoException(ex: ProdutoPrecoException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.BAD_REQUEST.value(),
             ex.localizedMessage
         )
 
