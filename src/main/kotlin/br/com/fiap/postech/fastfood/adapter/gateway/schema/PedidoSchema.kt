@@ -17,33 +17,9 @@ data class PedidoSchema(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lanche_id", referencedColumnName = "id", insertable = false, updatable = false)
-    var lanche: ProdutoSchema?,
+    @OneToMany
+    var itens: List<ItemPedidoSchema> = mutableListOf(),
 
-//    @Column(name = "lanche_id")
-//    var lancheId: UUID? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bebida_id", referencedColumnName = "id", insertable = false, updatable = false)
-    var bebida: ProdutoSchema?,
-
-//    @Column(name = "bebida_id")
-//    var bebidaId: UUID? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "acompanhamento_id", referencedColumnName = "id", insertable = false, updatable = false)
-    var acompanhamento: ProdutoSchema?,
-
-//    @Column(name = "acompanhamento_id")
-//    var acompanhamentoId: UUID? = null,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sobremesa_id", referencedColumnName = "id", insertable = false, updatable = false)
-    var sobremesa: ProdutoSchema?,
-
-//    @Column(name = "sobremesa_id")
-//    var sobremesaId: UUID? = null,
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "cliente_id", referencedColumnName = "id", insertable = false, updatable = false)

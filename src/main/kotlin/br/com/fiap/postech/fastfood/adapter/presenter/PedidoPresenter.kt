@@ -10,6 +10,25 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
 import java.util.*
 
+
+
+fun Pedido.toPedidoSchema(): PedidoSchema {
+    return PedidoSchema(
+        id = this.id,
+        data = this.data,
+        status = this.status,
+    )
+}
+
+fun PedidoSchema.toPedido(): Pedido {
+    return Pedido(
+        id = this.id,
+        data = this.data,
+        status = this.status,
+    )
+}
+
+/*
 data class PedidoRequest(
     @JsonProperty("id")
     var id: UUID? = null,
@@ -62,3 +81,4 @@ fun PedidoSchema.toPedido(): Pedido {
         sobremesa = this.sobremesa?.toProduto()
     )
 }
+*/
