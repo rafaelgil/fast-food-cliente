@@ -11,4 +11,5 @@ interface ProdutoRepository {
     fun buscarPorCategoria(categoria: CategoriaProduto): List<Produto>
     fun existeProduto(id: UUID): Boolean
     fun deletaProduto(id: UUID)
+    fun buscaPorId(id: UUID): Produto?
 }
