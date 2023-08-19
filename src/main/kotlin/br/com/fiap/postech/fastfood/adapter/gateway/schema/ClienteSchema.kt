@@ -1,10 +1,10 @@
-package br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities
+package br.com.fiap.postech.fastfood.adapter.gateway.schema
 
 import jakarta.persistence.*
 import java.util.*
 
-//@Entity(name = "cliente")
-class ClienteEntity (
+@Entity(name = "cliente")
+class ClienteSchema (
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
