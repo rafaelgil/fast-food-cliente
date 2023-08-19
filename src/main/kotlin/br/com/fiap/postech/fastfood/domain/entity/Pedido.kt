@@ -1,21 +1,21 @@
 package br.com.fiap.postech.fastfood.domain.entity
 
-import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.*
 
 data class Pedido(
     var id: UUID? = null,
     var cliente: Cliente? = null,
-    var lanche: Produto? = null,
-    var bebida: Produto? = null,
-    var acompanhamento: Produto? = null,
-    var sobremesa: Produto? = null,
-    var data: LocalDateTime? = null,
-    var status: StatusPedido? = null,
-    var clienteId: UUID? = null,
-    var lancheId: UUID? = null,
-    var bebidaId: UUID? = null,
-    var acompanhamentoId: UUID? = null,
-    var sobremesaId: UUID? = null,
+    var itens: List<ItemPedido>? = mutableListOf(),
+    var data: LocalDateTime?,
+    var status: String?,
 )
+
+data class ItemPedido(
+    var id: UUID? = null,
+    var produto: Produto? = null,
+    var quantidade: Int? = null,
+    var preco: BigDecimal? = null,
+)
+

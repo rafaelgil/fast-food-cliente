@@ -9,7 +9,7 @@ class CadastrarClienteUseCase (
 ) {
     fun executa(cliente: Cliente): Cliente {
 
-        val valorDuplicado = clienteRepository.buscarCPFouEmailDuplicado(cliente.cpf.cpf, cliente.email.email)
+        val valorDuplicado = clienteRepository.buscarCPFouEmailDuplicado(cliente.cpf!!.cpf, cliente.email!!.email)
         if (valorDuplicado) {
             throw ViolatesUniqueConstraintException("CPF ou E-mail já cadastrados!")
         }

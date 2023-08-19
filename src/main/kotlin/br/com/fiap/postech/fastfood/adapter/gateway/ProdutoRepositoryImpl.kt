@@ -35,4 +35,13 @@ class ProdutoRepositoryImpl(
     override fun deletaProduto(id: UUID) {
         produtoRepositoryJpa.deleteById(id)
     }
+
+    override fun buscaPorId(id: UUID): Produto? {
+        var produto = produtoRepositoryJpa.findById(id)
+
+        if (produto.isPresent) {
+            return produto.get().toProduto()
+        }
+        return null
+    }
 }

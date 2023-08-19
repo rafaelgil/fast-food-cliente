@@ -6,7 +6,6 @@ import br.com.fiap.postech.fastfood.application.ports.interfaces.ClienteServiceP
 import br.com.fiap.postech.fastfood.application.ports.interfaces.PagamentoServicePort
 import br.com.fiap.postech.fastfood.application.ports.interfaces.ProdutoServicePort
 import br.com.fiap.postech.fastfood.application.ports.repositories.*
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration

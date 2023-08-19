@@ -1,5 +1,9 @@
 CREATE TABLE IF NOT EXISTS pedido (
     id UUID NOT NULL default gen_random_uuid(),
-    constraint pk_pedido PRIMARY KEY (id)
+    cliente_id UUID,
+    data_pedido TIMESTAMP,
+    status VARCHAR(50),
+    constraint pk_pedido PRIMARY KEY (id),
+    CONSTRAINT fk_cliente_pedido FOREIGN KEY (cliente_id) REFERENCES cliente (id) ON DELETE SET NULL
 );
 

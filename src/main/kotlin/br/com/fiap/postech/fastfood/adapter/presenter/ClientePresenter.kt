@@ -31,26 +31,26 @@ fun ClienteRequest.toCliente(): Cliente {
 fun Cliente.toClienteResponse(): ClienteResponse {
     return ClienteResponse(
         id = this.id,
-        nome = this.nome.nome,
-        cpf = this.cpf.cpf,
-        email = this.email.email
+        nome = this.nome!!.nome,
+        cpf = this.cpf!!.cpf,
+        email = this.email!!.email
     )
 }
 
 fun Cliente.toClienteScheme(id: UUID? = null): ClienteSchema {
     return ClienteSchema(
         id = id,
-        cpf = this.cpf.cpf,
-        nome = this.nome.nome,
-        email = this.email.email
+        cpf = this.cpf!!.cpf,
+        nome = this.nome!!.nome,
+        email = this.email!!.email
     )
 }
 
 fun ClienteSchema.toCliente(): Cliente {
     return Cliente(
         id = this.id,
-        cpf = CPF(this.cpf),
-        nome = Nome(this.nome),
-        email = Email(this.email)
+        cpf = CPF(this.cpf!!),
+        nome = Nome(this.nome!!),
+        email = Email(this.email!!)
     )
 }

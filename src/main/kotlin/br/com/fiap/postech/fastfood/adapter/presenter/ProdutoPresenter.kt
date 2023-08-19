@@ -38,18 +38,18 @@ fun ProdutoRequest.toProduto(): Produto {
 fun Produto.toProdutoResponse(): ProdutoResponse {
     return ProdutoResponse(
         id = this.id!!,
-        descricao = this.descricao.descricao,
-        categoria = this.categoria.categoria,
-        preco = this.preco.valor
+        descricao = this.descricao!!.descricao,
+        categoria = this.categoria!!.categoria,
+        preco = this.preco!!.valor
     )
 }
 
 fun Produto.toProdutoSchema(id: UUID? = null): ProdutoSchema {
     return ProdutoSchema(
         id = id,
-        descricao = this.descricao.descricao,
-        categoria = CategoriaProduto.valueOf(this.categoria.categoria.uppercase()),
-        preco = this.preco.valor
+        descricao = this.descricao!!.descricao,
+        categoria = CategoriaProduto.valueOf(this.categoria!!.categoria.uppercase()),
+        preco = this.preco!!.valor
     )
 }
 

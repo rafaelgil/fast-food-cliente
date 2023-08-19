@@ -1,13 +1,20 @@
 package br.com.fiap.postech.fastfood.frameworks
 
 import br.com.fiap.postech.fastfood.adapter.gateway.ClienteRepositoryImpl
+import br.com.fiap.postech.fastfood.adapter.gateway.PedidoRepositoryImpl
 import br.com.fiap.postech.fastfood.adapter.gateway.ProdutoRepositoryImpl
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ClienteRepositoryJpa
+import br.com.fiap.postech.fastfood.adapter.gateway.jpa.PedidoRepositoryJpa
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ProdutoRepositoryJpa
 import br.com.fiap.postech.fastfood.domain.repository.ClienteRepository
+import br.com.fiap.postech.fastfood.domain.repository.PedidoRepository
 import br.com.fiap.postech.fastfood.domain.repository.ProdutoRepository
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.AdicionarItemPedidoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.ListarPedidosUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.RemoverItemPedidoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualizarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.BuscarProdutoPorCategoriaUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.CadastrarProdutoUseCase
@@ -21,6 +28,11 @@ class Configuration {
     @Bean
     fun produtoRepository(produtoRepositoryJpa: ProdutoRepositoryJpa): ProdutoRepository {
         return ProdutoRepositoryImpl(produtoRepositoryJpa)
+    }
+
+    @Bean
+    fun pedidoRepository(pedidoRepositoryJpa: PedidoRepositoryJpa): PedidoRepository {
+        return PedidoRepositoryImpl(pedidoRepositoryJpa)
     }
 
     @Bean
@@ -47,6 +59,30 @@ class Configuration {
     fun buscarProdutoPorCategoriaUseCase(produtoRepository: ProdutoRepository): BuscarProdutoPorCategoriaUseCase {
         return BuscarProdutoPorCategoriaUseCase(produtoRepository)
     }
+
+    @Bean
+    fun listarPedidosUseCase(pedidoRepository: PedidoRepository): ListarPedidosUseCase {
+        return ListarPedidosUseCase(pedidoRepository)
+    }
+
+    @Bean
+    fun cadastrarPedidoUseCase(pedidoRepository: PedidoRepository,
+                               produtoRepository: ProdutoRepository,
+                               clienteRepository: ClienteRepository) =
+        CadastrarPedidoUseCase(pedidoRepository,
+            produtoRepository, clienteRepository)
+
+    @Bean
+    fun adicionarItemPedidoUseCase(pedidoRepository: PedidoRepository,
+                               produtoRepository: ProdutoRepository) =
+        AdicionarItemPedidoUseCase(pedidoRepository,
+            produtoRepository)
+
+    @Bean
+    fun removerItemPedidoUseCase(pedidoRepository: PedidoRepository,
+                                   produtoRepository: ProdutoRepository) =
+        RemoverItemPedidoUseCase(pedidoRepository,
+            produtoRepository)
 
     @Bean
     fun cadastrarClienteUseCase(clienteRepository: ClienteRepository): CadastrarClienteUseCase {

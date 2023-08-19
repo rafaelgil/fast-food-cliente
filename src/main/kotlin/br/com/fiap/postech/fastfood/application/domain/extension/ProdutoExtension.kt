@@ -35,9 +35,9 @@ fun ProdutoEntity.toProdutoDTO() =
 fun Produto.toProdutoDTO(): ProdutoDTO {
     return ProdutoDTO(
         id = this.id,
-        descricao = this.descricao.descricao,
-        categoria = this.categoria.categoria,
-        preco = this.preco.valor
+        descricao = this.descricao!!.descricao,
+        categoria = this.categoria!!.categoria,
+        preco = this.preco!!.valor
     )
 }
 

@@ -7,7 +7,7 @@ import java.util.*
 
 data class Produto (
     var id: UUID? = null,
-    var descricao: Descricao,
-    var categoria: Categoria,
-    var preco: Preco
+    var descricao: Descricao? = null,
+    var categoria: Categoria? = null,
+    var preco: Preco? = null
 )

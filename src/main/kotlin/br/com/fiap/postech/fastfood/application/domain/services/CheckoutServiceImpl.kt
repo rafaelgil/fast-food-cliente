@@ -68,6 +68,7 @@ class CheckoutServiceImpl(
     private fun calculaValor(pedidoFound: Pedido): BigDecimal {
         var valor: BigDecimal = BigDecimal.ZERO
 
+        /*
         if (pedidoFound.bebida != null) {
             valor = valor.add(pedidoFound.bebida!!.preco.valor)
         }
@@ -83,6 +84,7 @@ class CheckoutServiceImpl(
         if (pedidoFound?.sobremesa?.preco != null) {
             valor = valor.add(pedidoFound?.sobremesa!!.preco.valor)
         }
+        */
 
         return valor
     }
