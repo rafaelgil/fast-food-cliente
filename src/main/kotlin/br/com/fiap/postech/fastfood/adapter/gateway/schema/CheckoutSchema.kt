@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapter.gateway.schema
 
-import br.com.fiap.postech.fastfood.domain.entity.Pagamento
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.*
@@ -17,7 +16,7 @@ class CheckoutSchema (
     var pedido: PedidoSchema,
 
     @OneToOne
-    @JoinColumn(name = "pedido_id", referencedColumnName = "id")
+    @JoinColumn(name = "pagamento_id", referencedColumnName = "id")
     var pagamento: PagamentoSchema,
 
     var data: LocalDateTime

@@ -3,5 +3,7 @@ CREATE TABLE IF NOT EXISTS pagamento (
     valor numeric(12, 2),
     forma_pagamento VARCHAR(50),
     status VARCHAR(50),
+    qrCodeId UUID NOT NULL,
+    qrCode VARCHAR(255),
     constraint pk_pagamento PRIMARY KEY (id)
-);
+)

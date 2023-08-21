@@ -28,14 +28,14 @@ class RemoverItemPedidoUseCase(
 
     private fun validarRemoverItem(pedido: Pedido, itemPedido: ItemPedido) {
 
-        val produto = produtoRepository.buscaPorId(itemPedido.produto!!.id!!)
+        val produto = produtoRepository.buscaPorId(itemPedido.produto.id!!)
 
         if (produto == null) {
-            throw NotFoundEntityException("O produto ${itemPedido?.produto?.id} não encontrado")
+            throw NotFoundEntityException("O produto ${itemPedido.produto.id} não encontrado")
         }
 
         val itens = mutableListOf<ItemPedido>()
-        itens.addAll(pedido.itens!!.toMutableList().filter { it.produto!!.id != itemPedido.produto!!.id })
+        itens.addAll(pedido.itens.toMutableList().filter { it.produto.id != itemPedido.produto.id })
 
         pedido.itens = itens
     }

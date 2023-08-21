@@ -21,8 +21,8 @@ data class Pedido(
 
 data class ItemPedido(
     var id: UUID? = null,
-    var produto: Produto? = null,
-    var quantidade: Int? = null,
-    var preco: BigDecimal? = null,
+    var produto: Produto,
+    var quantidade: Int,
+    var preco: BigDecimal,
 )
 
