@@ -1,20 +1,22 @@
 package br.com.fiap.postech.fastfood.frameworks
 
+import br.com.fiap.postech.fastfood.adapter.gateway.CheckoutRepositoryImpl
 import br.com.fiap.postech.fastfood.adapter.gateway.ClienteRepositoryImpl
 import br.com.fiap.postech.fastfood.adapter.gateway.PedidoRepositoryImpl
 import br.com.fiap.postech.fastfood.adapter.gateway.ProdutoRepositoryImpl
+import br.com.fiap.postech.fastfood.adapter.gateway.jpa.CheckoutRepositoryJpa
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ClienteRepositoryJpa
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.PedidoRepositoryJpa
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ProdutoRepositoryJpa
+import br.com.fiap.postech.fastfood.domain.repository.CheckoutRepository
 import br.com.fiap.postech.fastfood.domain.repository.ClienteRepository
 import br.com.fiap.postech.fastfood.domain.repository.PedidoRepository
 import br.com.fiap.postech.fastfood.domain.repository.ProdutoRepository
+import br.com.fiap.postech.fastfood.domain.usecase.checkout.IniciarCheckoutUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.AdicionarItemPedidoUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.ListarPedidosUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.RemoverItemPedidoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoQrCodeUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.*
 import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualizarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.BuscarProdutoPorCategoriaUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.CadastrarProdutoUseCase
@@ -39,6 +41,12 @@ class Configuration {
     fun clienteRepository(clienteRepositoryJpa: ClienteRepositoryJpa): ClienteRepository {
         return ClienteRepositoryImpl(clienteRepositoryJpa)
     }
+
+    @Bean
+    fun checkoutRepository(checkoutRepositoryJpa: CheckoutRepositoryJpa): CheckoutRepository{
+        return CheckoutRepositoryImpl(checkoutRepositoryJpa)
+    }
+
 
     @Bean
     fun cadastrarProdutoUseCase(produtoRepository: ProdutoRepository): CadastrarProdutoUseCase {
@@ -92,6 +100,24 @@ class Configuration {
     @Bean
     fun buscarClientePorCPFUseCase(clienteRepository: ClienteRepository): BuscarClientePorCPFUseCase {
         return BuscarClientePorCPFUseCase(clienteRepository)
+    }
+
+    @Bean
+    fun gerarPagamentoQrCodeUseCase(): GerarPagamentoQrCodeUseCase {
+        return GerarPagamentoQrCodeUseCase()
+    }
+
+    @Bean
+    fun mudarStatusPedidoUseCase(pedidoRepository: PedidoRepository): MudarStatusPedidoUseCase{
+        return MudarStatusPedidoUseCase(pedidoRepository)
+    }
+
+    @Bean
+    fun iniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase: GerarPagamentoQrCodeUseCase,
+         mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
+         checkoutRepository: CheckoutRepository
+    ): IniciarCheckoutUseCase {
+        return IniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase, mudarStatusPedidoUseCase, checkoutRepository)
     }
 
 //    @Bean

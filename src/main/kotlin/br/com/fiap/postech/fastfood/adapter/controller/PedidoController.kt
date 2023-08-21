@@ -2,13 +2,14 @@ package br.com.fiap.postech.fastfood.adapter.controller
 
 
 import br.com.fiap.postech.fastfood.adapter.presenter.*
+import br.com.fiap.postech.fastfood.domain.usecase.checkout.IniciarCheckoutUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pedido.AdicionarItemPedidoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pedido.ListarPedidosUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pedido.RemoverItemPedidoUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
+import java.util.*
 
 @RestController
 @RequestMapping("pedidos")
@@ -16,7 +17,8 @@ class PedidoController (
     private val listarPedidosUseCase: ListarPedidosUseCase,
     private val cadastrarPedidoUseCase: CadastrarPedidoUseCase,
     private val adicionarItemPedidoUseCase: AdicionarItemPedidoUseCase,
-    private val removerItemPedidoUseCase: RemoverItemPedidoUseCase
+    private val removerItemPedidoUseCase: RemoverItemPedidoUseCase,
+    private val iniciarCheckoutUseCase: IniciarCheckoutUseCase
 ) {
 
     @PostMapping
@@ -38,4 +40,9 @@ class PedidoController (
     fun listar(@PathVariable id: UUID): PedidoResponse {
         return listarPedidosUseCase.execute(id).toResponse()
     }
+
+    @PutMapping("/{id}/pagamento")
+    fun finalizarPagamento(@PathVariable id: UUID) =
+        iniciarCheckoutUseCase.executa(id).toResponse()
+
 }

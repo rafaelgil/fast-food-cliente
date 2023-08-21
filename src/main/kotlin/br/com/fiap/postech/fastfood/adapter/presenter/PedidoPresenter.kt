@@ -51,9 +51,9 @@ fun PedidoRequest.toPedido(): Pedido {
         id = this.id,
         cliente = Cliente(this.clienteId),
         data = LocalDateTime.now(),
-        status = StatusPedido.INICIADO.name
+        status = StatusPedido.INICIADO
     ).apply {
-        itens = this@toPedido.itens?.map { it.toItem() }
+        itens = this@toPedido.itens!!.map { it.toItem() }
     }
 }
 
@@ -85,7 +85,7 @@ fun Pedido.toPedidoSchema() =
         id = this.id,
         data = this.data,
         cliente = ClienteSchema(this.cliente?.id, this.cliente!!.cpf!!.cpf, this.cliente!!.nome!!.nome, this.cliente!!.email!!.email),
-        status = StatusPedido.valueOf(this.status!!),
+        status = this.status,
     ).apply {
         itens = this@toPedidoSchema.itens!!.map { it.toItemPedidoSchema(this) }
     }
@@ -102,8 +102,8 @@ fun PedidoSchema.toPedido() =
     Pedido(
         id = this.id,
         data = this.data,
-        status = this.status?.name,
-        cliente = this.cliente?.toCliente(),
+        status = this.status,
+        cliente = this.cliente.toCliente(),
     ).apply {
         itens = this@toPedido.itens!!.map { it.toItemPedido() }
     }

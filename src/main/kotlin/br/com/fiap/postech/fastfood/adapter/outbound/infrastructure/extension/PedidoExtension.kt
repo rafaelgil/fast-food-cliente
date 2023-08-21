@@ -29,13 +29,13 @@ fun Pedido.toPedidoEntity() =
 fun PedidoEntity.toPedidoModel(): Pedido {
     return Pedido(
         id = this.id,
-        cliente = this.cliente?.toClienteModel(),
+        cliente = this.cliente!!.toClienteModel(),
         //lanche = this.lanche?.toProdutoModel(),
         //bebida = this.bebida?.toProdutoModel(),
         //acompanhamento = this.acompanhamento?.toProdutoModel(),
         //sobremesa = this.sobremesa?.toProdutoModel(),
-        data = this.data,
-        status = "",
+        data = this.data!!,
+        status = StatusPedido.INICIADO,
         //clienteId = this.clienteId,
         //lancheId = this.lancheId,
         //bebidaId = this.bebidaId,

@@ -7,19 +7,19 @@ import br.com.fiap.postech.fastfood.domain.valueObjets.StatusCheckout
 fun CheckoutDTO.toCheckoutModel(): Checkout {
     return Checkout(
         id = this.id,
-        pedido = this.pedido?.toPedidoModel(this.pedido!!.id),
-        status = this.status?.let { StatusCheckout.valueOf(it) },
-        pagamento = this.pagamento?.toPagamentoModel(),
-        data = this.data
+        pedido = this.pedido!!.toPedidoModel(this.pedido!!.id),
+        //status = this.status?.let { StatusCheckout.valueOf(it) },
+        pagamento = this.pagamento!!.toPagamentoModel(),
+        data = this.data!!
     )
 }
 
 fun Checkout.toCheckoutDTO(): CheckoutDTO {
     return CheckoutDTO (
         id = this.id,
-        pedido = this.pedido?.toPedidoDTO(),
-        status = this.status?.name,
-        pagamento = this.pagamento?.toPagamentoDTO(),
+        pedido = this.pedido!!.toPedidoDTO(),
+        //status = this.status,
+        pagamento = this.pagamento!!.toPagamentoDTO(),
         data = this.data
     )
 }

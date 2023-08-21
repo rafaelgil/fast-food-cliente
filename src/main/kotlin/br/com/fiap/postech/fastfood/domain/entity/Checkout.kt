@@ -6,8 +6,8 @@ import java.util.*
 
 data class Checkout (
     var id: UUID? = null,
-    var pedido: Pedido? = null,
-    var status: StatusCheckout? = null,
-    var pagamento: Pagamento? = null,
-    var data: LocalDateTime? = null
+    var pedido: Pedido,
+    //var status: StatusCheckout? = null,
+    var pagamento: Pagamento,
+    var data: LocalDateTime
 )

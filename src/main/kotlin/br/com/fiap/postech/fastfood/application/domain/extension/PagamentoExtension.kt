@@ -17,8 +17,8 @@ fun Pagamento.toPagamentoDTO(): PagamentoDTO {
 fun PagamentoDTO.toPagamentoModel(): Pagamento {
     return Pagamento(
         id = this.id,
-        formaPagamento = this.formaPagamento?.let { FormaPagamento.valueOf(it) },
-        valor = this.valor,
-        status = this.status?.let { StatusPagamento.valueOf(it) }
+        formaPagamento = this.formaPagamento!!.let { FormaPagamento.valueOf(it) },
+        valor = this.valor!!,
+        status = this.status!!.let { StatusPagamento.valueOf(it) }
     )
 }
