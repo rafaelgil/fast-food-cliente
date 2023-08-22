@@ -18,7 +18,7 @@ data class CheckoutResponse(
 fun Checkout.toCheckoutSchema() =
     CheckoutSchema(
         pedido = this.pedido.toPedidoSchema(),
-        pagamento = this.pagamento.toSchema(),
+        pagamento = this.pagamento.toPagamentoSchema(),
         data = this.data
     )
 

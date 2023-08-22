@@ -10,5 +10,4 @@ interface PedidoRepository {
     fun listar(): List<Pedido>
     fun busca(id: UUID): Optional<Pedido>
     fun existePedido(id: UUID): Boolean
-
 }

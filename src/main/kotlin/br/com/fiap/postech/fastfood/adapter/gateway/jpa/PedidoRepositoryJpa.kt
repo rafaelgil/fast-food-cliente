@@ -7,4 +7,5 @@ import java.util.*
 
 @Repository
 interface PedidoRepositoryJpa : JpaRepository<PedidoSchema, UUID> {
+
 }

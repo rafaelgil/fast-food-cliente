@@ -1,8 +1,8 @@
 package br.com.fiap.postech.fastfood.adapter.presenter
 
+import br.com.fiap.postech.fastfood.adapter.gateway.schema.CheckoutSchema
 import br.com.fiap.postech.fastfood.adapter.gateway.schema.PagamentoSchema
 import br.com.fiap.postech.fastfood.domain.entity.Pagamento
-import br.com.fiap.postech.fastfood.domain.valueObjets.FormaPagamento
 import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPagamento
 import java.math.BigDecimal
 import java.util.*
@@ -17,11 +17,12 @@ data class PagamentoResponse(
     var qrCode: String? = null
 )
 
-fun Pagamento.toSchema() =
+fun Pagamento.toPagamentoSchema(status: StatusPagamento = StatusPagamento.AGUARDANDO_PAGAMENTO) =
     PagamentoSchema(
+        id = this.id,
         formaPagamento = this.formaPagamento,
         valor = this.valor,
-        status = StatusPagamento.AGUARDANDO_PAGAMENTO,
+        status = status,
         qrCodeId = this.qrCodeId,
         qrCode = this.qrCode
     )

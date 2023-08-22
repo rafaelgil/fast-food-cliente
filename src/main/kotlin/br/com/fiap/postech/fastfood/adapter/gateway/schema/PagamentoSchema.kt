@@ -28,5 +28,5 @@ class PagamentoSchema (
     var qrCodeId:  UUID? = null,
 
     @Column(name = "qrcode")
-    var qrCode: String? = null
+    var qrCode: String? = null,
 )

@@ -6,5 +6,8 @@ enum class StatusPedido(val status: String) {
     RECEBIDO("Recebido"),
     EM_PREPARACAO("Em preparação"),
     PRONTO("Pronto"),
-    FINALIZADO("Finalizado")
+    FINALIZADO("Finalizado"),
+    CANCELADO("Cancelado"),
+    EM_ENTREGA("Em entrega")
+
 }
