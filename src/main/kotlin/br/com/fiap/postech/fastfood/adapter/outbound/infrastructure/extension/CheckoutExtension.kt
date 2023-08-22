@@ -8,7 +8,7 @@ fun Checkout.toCheckoutEntity(): CheckoutEntity {
     return CheckoutEntity(
         id = this.id,
         pedido = this.pedido?.toPedidoEntity(),
-        status = this.status,
+        //status = this.status,
         pagamento = this.pagamento?.toPagamentoEntity(),
         dataCheckout = this.data
     )
@@ -27,9 +27,9 @@ fun CheckoutEntity.toCheckoutDTO(): CheckoutDTO {
 fun CheckoutEntity.toCheckoutModel(): Checkout {
     return Checkout(
         id = this.id,
-        pedido = this.pedido?.toPedidoModel(),
-        status = this.status,
-        pagamento = this.pagamento?.toPagamentoModel(),
-        data = this.dataCheckout
+        pedido = this.pedido!!.toPedidoModel(),
+        //status = this.status,
+        pagamento = this.pagamento!!.toPagamentoModel(),
+        data = this.dataCheckout!!
     )
 }

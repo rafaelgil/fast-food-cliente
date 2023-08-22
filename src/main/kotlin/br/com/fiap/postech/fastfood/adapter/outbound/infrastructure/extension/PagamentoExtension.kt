@@ -27,8 +27,8 @@ fun PagamentoEntity.toPagamentoDTO(): PagamentoDTO {
 fun PagamentoEntity.toPagamentoModel(): Pagamento {
     return Pagamento(
         id = this.id,
-        valor = this.valor,
-        formaPagamento = this.formaPagamento?.let { FormaPagamento.valueOf(it) },
-        status = this.status?.let { StatusPagamento.valueOf(it) }
+        valor = this.valor!!,
+        formaPagamento = this.formaPagamento!!.let { FormaPagamento.valueOf(it) },
+        status = this.status!!.let { StatusPagamento.valueOf(it) }
     )
 }

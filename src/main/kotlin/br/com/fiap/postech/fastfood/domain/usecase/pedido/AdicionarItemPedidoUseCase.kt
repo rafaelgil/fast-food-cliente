@@ -30,20 +30,20 @@ class AdicionarItemPedidoUseCase(
 
     private fun validarAdicionarItem(pedido: Pedido, itemPedido: ItemPedido) {
 
-        val produto = produtoRepository.buscaPorId(itemPedido.produto!!.id!!)
+        val produto = produtoRepository.buscaPorId(itemPedido.produto.id!!)
 
         if (produto == null) {
-            throw NotFoundEntityException("O produto ${itemPedido?.produto?.id} não encontrado")
+            throw NotFoundEntityException("O produto ${itemPedido.produto.id} não encontrado")
         }
 
-        if (produto?.preco?.valor != itemPedido?.preco) {
-            throw ProdutoPrecoException("O produto ${itemPedido?.produto?.id} está com preço inválido")
+        if (produto.preco?.valor != itemPedido.preco) {
+            throw ProdutoPrecoException("O produto ${itemPedido.produto.id} está com preço inválido")
         }
 
-        itemPedido.produto = Produto(produto!!.id, produto!!.descricao, produto!!.categoria, produto!!.preco)
+        itemPedido.produto = Produto(produto.id, produto.descricao, produto.categoria, produto.preco)
 
         val itens = mutableListOf<ItemPedido>()
-        itens.addAll(pedido.itens!!.toMutableList())
+        itens.addAll(pedido.itens.toMutableList())
         itens.add(itemPedido)
 
         pedido.itens = itens

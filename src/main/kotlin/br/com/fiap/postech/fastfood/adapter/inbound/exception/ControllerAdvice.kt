@@ -4,6 +4,8 @@ import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcesse
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.application.domain.exception.ViolatesUniqueConstraintException
 import br.com.fiap.postech.fastfood.domain.exception.ClienteNotFoundException
+import br.com.fiap.postech.fastfood.domain.exception.PagamentoException
+import br.com.fiap.postech.fastfood.domain.exception.PedidoException
 import br.com.fiap.postech.fastfood.domain.exception.ProdutoPrecoException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.EmptyResultDataAccessException
@@ -48,6 +50,26 @@ class ControllerAdvice() {
 
     @ExceptionHandler(ProdutoPrecoException::class)
     fun handleProdutoPrecoException(ex: ProdutoPrecoException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.BAD_REQUEST.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(PedidoException::class)
+    fun handlePedidoException(ex: PedidoException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.BAD_REQUEST.value(),
+            ex.localizedMessage
+        )
+
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(PagamentoException::class)
+    fun handlePagamentoException(ex: PagamentoException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val erro = ErrorResponse(
             HttpStatus.BAD_REQUEST.value(),
             ex.localizedMessage

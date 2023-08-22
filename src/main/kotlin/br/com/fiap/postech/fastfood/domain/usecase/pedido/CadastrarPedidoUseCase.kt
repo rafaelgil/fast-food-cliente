@@ -24,26 +24,26 @@ class CadastrarPedidoUseCase(
 
     private fun validarAtualizarProduto(pedido: Pedido) {
         pedido.itens.apply {
-            this?.forEach {
-                val produto = produtoRepository.buscaPorId(it.produto!!.id!!)
+            this.forEach {
+                val produto = produtoRepository.buscaPorId(it.produto.id!!)
 
                 if(produto == null){
-                    throw NotFoundEntityException("O produto ${it?.produto?.id} não encontrado")
+                    throw NotFoundEntityException("O produto ${it.produto.id} não encontrado")
                 }
 
-                if(produto?.preco?.valor != it?.preco){
-                    throw ProdutoPrecoException("O produto ${it?.produto?.id} está com preço inválido")
+                if(produto.preco?.valor != it.preco){
+                    throw ProdutoPrecoException("O produto ${it.produto.id} está com preço diferente do catálogo")
                 }
 
-                it.produto = Produto(produto!!.id, produto!!.descricao, produto!!.categoria, produto!!.preco)
+                it.produto = Produto(produto.id, produto.descricao, produto.categoria, produto.preco)
             }
         }
     }
 
     private fun validarAtualizarCliente(pedido: Pedido) {
-        val cliente = clienteRepository.buscarPorId(pedido.cliente!!.id!!)
+        val cliente = clienteRepository.buscarPorId(pedido.cliente.id!!)
         if (cliente == null) {
-            throw ClienteNotFoundException("Cliente ${pedido.cliente!!.id!!} não encontrado")
+            throw ClienteNotFoundException("Cliente ${pedido.cliente.id} não encontrado")
         }
         pedido.cliente = cliente
     }

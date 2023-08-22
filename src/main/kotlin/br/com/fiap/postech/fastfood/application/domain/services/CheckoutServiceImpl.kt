@@ -38,7 +38,7 @@ class CheckoutServiceImpl(
 
         if (checkoutFound.isPresent) {
             checkout = checkoutFound.get()
-            checkout.status = StatusCheckout.REENVIADO
+            //checkout.status = StatusCheckout.REENVIADO
             checkout.data = LocalDateTime.now()
         } else {
             var valor = this.calculaValor(pedido)
@@ -104,9 +104,9 @@ class CheckoutServiceImpl(
             throw IllegalArgumentException("Pagamento com status inválido.")
         }
 
-        if (!StatusPagamento.APROVADO.equals(pagamento.status)) {
+        /*if (!StatusPagamento.APROVADO.equals(pagamento.status)) {
             throw IllegalArgumentException("Pagamento Não aprovado")
-        }
+        }*/
     }
 
     private fun enviaCheckout(checkout: Checkout): CheckoutDTO {

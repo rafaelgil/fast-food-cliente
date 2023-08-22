@@ -15,7 +15,7 @@ class PagamentoServiceImpl(
     override fun efetuaPagamento(pagamentoDTO: PagamentoDTO): Pagamento {
 
         println("Implementação fake para o pagamento")
-        pagamentoDTO.status = StatusPagamento.APROVADO.name
+        //pagamentoDTO.status = StatusPagamento.APROVADO.name
         var pagamentoEntity = pagamentoRepositoryPort.efetuaPagamento(pagamentoDTO.toPagamentoModel())
 
         return pagamentoEntity.toPagamentoModel()

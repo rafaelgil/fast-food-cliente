@@ -1,20 +1,16 @@
 package br.com.fiap.postech.fastfood.frameworks
 
-import br.com.fiap.postech.fastfood.adapter.gateway.ClienteRepositoryImpl
-import br.com.fiap.postech.fastfood.adapter.gateway.PedidoRepositoryImpl
-import br.com.fiap.postech.fastfood.adapter.gateway.ProdutoRepositoryImpl
-import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ClienteRepositoryJpa
-import br.com.fiap.postech.fastfood.adapter.gateway.jpa.PedidoRepositoryJpa
-import br.com.fiap.postech.fastfood.adapter.gateway.jpa.ProdutoRepositoryJpa
-import br.com.fiap.postech.fastfood.domain.repository.ClienteRepository
-import br.com.fiap.postech.fastfood.domain.repository.PedidoRepository
-import br.com.fiap.postech.fastfood.domain.repository.ProdutoRepository
+import br.com.fiap.postech.fastfood.adapter.gateway.*
+import br.com.fiap.postech.fastfood.adapter.gateway.jpa.*
+import br.com.fiap.postech.fastfood.domain.repository.*
+import br.com.fiap.postech.fastfood.domain.usecase.checkout.IniciarCheckoutUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.checkout.WebHookCheckoutNaoReceberUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.checkout.WebHookCheckoutPagoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.AdicionarItemPedidoUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.ListarPedidosUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.RemoverItemPedidoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoQrCodeUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pagamento.MudarStatusPagamentoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.*
 import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualizarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.BuscarProdutoPorCategoriaUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.CadastrarProdutoUseCase
@@ -39,6 +35,19 @@ class Configuration {
     fun clienteRepository(clienteRepositoryJpa: ClienteRepositoryJpa): ClienteRepository {
         return ClienteRepositoryImpl(clienteRepositoryJpa)
     }
+
+    @Bean
+    fun checkoutRepository(checkoutRepositoryJpa: CheckoutRepositoryJpa): CheckoutRepository{
+        return CheckoutRepositoryImpl(checkoutRepositoryJpa)
+    }
+
+    @Bean
+    fun pagamentoRepository(
+        pagamentoRepositoryJpa: PagamentoRepositoryJpa
+    ): PagamentoRepository {
+        return PagamentoRepositoryImpl(pagamentoRepositoryJpa)
+    }
+
 
     @Bean
     fun cadastrarProdutoUseCase(produtoRepository: ProdutoRepository): CadastrarProdutoUseCase {
@@ -93,6 +102,50 @@ class Configuration {
     fun buscarClientePorCPFUseCase(clienteRepository: ClienteRepository): BuscarClientePorCPFUseCase {
         return BuscarClientePorCPFUseCase(clienteRepository)
     }
+
+    @Bean
+    fun gerarPagamentoQrCodeUseCase(): GerarPagamentoQrCodeUseCase {
+        return GerarPagamentoQrCodeUseCase()
+    }
+
+    @Bean
+    fun mudarStatusPedidoUseCase(pedidoRepository: PedidoRepository): MudarStatusPedidoUseCase{
+        return MudarStatusPedidoUseCase(pedidoRepository)
+    }
+
+    @Bean
+    fun iniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase: GerarPagamentoQrCodeUseCase,
+         mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
+         checkoutRepository: CheckoutRepository
+    ): IniciarCheckoutUseCase {
+        return IniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase, mudarStatusPedidoUseCase, checkoutRepository)
+    }
+
+    @Bean
+    fun mudarStatusPagamentoUseCase(
+        pagamentoRepository: PagamentoRepository
+    ): MudarStatusPagamentoUseCase {
+        return MudarStatusPagamentoUseCase(pagamentoRepository)
+    }
+
+    @Bean
+    fun webHookCheckoutPagoUseCase(
+        mudarStatusPagamentoUseCase: MudarStatusPagamentoUseCase,
+        mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
+        checkoutRepository: CheckoutRepository
+    ): WebHookCheckoutPagoUseCase {
+        return WebHookCheckoutPagoUseCase(mudarStatusPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository)
+    }
+
+    @Bean
+    fun webHookCheckoutNaoReceberUseCase(
+        mudarStatusPagamentoUseCase: MudarStatusPagamentoUseCase,
+        mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
+        checkoutRepository: CheckoutRepository
+    ): WebHookCheckoutNaoReceberUseCase {
+        return WebHookCheckoutNaoReceberUseCase(mudarStatusPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository)
+    }
+
 
 //    @Bean
 //    fun clienteService(clienteRepositoryPort: ClienteRepositoryPort): ClienteServicePort {
