@@ -2,7 +2,6 @@ package br.com.fiap.postech.fastfood.domain.usecase.pedido
 
 import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.domain.entity.Pedido
-import br.com.fiap.postech.fastfood.domain.entity.Produto
 import br.com.fiap.postech.fastfood.domain.exception.ClienteNotFoundException
 import br.com.fiap.postech.fastfood.domain.exception.ProdutoPrecoException
 import br.com.fiap.postech.fastfood.domain.repository.ClienteRepository
@@ -15,36 +14,32 @@ class CadastrarPedidoUseCase(
     private val clienteRepository: ClienteRepository
 ) {
     fun executa(pedido: Pedido):Pedido {
-        validarAtualizarCliente(pedido)
+        validarCliente(pedido)
 
-        validarAtualizarProduto(pedido)
+        validarItemProduto(pedido)
 
         return pedidoRepository.cadastrar(pedido)
     }
 
-    private fun validarAtualizarProduto(pedido: Pedido) {
+    private fun validarItemProduto(pedido: Pedido) {
         pedido.itens.apply {
             this.forEach {
                 val produto = produtoRepository.buscaPorId(it.produto.id!!)
+                    ?: throw NotFoundEntityException("O produto ${it.produto.id} não encontrado")
 
-                if(produto == null){
-                    throw NotFoundEntityException("O produto ${it.produto.id} não encontrado")
-                }
-
-                if(produto.preco?.valor != it.preco){
+                produto.preco?.valor.takeIf { valor -> valor == it.preco }.apply {
+                    it.produto = produto
+                }?: run {
                     throw ProdutoPrecoException("O produto ${it.produto.id} está com preço diferente do catálogo")
                 }
-
-                it.produto = Produto(produto.id, produto.descricao, produto.categoria, produto.preco)
             }
         }
     }
 
-    private fun validarAtualizarCliente(pedido: Pedido) {
+    private fun validarCliente( pedido: Pedido ) {
         val cliente = clienteRepository.buscarPorId(pedido.cliente.id!!)
-        if (cliente == null) {
-            throw ClienteNotFoundException("Cliente ${pedido.cliente.id} não encontrado")
-        }
+            ?: throw ClienteNotFoundException("Cliente ${pedido.cliente.id} não encontrado")
+
         pedido.cliente = cliente
     }
 

@@ -29,6 +29,8 @@ data class PedidoResponse(
     var status: String,
     @JsonProperty("itens")
     var itens: List<ItemPedidoResponse>? = mutableListOf(),
+    @JsonProperty("valor_total")
+    var valorTotal: BigDecimal? = BigDecimal.ZERO
 )
 
 data class ItemPedidoRequest(
@@ -74,7 +76,8 @@ fun Pedido.toResponse() =
     PedidoResponse(
         id = this.id,
         cliente = this.cliente.toClienteResponse(),
-        status = this.status.status
+        status = this.status.status,
+        valorTotal = valorTotal()
     ).apply {
         itens = this@toResponse.itens.map { it.toResponse() }
     }
@@ -107,7 +110,8 @@ fun ItemPedido.toItemPedidoSchema(pedidoSchema: PedidoSchema) =
         id = this.id,
         pedido = pedidoSchema,
         produto = this.produto.toProdutoSchema(this.produto.id),
-        preco = this.preco
+        preco = this.preco,
+        quantidade = this.quantidade
     )
 
 fun PedidoSchema.toPedido() =

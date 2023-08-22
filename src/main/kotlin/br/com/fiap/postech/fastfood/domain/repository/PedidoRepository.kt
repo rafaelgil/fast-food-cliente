@@ -8,6 +8,6 @@ interface PedidoRepository {
     fun cadastrar(pedido: Pedido): Pedido
     fun atualizar(pedido: Pedido): Pedido
     fun listar(): List<Pedido>
-    fun busca(id: UUID): Optional<Pedido>
+    fun buscarPorId(id: UUID): Pedido?
     fun existePedido(id: UUID): Boolean
 }

@@ -26,6 +26,7 @@ class ClienteRepositoryImpl(
 
     override fun buscarPorId(id: UUID): Cliente? {
         val opCliente = clienteRepositoryJpa.findById(id)
+
         if(opCliente.isPresent){
             return opCliente.get().toCliente()
         }

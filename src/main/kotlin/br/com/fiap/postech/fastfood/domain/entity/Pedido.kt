@@ -13,7 +13,7 @@ data class Pedido(
     var data: LocalDateTime,
     var status: StatusPedido
 ){
-    fun valorTotal() = BigDecimal.TEN
+    fun valorTotal() = itens.sumOf { BigDecimal(it.quantidade).multiply(it.preco) }
 
     fun mudarStatus(status: StatusPedido) {
 

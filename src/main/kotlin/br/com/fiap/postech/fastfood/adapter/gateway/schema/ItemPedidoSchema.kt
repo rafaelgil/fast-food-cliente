@@ -24,7 +24,7 @@ data class ItemPedidoSchema (
     var preco: BigDecimal,
 
     @Column
-    var quantidade: Int = 1
+    var quantidade: Int
 ) {
     override fun toString(): String {
         return "ItemPedidoSchema(id=$id, pedido=${pedido.id}, produto=${produto.id}, preco=$preco, quantidade=$quantidade)"
