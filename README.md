@@ -78,44 +78,90 @@ curl --location --request DELETE 'http://localhost:8094/produto/6c90811d-08ca-41
 ### Cadastrar Pedido
 ```bash 
 curl --request POST \
-  --url http://localhost:8094/pedido \
+  --url http://localhost:8094/pedidos \
   --header 'Content-Type: application/json' \
   --data '{
-	"id_cliente":"9f961b3d-1f4a-4f5a-a06e-9b6d21daad94",
-	"id_lanche":"d8a0d839-62e6-4b27-a7db-00b58b745385",
-	"id_bebida":"71d73f33-1f1f-44de-baaa-f2b395d27d56",
-	"id_acompanhamento":"699e1dca-62e7-4cd2-8ebe-f82088db1625",
-	"id_sobremesa":"699e1dca-62e7-4cd2-8ebe-f82088db1625"
+	"id_cliente":"13907e60-0971-4856-93ba-7e184916e0e6",
+	"itens": [
+		{
+			"id_produto":"abf2da35-a638-4db6-a553-00a9dfd76e4e",
+			"quantidade": 1,
+			"preco": 39.99
+		},
+		{
+			"id_produto":"a2a22642-e7e1-4cae-9b18-db2f7c0f3f42",
+			"quantidade": 1,
+			"preco": 9.99
+		},
+		{
+			"id_produto":"8e2053d7-d93a-4b4a-ade6-f53c4e043730",
+			"quantidade": 2,
+			"preco": 20.00
+		}
+	]
 }'
 ```
 
-### Atualizar Pedido
-```bash 
-curl --request PUT \
-  --url http://localhost:8094/pedido/1cf5afc9-dbc2-40d6-876c-21214ac25388 \
-  --header 'Content-Type: application/json' \
-  --data '{
-	"id_cliente":"9f961b3d-1f4a-4f5a-a06e-9b6d21daad94",
-	"id_lanche":"d8a0d839-62e6-4b27-a7db-00b58b745385",
-	"id_bebida":"71d73f33-1f1f-44de-baaa-f2b395d27d56",
-	"id_acompanhamento":"699e1dca-62e7-4cd2-8ebe-f82088db1625",
-	"id_sobremesa":"699e1dca-62e7-4cd2-8ebe-f82088db1625"
-}'
-```
-
-### Listar Pedidos
+### Listar Pedido por Id
 ```bash 
 curl --request GET \
-  --url http://localhost:8094/pedido/listar
+  --url http://localhost:8094/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec
 ```
 
-### Gerar Checkout
-```bash
-curl --request POST \
-  --url http://localhost:8094/checkout \
+### Adicionar Item no Pedido
+```bash 
+curl --request PATCH \
+  --url http://localhost:8094/pedidos/aba03d3d-9393-46ae-b1e4-e3c904cb36e6/adicionar-item \
   --header 'Content-Type: application/json' \
   --data '{
-	"id_pedido":"6dde3931-87a7-4c0c-bf68-0a39842c6f11",
-	"forma_pagamento":"PIX"
+		"id_produto":"a91a5d0d-a1a4-43dc-8a73-f8cd1be89425",
+		"quantidade": 2,
+		"preco": 19.99
 }'
 ```
+
+### Remover Item no Pedido
+```bash 
+curl --request PATCH \
+  --url http://localhost:8094/pedidos/aba03d3d-9393-46ae-b1e4-e3c904cb36e6/remover-item \
+  --header 'Content-Type: application/json' \
+  --data '{
+		"id_produto":"a91a5d0d-a1a4-43dc-8a73-f8cd1be89425",
+		"quantidade": 2,
+		"preco": 19.99
+}'
+```
+
+### Finalizar pedido e gerar checkout
+```bash
+curl --request PUT \
+  --url http://localhost:8094/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec/finalizar
+```
+
+### Notificar o recebimento de pagamento
+```bash
+curl --request PUT \
+--url http://localhost:8094/checkouts/76178a33-114f-44d8-b817-c5e06674a0ac/webhook/pagar \
+  --header 'Content-Type: application/json'
+```
+
+### Notificar o não recebimento de pagamento
+```bash
+curl --request PUT \
+--url http://localhost:8094/checkouts/76178a33-114f-44d8-b817-c5e06674a0ac/webhook/nao-receber \
+  --header 'Content-Type: application/json'
+```
+
+### Informar que o pedido saiu para a entrega
+```bash
+curl --request PUT \
+  --url http://localhost:8094/pedidos/5629fa12-50ab-4cda-8236-c41740aca3af/entregar
+```
+
+### Informar que o pedido foi recebido pelo cliente
+```bash
+curl --request PUT \
+  --url http://localhost:8094/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec/confirmar-entrega
+```
+
+

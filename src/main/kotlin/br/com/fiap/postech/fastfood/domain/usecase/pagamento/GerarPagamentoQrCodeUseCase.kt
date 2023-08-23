@@ -9,7 +9,7 @@ import java.util.*
 class GerarPagamentoQrCodeUseCase {
 
     fun executa(pedido: Pedido): Pagamento {
-        val qrCode = gerarQrCode(pedido)
+        val qrCode = gerarFakeQrCode(pedido)
 
         return Pagamento(
             formaPagamento = FormaPagamento.QR_CODE,
@@ -20,7 +20,7 @@ class GerarPagamentoQrCodeUseCase {
         )
     }
 
-    private fun gerarQrCode(pedido: Pedido): String? {
+    private fun gerarFakeQrCode(pedido: Pedido): String? {
         return "QRCODE_" + generateInternal(pedido)
     }
 

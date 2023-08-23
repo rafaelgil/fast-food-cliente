@@ -15,13 +15,8 @@ class AdicionarItemPedidoUseCase(
 ) {
     fun executa(idPedido: UUID, itemPedido: ItemPedido): Pedido {
 
-        val opPedido = pedidoRepository.busca(idPedido)
-
-        if (opPedido.isEmpty) {
-            throw NotFoundEntityException("Pedido ${idPedido} não encontrado")
-        }
-
-        val pedido = opPedido.get()
+        val pedido = pedidoRepository.buscarPorId(idPedido)
+            ?: throw NotFoundEntityException("Pedido ${idPedido} não encontrado")
 
         validarAdicionarItem(pedido, itemPedido)
 
@@ -31,16 +26,13 @@ class AdicionarItemPedidoUseCase(
     private fun validarAdicionarItem(pedido: Pedido, itemPedido: ItemPedido) {
 
         val produto = produtoRepository.buscaPorId(itemPedido.produto.id!!)
+            ?: throw NotFoundEntityException("O produto ${itemPedido.produto.id} não encontrado")
 
-        if (produto == null) {
-            throw NotFoundEntityException("O produto ${itemPedido.produto.id} não encontrado")
-        }
-
-        if (produto.preco?.valor != itemPedido.preco) {
+        produto.preco?.valor.takeIf { valor -> valor == itemPedido.preco }.apply {
+            itemPedido.produto = Produto(produto.id, produto.descricao, produto.categoria, produto.preco)
+        }?: run {
             throw ProdutoPrecoException("O produto ${itemPedido.produto.id} está com preço inválido")
         }
-
-        itemPedido.produto = Produto(produto.id, produto.descricao, produto.categoria, produto.preco)
 
         val itens = mutableListOf<ItemPedido>()
         itens.addAll(pedido.itens.toMutableList())

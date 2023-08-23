@@ -12,10 +12,7 @@ class MudarStatusPagamentoUseCase(
 
     fun executa(qrCodeId: UUID, statusPagamento: StatusPagamento): Pagamento {
         val pagamento = pagamentoRepository.buscarPagamentoPorQrCodeId(qrCodeId)
-
-        if(pagamento == null) {
-            throw NotFoundEntityException("Pagamento com QrCodeId $qrCodeId não encontrado")
-        }
+            ?: throw NotFoundEntityException("Pagamento com QrCodeId $qrCodeId não encontrado")
 
         pagamento.mudarStatus(statusPagamento)
 
