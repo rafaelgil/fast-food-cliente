@@ -4,7 +4,6 @@ import br.com.fiap.postech.fastfood.adapter.gateway.*
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.*
 import br.com.fiap.postech.fastfood.domain.repository.*
 import br.com.fiap.postech.fastfood.domain.usecase.checkout.IniciarCheckoutUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.checkout.WebHookCheckoutNaoReceberUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.checkout.WebHookCheckoutPagoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
@@ -70,8 +69,8 @@ class Configuration {
     }
 
     @Bean
-    fun listarPedidosUseCase(pedidoRepository: PedidoRepository): ListarPedidosUseCase {
-        return ListarPedidosUseCase(pedidoRepository)
+    fun listarPedidosUseCase(pedidoRepository: PedidoRepository): ListarPedidoUseCase {
+        return ListarPedidoUseCase(pedidoRepository)
     }
 
     @Bean
@@ -80,18 +79,6 @@ class Configuration {
                                clienteRepository: ClienteRepository) =
         CadastrarPedidoUseCase(pedidoRepository,
             produtoRepository, clienteRepository)
-
-    @Bean
-    fun adicionarItemPedidoUseCase(pedidoRepository: PedidoRepository,
-                               produtoRepository: ProdutoRepository) =
-        AdicionarItemPedidoUseCase(pedidoRepository,
-            produtoRepository)
-
-    @Bean
-    fun removerItemPedidoUseCase(pedidoRepository: PedidoRepository,
-                                   produtoRepository: ProdutoRepository) =
-        RemoverItemPedidoUseCase(pedidoRepository,
-            produtoRepository)
 
     @Bean
     fun cadastrarClienteUseCase(clienteRepository: ClienteRepository): CadastrarClienteUseCase {
@@ -116,9 +103,10 @@ class Configuration {
     @Bean
     fun iniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase: GerarPagamentoQrCodeUseCase,
          mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
-         checkoutRepository: CheckoutRepository
+         checkoutRepository: CheckoutRepository,
+         cadastrarPedidoUseCase: CadastrarPedidoUseCase
     ): IniciarCheckoutUseCase {
-        return IniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase, mudarStatusPedidoUseCase, checkoutRepository)
+        return IniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase, mudarStatusPedidoUseCase, checkoutRepository, cadastrarPedidoUseCase)
     }
 
     @Bean
@@ -136,16 +124,6 @@ class Configuration {
     ): WebHookCheckoutPagoUseCase {
         return WebHookCheckoutPagoUseCase(mudarStatusPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository)
     }
-
-    @Bean
-    fun webHookCheckoutNaoReceberUseCase(
-        mudarStatusPagamentoUseCase: MudarStatusPagamentoUseCase,
-        mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
-        checkoutRepository: CheckoutRepository
-    ): WebHookCheckoutNaoReceberUseCase {
-        return WebHookCheckoutNaoReceberUseCase(mudarStatusPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository)
-    }
-
 
 //    @Bean
 //    fun clienteService(clienteRepositoryPort: ClienteRepositoryPort): ClienteServicePort {

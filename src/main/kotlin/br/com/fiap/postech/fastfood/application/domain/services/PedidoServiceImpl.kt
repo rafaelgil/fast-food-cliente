@@ -16,7 +16,7 @@ class PedidoServiceImpl(
 
     override fun cadastrar(pedidoDTO: PedidoDTO): PedidoResponseDTO {
         pedidoDTO.data = LocalDateTime.now()
-        pedidoDTO.status = StatusPedido.INICIADO
+        pedidoDTO.status = StatusPedido.AGUARDANDO_PAGAMENTO
 
         return pedidoRepositoryPort.cadastrar(pedidoDTO.toPedidoModel())
     }

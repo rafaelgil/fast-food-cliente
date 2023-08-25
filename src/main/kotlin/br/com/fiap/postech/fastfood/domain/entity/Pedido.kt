@@ -18,20 +18,16 @@ data class Pedido(
     fun mudarStatus(status: StatusPedido) {
 
         when {
-            status == StatusPedido.AGUARDANDO_PAGAMENTO -> {
-                mudarStatusAguardandoPagamento()
+            status == StatusPedido.RECEBIDO -> {
+                mudarStatusRecebido()
             }
 
             status == StatusPedido.EM_PREPARACAO -> {
                 mudarStatusEmPreparacao()
             }
 
-            status == StatusPedido.CANCELADO -> {
-                mudarStatusCancelado()
-            }
-
-            status == StatusPedido.EM_ENTREGA -> {
-                mudarStatusEmEntrega()
+            status == StatusPedido.PRONTO -> {
+                mudarStatusPronto()
             }
 
             status == StatusPedido.FINALIZADO -> {
@@ -40,41 +36,33 @@ data class Pedido(
         }
     }
 
-    private fun mudarStatusAguardandoPagamento() {
-        if( this.status != StatusPedido.INICIADO) {
+    private fun mudarStatusRecebido() {
+        if( this.status != StatusPedido.AGUARDANDO_PAGAMENTO) {
             lancarErroMudancaStatusIncorreto(StatusPedido.AGUARDANDO_PAGAMENTO)
         }
 
-        this.status = StatusPedido.AGUARDANDO_PAGAMENTO
+        this.status = StatusPedido.RECEBIDO
     }
 
     private fun mudarStatusEmPreparacao() {
-        if( this.status != StatusPedido.AGUARDANDO_PAGAMENTO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.EM_PREPARACAO)
+        if( this.status != StatusPedido.RECEBIDO) {
+            lancarErroMudancaStatusIncorreto(StatusPedido.RECEBIDO)
         }
 
         this.status = StatusPedido.EM_PREPARACAO
     }
 
-    private fun mudarStatusCancelado() {
-        if( this.status != StatusPedido.AGUARDANDO_PAGAMENTO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.CANCELADO)
-        }
-
-        this.status = StatusPedido.CANCELADO
-    }
-
-    private fun mudarStatusEmEntrega() {
+    private fun mudarStatusPronto() {
         if( this.status != StatusPedido.EM_PREPARACAO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.EM_ENTREGA)
+            lancarErroMudancaStatusIncorreto(StatusPedido.EM_PREPARACAO)
         }
 
-        this.status = StatusPedido.EM_ENTREGA
+        this.status = StatusPedido.PRONTO
     }
 
     private fun mudarStatusFinalizado() {
-        if( this.status != StatusPedido.EM_ENTREGA) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.FINALIZADO)
+        if( this.status != StatusPedido.PRONTO) {
+            lancarErroMudancaStatusIncorreto(StatusPedido.PRONTO)
         }
 
         this.status = StatusPedido.FINALIZADO

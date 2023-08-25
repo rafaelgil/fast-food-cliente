@@ -33,6 +33,13 @@ data class PedidoResponse(
     var valorTotal: BigDecimal? = BigDecimal.ZERO
 )
 
+data class StatusPedidoResponse(
+    @JsonProperty("id")
+    var id: UUID? = null,
+    var status: String
+)
+
+
 data class ItemPedidoRequest(
     @JsonProperty("id_produto")
     var produtoId: UUID,
@@ -58,7 +65,7 @@ fun PedidoRequest.toPedido(): Pedido {
         id = this.id,
         cliente = Cliente(this.clienteId),
         data = LocalDateTime.now(),
-        status = StatusPedido.INICIADO
+        status = StatusPedido.AGUARDANDO_PAGAMENTO
     ).apply {
         itens = this@toPedido.itens!!.map { it.toItem() }
     }
@@ -81,6 +88,12 @@ fun Pedido.toResponse() =
     ).apply {
         itens = this@toResponse.itens.map { it.toResponse() }
     }
+
+fun Pedido.toStatusResponse() =
+    StatusPedidoResponse(
+        id = this.id,
+        status = this.status.status
+    )
 
 fun ItemPedido.toResponse(): ItemPedidoResponse {
     val produto = this.produto.toProdutoResponse()

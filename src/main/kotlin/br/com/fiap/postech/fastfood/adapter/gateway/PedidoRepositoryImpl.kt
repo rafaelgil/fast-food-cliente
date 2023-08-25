@@ -23,10 +23,11 @@ class PedidoRepositoryImpl(
     override fun buscarPorId(id: UUID): Pedido? {
         val opPedido = pedidoRepositoryJpa.findById(id)
 
-       return opPedido.takeIf { it.isPresent }.let {
-            opPedido.get().toPedido()
-        }
+       if (opPedido.isPresent) {
+           return opPedido.get().toPedido()
+       }
 
+       return null
     }
 
     override fun existePedido(id: UUID): Boolean {

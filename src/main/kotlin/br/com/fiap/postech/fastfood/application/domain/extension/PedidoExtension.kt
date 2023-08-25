@@ -10,7 +10,7 @@ fun PedidoDTO.toPedidoModel(id: UUID? = null) =
         id = id,
         cliente = this.cliente!!.toClienteModel(),
         data = this.data!!,
-        status = StatusPedido.INICIADO,
+        status = StatusPedido.AGUARDANDO_PAGAMENTO,
     )
 
 fun Pedido.toPedidoDTO(): PedidoDTO {
@@ -22,7 +22,7 @@ fun Pedido.toPedidoDTO(): PedidoDTO {
         acompanhamento = null,
         sobremesa = null,
         data = this.data,
-        status = StatusPedido.INICIADO,
+        status = StatusPedido.AGUARDANDO_PAGAMENTO,
         clienteId = null,
         lancheId = null,
         bebidaId = null,
