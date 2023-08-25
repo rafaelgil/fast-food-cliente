@@ -125,29 +125,10 @@ class Configuration {
         return WebHookCheckoutPagoUseCase(mudarStatusPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository)
     }
 
-//    @Bean
-//    fun clienteService(clienteRepositoryPort: ClienteRepositoryPort): ClienteServicePort {
-//        return ClienteServiceImpl(clienteRepositoryPort)
-//    }
-
-//    @Bean
-//    fun produtoService(produtoRepositoryPort: ProdutoRepositoryPort): ProdutoServicePort {
-//        return ProdutoServiceImpl(produtoRepositoryPort)
-//    }
-//
-//    @Bean
-//    fun pedidoService(pedidoRepositoryPort: PedidoRepositoryPort): PedidoServiceImpl {
-//        return PedidoServiceImpl(pedidoRepositoryPort)
-//    }
-//
-//
-//    @Bean
-//    fun checkoutService(checkoutRepositoryPort: CheckoutRepositoryPort, pedidoRepositoryPort: PedidoRepositoryPort, pagamentoServicePort: PagamentoServicePort): CheckoutServicePort {
-//        return CheckoutServiceImpl(checkoutRepositoryPort, pedidoRepositoryPort, pagamentoServicePort)
-//    }
-//
-//    @Bean
-//    fun pagamentoService(pagamentoRepositoryPort: PagamentoRepositoryPort): PagamentoServicePort {
-//        return PagamentoServiceImpl(pagamentoRepositoryPort)
-//    }
+    @Bean
+    fun listarTodosPedidosUseCase(
+        pedidoRepository: PedidoRepository
+    ): ListarTodosPedidosUseCase {
+        return ListarTodosPedidosUseCase(pedidoRepository)
+    }
 }

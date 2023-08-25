@@ -14,7 +14,8 @@ import java.util.*
 class PedidoController (
     private val listarPedidoUseCase: ListarPedidoUseCase,
     private val iniciarCheckoutUseCase: IniciarCheckoutUseCase,
-    private val mudarStatusPedidoUseCase: MudarStatusPedidoUseCase
+    private val mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
+    private val listarTodosPedidosUseCase: ListarTodosPedidosUseCase
 ) {
 
     @PostMapping("/checkout")
@@ -25,6 +26,11 @@ class PedidoController (
     @GetMapping("/{id}")
     fun listar(@PathVariable id: UUID): PedidoResponse {
         return listarPedidoUseCase.execute(id).toResponse()
+    }
+
+    @GetMapping()
+    fun listarTodosPedidos(): List<StatusPedidoResponse> {
+        return listarTodosPedidosUseCase.execute()
     }
 
     @GetMapping("/{id}/status")

@@ -11,6 +11,7 @@ data class Pedido(
     var cliente: Cliente,
     var itens: List<ItemPedido> = mutableListOf(),
     var data: LocalDateTime,
+    var dataRecebimento: LocalDateTime? = null,
     var status: StatusPedido
 ){
     fun valorTotal() = itens.sumOf { BigDecimal(it.quantidade).multiply(it.preco) }
@@ -42,6 +43,7 @@ data class Pedido(
         }
 
         this.status = StatusPedido.RECEBIDO
+        this.dataRecebimento = LocalDateTime.now()
     }
 
     private fun mudarStatusEmPreparacao() {
