@@ -21,6 +21,9 @@ data class PedidoSchema(
     @Column
     var data: LocalDateTime,
 
+    @Column(name = "data_recebimento")
+    var dataRecebimento: LocalDateTime? = null,
+
     @Column
     @Enumerated(EnumType.STRING)
     var status: StatusPedido,

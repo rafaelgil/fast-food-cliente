@@ -33,6 +33,17 @@ data class PedidoResponse(
     var valorTotal: BigDecimal? = BigDecimal.ZERO
 )
 
+data class StatusPedidoResponse(
+    @JsonProperty("id")
+    var id: UUID? = null,
+    var nomeCliente: String,
+    var dataCriacao: LocalDateTime,
+    var dataRecebimento: LocalDateTime?,
+    var status: String,
+    var itens: List<ItemPedidoSimpleResponse> = mutableListOf(),
+)
+
+
 data class ItemPedidoRequest(
     @JsonProperty("id_produto")
     var produtoId: UUID,
@@ -53,12 +64,21 @@ data class ItemPedidoResponse(
     var quantidade: Int
 )
 
+data class ItemPedidoSimpleResponse(
+    @JsonProperty("descricao_produto")
+    var descricaoProduto:String,
+    @JsonProperty("categoria_produto")
+    var categoriaProduto:String,
+    var preco: BigDecimal,
+    var quantidade: Int
+)
+
 fun PedidoRequest.toPedido(): Pedido {
     return Pedido(
         id = this.id,
         cliente = Cliente(this.clienteId),
         data = LocalDateTime.now(),
-        status = StatusPedido.INICIADO
+        status = StatusPedido.AGUARDANDO_PAGAMENTO
     ).apply {
         itens = this@toPedido.itens!!.map { it.toItem() }
     }
@@ -82,6 +102,17 @@ fun Pedido.toResponse() =
         itens = this@toResponse.itens.map { it.toResponse() }
     }
 
+fun Pedido.toStatusResponse() =
+    StatusPedidoResponse(
+        id = this.id,
+        nomeCliente = this.cliente.nome!!.nome,
+        dataCriacao = this.data,
+        status = this.status.status,
+        dataRecebimento = this.dataRecebimento
+    ).apply {
+        itens = this@toStatusResponse.itens.map { it.toSimpleResponse() }
+    }
+
 fun ItemPedido.toResponse(): ItemPedidoResponse {
     val produto = this.produto.toProdutoResponse()
 
@@ -95,12 +126,24 @@ fun ItemPedido.toResponse(): ItemPedidoResponse {
     )
 }
 
+fun ItemPedido.toSimpleResponse(): ItemPedidoSimpleResponse {
+    val produto = this.produto.toProdutoResponse()
+
+    return ItemPedidoSimpleResponse(
+        descricaoProduto = produto.descricao,
+        categoriaProduto = produto.categoria,
+        preco = this.preco,
+        quantidade = this.quantidade
+    )
+}
+
 fun Pedido.toPedidoSchema() =
     PedidoSchema(
         id = this.id,
         data = this.data,
         cliente = ClienteSchema(this.cliente.id, this.cliente.cpf!!.cpf, this.cliente.nome!!.nome, this.cliente.email!!.email),
         status = this.status,
+        dataRecebimento = this.dataRecebimento
     ).apply {
         itens = this@toPedidoSchema.itens.map { it.toItemPedidoSchema(this) }
     }
@@ -120,6 +163,7 @@ fun PedidoSchema.toPedido() =
         data = this.data,
         status = this.status,
         cliente = this.cliente.toCliente(),
+        dataRecebimento = this.dataRecebimento
     ).apply {
         itens = this@toPedido.itens.map { it.toItemPedido() }
     }

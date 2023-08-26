@@ -19,7 +19,7 @@ class WebHookCheckoutPagoUseCase(
 
         val checkout = checkoutRepository.buscarPorPagamento(pagamento.id!!)
 
-        return mudarStatusPedidoUseCase.executa(checkout.pedido.id!!, StatusPedido.EM_PREPARACAO)
+        return mudarStatusPedidoUseCase.executa(checkout.pedido.id!!, StatusPedido.RECEBIDO)
 
     }
 

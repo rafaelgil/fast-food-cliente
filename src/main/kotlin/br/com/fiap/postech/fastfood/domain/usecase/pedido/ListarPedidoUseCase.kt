@@ -4,7 +4,7 @@ import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityE
 import br.com.fiap.postech.fastfood.domain.repository.PedidoRepository
 import java.util.*
 
-class ListarPedidosUseCase(
+class ListarPedidoUseCase(
     private val pedidoRepository: PedidoRepository
 ) {
     fun execute(id: UUID) = pedidoRepository.buscarPorId(id)

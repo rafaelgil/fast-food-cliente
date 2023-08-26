@@ -5,6 +5,7 @@ import br.com.fiap.postech.fastfood.domain.entity.Pagamento
 import br.com.fiap.postech.fastfood.domain.entity.Pedido
 import br.com.fiap.postech.fastfood.domain.repository.CheckoutRepository
 import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoQrCodeUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pedido.MudarStatusPedidoUseCase
 import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 import java.time.LocalDateTime
@@ -13,11 +14,19 @@ import java.util.*
 class IniciarCheckoutUseCase(
     private val gerarPagamentoQrCodeUseCase: GerarPagamentoQrCodeUseCase,
     private val mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
-    private val checkoutRepository: CheckoutRepository
+    private val checkoutRepository: CheckoutRepository,
+    private val cadastrarPedidoUseCase: CadastrarPedidoUseCase
 ) {
-    fun executa(id: UUID): Checkout {
 
-        val pedido = mudarStatusPedidoUseCase.executa(id, StatusPedido.AGUARDANDO_PAGAMENTO)
+    fun executa(pedido: Pedido): Checkout {
+
+        val pedido = cadastrarPedidoUseCase.executa(pedido)
+
+        return criarCheckout(pedido.id!!)
+    }
+
+    private fun criarCheckout(idPedido: UUID): Checkout {
+        val pedido = mudarStatusPedidoUseCase.executa(idPedido, StatusPedido.AGUARDANDO_PAGAMENTO)
 
         val pagamento = gerarPagamentoQrCodeUseCase.executa(pedido = pedido)
 

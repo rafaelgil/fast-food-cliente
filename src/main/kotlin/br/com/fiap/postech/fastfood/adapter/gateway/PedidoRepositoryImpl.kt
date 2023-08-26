@@ -15,18 +15,18 @@ class PedidoRepositoryImpl(
     override fun atualizar(pedido: Pedido) =
         this.cadastrar(pedido)
 
-    override fun listar(): List<Pedido> {
-        TODO("Not yet implemented")
-        //return pedidoRepositoryJpa.findAll().map{ it.toPedido() }
+    override fun listarPedidosRecebidos(): List<Pedido> {
+        return pedidoRepositoryJpa.findAll().map{ it.toPedido() }
     }
 
     override fun buscarPorId(id: UUID): Pedido? {
         val opPedido = pedidoRepositoryJpa.findById(id)
 
-       return opPedido.takeIf { it.isPresent }.let {
-            opPedido.get().toPedido()
-        }
+       if (opPedido.isPresent) {
+           return opPedido.get().toPedido()
+       }
 
+       return null
     }
 
     override fun existePedido(id: UUID): Boolean {
