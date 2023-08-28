@@ -20,9 +20,9 @@ class IniciarCheckoutUseCase(
 
     fun executa(pedido: Pedido): Checkout {
 
-        val pedido = cadastrarPedidoUseCase.executa(pedido)
+        val pedidoCadastrado = cadastrarPedidoUseCase.executa(pedido)
 
-        return criarCheckout(pedido.id!!)
+        return criarCheckout(pedidoCadastrado.id!!)
     }
 
     private fun criarCheckout(idPedido: UUID): Checkout {

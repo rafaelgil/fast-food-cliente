@@ -49,8 +49,8 @@ fun Cliente.toClienteScheme(id: UUID? = null): ClienteSchema {
 fun ClienteSchema.toCliente(): Cliente {
     return Cliente(
         id = this.id,
-        cpf = CPF(this.cpf!!),
-        nome = Nome(this.nome!!),
-        email = Email(this.email!!)
+        cpf = CPF(this.cpf),
+        nome = Nome(this.nome),
+        email = Email(this.email)
     )
 }

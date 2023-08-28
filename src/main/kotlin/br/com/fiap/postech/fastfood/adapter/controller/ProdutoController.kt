@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapter.controller
 
-import br.com.fiap.postech.fastfood.adapter.inbound.extension.toProdutoResponse
 import br.com.fiap.postech.fastfood.adapter.presenter.toProduto
 import br.com.fiap.postech.fastfood.adapter.presenter.toProdutoResponse
 import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualizarProdutoUseCase
@@ -9,7 +8,7 @@ import br.com.fiap.postech.fastfood.domain.usecase.produto.CadastrarProdutoUseCa
 import br.com.fiap.postech.fastfood.domain.usecase.produto.RemoverProdutoUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
+import java.util.*
 
 @RestController
 @RequestMapping("produto")
@@ -39,6 +38,6 @@ class ProdutoController (
 
     @GetMapping("/categoria")
     fun buscarPorCategoria(@RequestParam nome: String): List<br.com.fiap.postech.fastfood.adapter.presenter.ProdutoResponse>? {
-        return buscarProdutoPorCategoriaUseCase.executa(nome)?.map { it.toProdutoResponse() }
+        return buscarProdutoPorCategoriaUseCase.executa(nome).map { it.toProdutoResponse() }
     }
 }
