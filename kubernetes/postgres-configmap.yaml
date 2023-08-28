@@ -6,3 +6,4 @@ metadata:
     app: postgres
 data:
   postgres-dbname: fast-food
+  postgres-url: jdbc:postgresql://dbfastfood:5432/fast-food
