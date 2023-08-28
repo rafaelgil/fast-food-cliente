@@ -39,7 +39,7 @@ data class Pedido(
 
     private fun mudarStatusRecebido() {
         if( this.status != StatusPedido.AGUARDANDO_PAGAMENTO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.AGUARDANDO_PAGAMENTO)
+            lancarErroMudancaStatusIncorreto(StatusPedido.RECEBIDO)
         }
 
         this.status = StatusPedido.RECEBIDO
@@ -48,7 +48,7 @@ data class Pedido(
 
     private fun mudarStatusEmPreparacao() {
         if( this.status != StatusPedido.RECEBIDO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.RECEBIDO)
+            lancarErroMudancaStatusIncorreto(StatusPedido.EM_PREPARACAO)
         }
 
         this.status = StatusPedido.EM_PREPARACAO
@@ -56,7 +56,7 @@ data class Pedido(
 
     private fun mudarStatusPronto() {
         if( this.status != StatusPedido.EM_PREPARACAO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.EM_PREPARACAO)
+            lancarErroMudancaStatusIncorreto(StatusPedido.PRONTO)
         }
 
         this.status = StatusPedido.PRONTO
@@ -64,7 +64,7 @@ data class Pedido(
 
     private fun mudarStatusFinalizado() {
         if( this.status != StatusPedido.PRONTO) {
-            lancarErroMudancaStatusIncorreto(StatusPedido.PRONTO)
+            lancarErroMudancaStatusIncorreto(StatusPedido.FINALIZADO)
         }
 
         this.status = StatusPedido.FINALIZADO

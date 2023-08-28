@@ -75,10 +75,10 @@ curl --location --request DELETE 'http://localhost:8080/produto/6c90811d-08ca-41
 --header 'Content-Type: application/json'
 ```
 
-### Cadastrar Pedido
+### Criar checkout do pedido
 ```bash 
 curl --request POST \
-  --url http://localhost:8080/pedidos \
+  --url http://localhost:8080/pedidos/checkout \
   --header 'Content-Type: application/json' \
   --data '{
 	"id_cliente":"13907e60-0971-4856-93ba-7e184916e0e6",
@@ -102,40 +102,16 @@ curl --request POST \
 }'
 ```
 
-### Listar Pedido por Id
+### Listar pedido por id
 ```bash 
 curl --request GET \
   --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec
 ```
 
-### Adicionar Item no Pedido
+### Acompanhar o status do pedido
 ```bash 
-curl --request PATCH \
-  --url http://localhost:8080/pedidos/aba03d3d-9393-46ae-b1e4-e3c904cb36e6/adicionar-item \
-  --header 'Content-Type: application/json' \
-  --data '{
-		"id_produto":"a91a5d0d-a1a4-43dc-8a73-f8cd1be89425",
-		"quantidade": 2,
-		"preco": 19.99
-}'
-```
-
-### Remover Item no Pedido
-```bash 
-curl --request PATCH \
-  --url http://localhost:8080/pedidos/aba03d3d-9393-46ae-b1e4-e3c904cb36e6/remover-item \
-  --header 'Content-Type: application/json' \
-  --data '{
-		"id_produto":"a91a5d0d-a1a4-43dc-8a73-f8cd1be89425",
-		"quantidade": 2,
-		"preco": 19.99
-}'
-```
-
-### Finalizar pedido e gerar checkout
-```bash
-curl --request PUT \
-  --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec/finalizar
+curl --request GET \
+  --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec
 ```
 
 ### Notificar o recebimento de pagamento
@@ -145,23 +121,22 @@ curl --request PUT \
   --header 'Content-Type: application/json'
 ```
 
-### Notificar o não recebimento de pagamento
+### Mudar o status do pedido para Em Preparação
 ```bash
 curl --request PUT \
---url http://localhost:8080/checkouts/76178a33-114f-44d8-b817-c5e06674a0ac/webhook/nao-receber \
-  --header 'Content-Type: application/json'
+  --url http://localhost:8080/pedidos/ba90138d-0fc1-4555-9e3f-5ca79a8e2cb5/mudar-status/preparacao
 ```
 
-### Informar que o pedido saiu para a entrega
+### Mudar o status do pedido para Pronto
 ```bash
 curl --request PUT \
-  --url http://localhost:8080/pedidos/5629fa12-50ab-4cda-8236-c41740aca3af/entregar
+  --http://localhost:8080/pedidos/ba90138d-0fc1-4555-9e3f-5ca79a8e2cb5/mudar-status/pronto
 ```
 
-### Informar que o pedido foi recebido pelo cliente
+### Mudar o status do pedido para Finalizado
 ```bash
 curl --request PUT \
-  --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec/confirmar-entrega
+  --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec/mudar-status/confirmar-entrega
 ```
 
 
