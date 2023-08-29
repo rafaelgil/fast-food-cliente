@@ -2,10 +2,8 @@ package br.com.fiap.postech.fastfood.domain.usecase.pedido
 
 import br.com.fiap.postech.fastfood.adapter.presenter.StatusPedidoResponse
 import br.com.fiap.postech.fastfood.adapter.presenter.toStatusResponse
-import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.domain.repository.PedidoRepository
 import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
-import java.util.*
 
 class ListarTodosPedidosUseCase(
     private val pedidoRepository: PedidoRepository

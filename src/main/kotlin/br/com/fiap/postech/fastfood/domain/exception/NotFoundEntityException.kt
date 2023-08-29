@@ -1,4 +1,4 @@
-package br.com.fiap.postech.fastfood.application.domain.exception
+package br.com.fiap.postech.fastfood.domain.exception
 
 class NotFoundEntityException(s: String, exception: Exception?): Exception(s, exception)
 {
