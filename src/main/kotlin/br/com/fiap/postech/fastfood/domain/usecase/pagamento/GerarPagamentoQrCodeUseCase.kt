@@ -26,8 +26,8 @@ class GerarPagamentoQrCodeUseCase {
 
     private fun generateInternal(pedido: Pedido): String {
         val sb = StringBuilder()
-        sb.append(pedido.cliente?.nome)
-        sb.append(pedido.cliente?.email)
+        sb.append(pedido.cliente.nome)
+        sb.append(pedido.cliente.email)
         sb.append(pedido.id)
 
         return sb.toString()

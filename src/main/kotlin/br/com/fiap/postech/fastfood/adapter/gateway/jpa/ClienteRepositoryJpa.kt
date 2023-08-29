@@ -1,7 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.gateway.jpa
 
 import br.com.fiap.postech.fastfood.adapter.gateway.schema.ClienteSchema
-import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.ClienteEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

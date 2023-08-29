@@ -1,7 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.gateway.jpa
 
 import br.com.fiap.postech.fastfood.adapter.gateway.schema.ProdutoSchema
-import br.com.fiap.postech.fastfood.adapter.outbound.infrastructure.database.entities.ProdutoEntity
 import br.com.fiap.postech.fastfood.domain.valueObjets.CategoriaProduto
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
