@@ -6,6 +6,7 @@ spec:
   selector:
     matchLabels:
       app: api-fast-food
+  replicas: 3
   template:
     metadata:
       labels:
@@ -14,6 +15,7 @@ spec:
       containers:
         - name: api-fast-food
           image: rafaelcarmonagil/fast-food:2.0
+          imagePullPolicy: "IfNotPresent"
           env:
           - name: spring.profiles.active
             value: kubernetes
