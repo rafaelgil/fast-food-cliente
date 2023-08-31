@@ -114,6 +114,12 @@ curl --request GET \
   --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec
 ```
 
+### Lista de pedidos ordenados por recebimento e por status
+```bash 
+curl --request GET \
+  --url http://localhost:8080/pedidos
+```
+
 ### Notificar o recebimento de pagamento
 ```bash
 curl --request PUT \

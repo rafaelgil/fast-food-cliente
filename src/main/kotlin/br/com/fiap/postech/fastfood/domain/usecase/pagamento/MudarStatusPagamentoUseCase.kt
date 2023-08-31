@@ -1,6 +1,6 @@
 package br.com.fiap.postech.fastfood.domain.usecase.pagamento
 
-import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
+import br.com.fiap.postech.fastfood.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.domain.entity.Pagamento
 import br.com.fiap.postech.fastfood.domain.repository.PagamentoRepository
 import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPagamento

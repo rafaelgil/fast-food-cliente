@@ -1,6 +1,6 @@
 package br.com.fiap.postech.fastfood.domain.usecase.pedido
 
-import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
+import br.com.fiap.postech.fastfood.domain.exception.NotFoundEntityException
 import br.com.fiap.postech.fastfood.domain.entity.Pedido
 import br.com.fiap.postech.fastfood.domain.repository.PedidoRepository
 import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido

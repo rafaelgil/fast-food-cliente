@@ -1,12 +1,6 @@
-package br.com.fiap.postech.fastfood.adapter.inbound.exception
+package br.com.fiap.postech.fastfood.adapter.controller
 
-import br.com.fiap.postech.fastfood.application.domain.exception.AlreadyProcessedException
-import br.com.fiap.postech.fastfood.application.domain.exception.NotFoundEntityException
-import br.com.fiap.postech.fastfood.application.domain.exception.ViolatesUniqueConstraintException
-import br.com.fiap.postech.fastfood.domain.exception.ClienteNotFoundException
-import br.com.fiap.postech.fastfood.domain.exception.PagamentoException
-import br.com.fiap.postech.fastfood.domain.exception.PedidoException
-import br.com.fiap.postech.fastfood.domain.exception.ProdutoPrecoException
+import br.com.fiap.postech.fastfood.domain.exception.*
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.HttpStatus
@@ -118,3 +112,8 @@ class ControllerAdvice() {
         return ResponseEntity(erro, HttpStatus.UNPROCESSABLE_ENTITY)
     }
 }
+
+data class ErrorResponse(
+    var codigoHttp: Int,
+    var mensagem: String
+)
