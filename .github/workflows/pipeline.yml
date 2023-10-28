@@ -36,14 +36,14 @@ jobs:
 
   pre_build:
     steps:
-      run: "echo Logging in to Amazon ECR..."
+      - run: "echo Logging in to Amazon ECR..."
 
 
   build_image:
     steps:
-      run: "echo Build started on `date`"
+      - run: "echo Build started on `date`"
 
 
   post_build:
     steps:
-      run: "echo Build completed on `date`"
+      - run: "echo Build completed on `date`"
