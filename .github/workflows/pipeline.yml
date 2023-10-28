@@ -38,10 +38,6 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-        name: pre_build_image
         run: | 
           echo "Logging in to Amazon ECR..."
           aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
@@ -50,10 +46,6 @@ jobs:
   build_image:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-        name: pre_build_image
         run: |
          echo Build started on `date`
          echo Building the Docker image...
@@ -63,10 +55,6 @@ jobs:
   post_build_image:
     needs: build_image
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-        name: pre_build_image
         run: |
           echo Build completed on `date`
           echo Pushing the Docker image...
