@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
 
       - name: Package
-        run: mvn package -Dmaven.test.skip
+        run: ./gradlew clen build -x test
 
   test:
     needs: build
@@ -23,4 +23,4 @@ jobs:
           fetch-depth: 0
 
       - name: Test
-        run: mvn test
+        run: ./gradlew test
