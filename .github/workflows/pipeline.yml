@@ -17,7 +17,7 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
       - name: Package
-        run: ./gradlew clen build -x test
+        run: ./gradlew clean build -x test
   test:
     needs: build
     runs-on: ubuntu-latest
