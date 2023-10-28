@@ -22,6 +22,12 @@ class ClienteController (
         return cadastrarClienteUseCase.executa(cliente.toCliente()).toClienteResponse()
     }
 
+    @PostMapping("/v2")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun cadastrarClienteV2(@RequestBody cliente: ClienteRequest): ClienteResponse {
+        return cadastrarClienteUseCase.executa(cliente.toCliente()).toClienteResponse()
+    }
+
     @GetMapping
     fun buscarCliente(@RequestParam cpf: String): ClienteResponse {
         return buscarClientePorCPFUseCase.executa(cpf).toClienteResponse()
