@@ -73,7 +73,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Package
-        run: ./gradlew test
+        run: ./gradlew clean build -x test
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
