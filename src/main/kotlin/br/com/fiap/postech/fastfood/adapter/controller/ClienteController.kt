@@ -22,7 +22,7 @@ class ClienteController (
         return cadastrarClienteUseCase.executa(cliente.toCliente()).toClienteResponse()
     }
 
-    @PostMapping("/v2")
+    @PostMapping("/v3")
     @ResponseStatus(HttpStatus.CREATED)
     fun cadastrarClienteV2(@RequestBody cliente: ClienteRequest): ClienteResponse {
         return cadastrarClienteUseCase.executa(cliente.toCliente()).toClienteResponse()
