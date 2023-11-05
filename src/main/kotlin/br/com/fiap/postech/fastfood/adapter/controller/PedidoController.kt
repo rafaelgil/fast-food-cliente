@@ -33,20 +33,20 @@ class PedidoController (
         return listarTodosPedidosUseCase.execute()
     }
 
-    @GetMapping("/{id}/status")
+    @GetMapping("/status/{id}")
     fun consultarStatus(@PathVariable id: UUID): StatusPedidoResponse {
         return listarPedidoUseCase.execute(id).toStatusResponse()
     }
 
-    @PutMapping("/{id}/mudar-status/preparacao")
+    @PutMapping("/mudar-status/preparacao/{id}")
     fun prepararPedido(@PathVariable id: UUID) =
         mudarStatusPedidoUseCase.executa(id, StatusPedido.EM_PREPARACAO).toResponse()
 
-    @PutMapping("/{id}/mudar-status/pronto")
+    @PutMapping("/mudar-status/pronto/{id}")
     fun pedidoPronto(@PathVariable id: UUID) =
         mudarStatusPedidoUseCase.executa(id, StatusPedido.PRONTO).toResponse()
 
-    @PutMapping("/{id}/mudar-status/confirmar-entrega")
+    @PutMapping("/mudar-status/confirmar-entrega/{id}")
     fun confirmarEntrega(@PathVariable id: UUID) =
         mudarStatusPedidoUseCase.executa(id, StatusPedido.FINALIZADO).toResponse()
 }
