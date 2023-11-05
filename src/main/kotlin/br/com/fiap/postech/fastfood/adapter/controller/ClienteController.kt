@@ -1,9 +1,6 @@
 package br.com.fiap.postech.fastfood.adapter.controller
 
-import br.com.fiap.postech.fastfood.adapter.presenter.ClienteRequest
-import br.com.fiap.postech.fastfood.adapter.presenter.ClienteResponse
-import br.com.fiap.postech.fastfood.adapter.presenter.toCliente
-import br.com.fiap.postech.fastfood.adapter.presenter.toClienteResponse
+import br.com.fiap.postech.fastfood.adapter.presenter.*
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
 import org.springframework.http.HttpStatus
