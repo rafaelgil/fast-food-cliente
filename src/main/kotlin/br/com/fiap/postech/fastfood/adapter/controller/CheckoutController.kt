@@ -11,9 +11,9 @@ class CheckoutController (
     private val webHookCheckoutPagoUseCase: WebHookCheckoutPagoUseCase
 ) {
 
-    @PutMapping("/{qrCodeId}/webhook/pagar")
-    fun receberPagamentoPedido(@PathVariable qrCodeId: UUID): PedidoResponse {
-        return webHookCheckoutPagoUseCase.executa(qrCodeId).toResponse()
+    @PutMapping("/webhook/pagar/{id}")
+    fun receberPagamentoPedido(@PathVariable id: UUID): PedidoResponse {
+        return webHookCheckoutPagoUseCase.executa(id).toResponse()
     }
 
 }
