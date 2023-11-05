@@ -145,6 +145,6 @@ curl --request PUT \
   --url http://localhost:8080/pedidos/eee0b41a-f582-4288-8548-9292ac95f2ec/mudar-status/confirmar-entrega
 ```
 
-### Pipeline 3
+### Pipeline 4
 
 
