@@ -9,8 +9,7 @@ import java.util.*
 
 data class CheckoutResponse(
     var id: UUID? = null,
-    @JsonProperty("id_pedido")
-    var pedidoId: UUID,
+    var pedido: PedidoResponse,
     var pagamento: PagamentoResponse,
     var data: LocalDateTime
 )
@@ -34,7 +33,7 @@ fun CheckoutSchema.toCheckout() =
 fun Checkout.toResponse() =
     CheckoutResponse(
         id = this.id,
-        pedidoId = this.pedido.id!!,
+        pedido = this.pedido.toResponse(),
         pagamento = this.pagamento.toResponse(),
         data = this.data
     )

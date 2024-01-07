@@ -1,21 +1,27 @@
 package br.com.fiap.postech.fastfood.frameworks
 
 import br.com.fiap.postech.fastfood.adapter.gateway.*
+import br.com.fiap.postech.fastfood.adapter.gateway.apis.pagamento.PagamentoClient
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.*
 import br.com.fiap.postech.fastfood.domain.repository.*
 import br.com.fiap.postech.fastfood.domain.usecase.checkout.IniciarCheckoutUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.checkout.WebHookCheckoutPagoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoQrCodeUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pagamento.MudarStatusPagamentoUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.*
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.ListarPedidoUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.ListarTodosPedidosUseCase
+import br.com.fiap.postech.fastfood.domain.usecase.pedido.MudarStatusPedidoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.AtualizarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.BuscarProdutoPorCategoriaUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.CadastrarProdutoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.produto.RemoverProdutoUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.client.RestTemplate
+
 
 @Configuration
 class Configuration {
@@ -91,8 +97,8 @@ class Configuration {
     }
 
     @Bean
-    fun gerarPagamentoQrCodeUseCase(): GerarPagamentoQrCodeUseCase {
-        return GerarPagamentoQrCodeUseCase()
+    fun gerarPagamentoQrCodeUseCase(pagamentoClient: PagamentoClient): GerarPagamentoUseCase {
+        return GerarPagamentoUseCase(pagamentoClient)
     }
 
     @Bean
@@ -101,12 +107,12 @@ class Configuration {
     }
 
     @Bean
-    fun iniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase: GerarPagamentoQrCodeUseCase,
-         mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
-         checkoutRepository: CheckoutRepository,
-         cadastrarPedidoUseCase: CadastrarPedidoUseCase
+    fun iniciarCheckoutUseCase(gerarPagamentoUseCase: GerarPagamentoUseCase,
+                               mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
+                               checkoutRepository: CheckoutRepository,
+                               cadastrarPedidoUseCase: CadastrarPedidoUseCase
     ): IniciarCheckoutUseCase {
-        return IniciarCheckoutUseCase(gerarPagamentoQrCodeUseCase, mudarStatusPedidoUseCase, checkoutRepository, cadastrarPedidoUseCase)
+        return IniciarCheckoutUseCase(gerarPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository, cadastrarPedidoUseCase)
     }
 
     @Bean
@@ -130,5 +136,10 @@ class Configuration {
         pedidoRepository: PedidoRepository
     ): ListarTodosPedidosUseCase {
         return ListarTodosPedidosUseCase(pedidoRepository)
+    }
+
+    @Bean
+    fun restTemplate(): RestTemplate {
+        return RestTemplate()
     }
 }
