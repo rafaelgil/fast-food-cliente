@@ -1,4 +1,4 @@
- version: '3'
+version: '3'
 
 services:
   postgres-compose:
@@ -12,8 +12,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres:/data/postgres
-    networks:
-      - postgres-network
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -24,11 +22,9 @@ services:
       - "15432:80"
     depends_on:
       - postgres-compose
-    networks:
-      - postgres-network
 
   localstack:
-    image: localstack/localstack:3.0.0
+    image:  localstack/localstack:0.14.2
     ports:
       - "4566-4584:4566-4584"
       - "8080:8080"
@@ -46,8 +42,8 @@ services:
     entrypoint: /bin/sh -c
     command: >
       "
-        sleep 20;
-        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name notificacao-pagamento-sync.fifo --attributes FifoQueue=true        
+        sleep 20;                
+        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name notificacao-pagamento-sync
       "
     depends_on:
       - localstack
@@ -74,8 +70,9 @@ services:
 #      - postgres-compose
 
 networks:
-  postgres-network:
-    driver: bridge
+  default:
+    external: true
+    name: docker_default
 
 volumes:
   postgres:
