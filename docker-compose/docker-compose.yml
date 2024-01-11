@@ -11,7 +11,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres:/data/postgres
+      - fast-food-postgres:/data/postgres
+    networks:
+      - postgres-network
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -22,6 +24,8 @@ services:
       - "15432:80"
     depends_on:
       - postgres-compose
+    networks:
+      - postgres-network
 
   localstack:
     image:  localstack/localstack:0.14.2
@@ -56,7 +60,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_container:/data/db
+      - fast-food-mongodb:/data/db
 
 #  fast-food:
 #    image: rafaelcarmonagil/fast-food:1.1
@@ -70,10 +74,9 @@ services:
 #      - postgres-compose
 
 networks:
-  default:
-    external: true
-    name: docker_default
+  postgres-network:
+    driver: bridge
 
 volumes:
-  postgres:
-  mongodb_data_container:
+  fast-food-postgres:
+  fast-food-mongodb:

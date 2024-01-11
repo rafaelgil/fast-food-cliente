@@ -1,45 +1,34 @@
 package br.com.fiap.postech.fastfood.domain.usecase.checkout
 
 import br.com.fiap.postech.fastfood.domain.entity.Checkout
-import br.com.fiap.postech.fastfood.domain.entity.Pagamento
 import br.com.fiap.postech.fastfood.domain.entity.Pedido
 import br.com.fiap.postech.fastfood.domain.repository.CheckoutRepository
 import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pedido.CadastrarPedidoUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.pedido.MudarStatusPedidoUseCase
-import br.com.fiap.postech.fastfood.domain.valueObjets.StatusPedido
 import java.time.LocalDateTime
-import java.util.*
 
 class IniciarCheckoutUseCase(
     private val gerarPagamentoUseCase: GerarPagamentoUseCase,
-    private val mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
     private val checkoutRepository: CheckoutRepository,
     private val cadastrarPedidoUseCase: CadastrarPedidoUseCase
 ) {
 
     fun executa(pedido: Pedido): Checkout {
+        val pagamento = gerarPagamentoUseCase.executa(pedido)
+
+        pedido.atualizaPagamento(pagamento)
 
         val pedidoCadastrado = cadastrarPedidoUseCase.executa(pedido)
 
-        return criarCheckout(pedidoCadastrado.id!!)
+        return criarCheckout(pedidoCadastrado)
     }
 
-    private fun criarCheckout(idPedido: UUID): Checkout {
-        val pedido = mudarStatusPedidoUseCase.executa(idPedido, StatusPedido.AGUARDANDO_PAGAMENTO)
-
-        val pagamento = gerarPagamentoUseCase.executa(pedido = pedido)
-
-        val checkout = criarCheckout(pedido, pagamento)
-
-        return checkoutRepository.cadastrar(checkout)
-    }
-
-    private fun criarCheckout(pedido: Pedido, pagamento: Pagamento): Checkout {
-        return Checkout(
+    private fun criarCheckout(pedido: Pedido): Checkout {
+        val checkout = Checkout(
             pedido = pedido,
-            pagamento = pagamento,
             data = LocalDateTime.now()
         );
+
+        return checkoutRepository.cadastrar(checkout)
     }
 }

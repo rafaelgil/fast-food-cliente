@@ -5,6 +5,4 @@ import java.util.UUID
 
 interface CheckoutRepository {
     fun cadastrar(checkout: Checkout): Checkout
-    fun buscarPorPagamento(idPagamento: UUID): Checkout
-
 }

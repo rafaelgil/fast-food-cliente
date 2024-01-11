@@ -5,7 +5,6 @@ import br.com.fiap.postech.fastfood.adapter.gateway.apis.pagamento.PagamentoClie
 import br.com.fiap.postech.fastfood.adapter.gateway.jpa.*
 import br.com.fiap.postech.fastfood.domain.repository.*
 import br.com.fiap.postech.fastfood.domain.usecase.checkout.IniciarCheckoutUseCase
-import br.com.fiap.postech.fastfood.domain.usecase.checkout.WebHookCheckoutPagoUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.cliente.CadastrarClienteUseCase
 import br.com.fiap.postech.fastfood.domain.usecase.pagamento.GerarPagamentoUseCase
@@ -108,11 +107,10 @@ class Configuration {
 
     @Bean
     fun iniciarCheckoutUseCase(gerarPagamentoUseCase: GerarPagamentoUseCase,
-                               mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
                                checkoutRepository: CheckoutRepository,
                                cadastrarPedidoUseCase: CadastrarPedidoUseCase
     ): IniciarCheckoutUseCase {
-        return IniciarCheckoutUseCase(gerarPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository, cadastrarPedidoUseCase)
+        return IniciarCheckoutUseCase(gerarPagamentoUseCase, checkoutRepository, cadastrarPedidoUseCase)
     }
 
     @Bean
@@ -120,15 +118,6 @@ class Configuration {
         pagamentoRepository: PagamentoRepository
     ): MudarStatusPagamentoUseCase {
         return MudarStatusPagamentoUseCase(pagamentoRepository)
-    }
-
-    @Bean
-    fun webHookCheckoutPagoUseCase(
-        mudarStatusPagamentoUseCase: MudarStatusPagamentoUseCase,
-        mudarStatusPedidoUseCase: MudarStatusPedidoUseCase,
-        checkoutRepository: CheckoutRepository
-    ): WebHookCheckoutPagoUseCase {
-        return WebHookCheckoutPagoUseCase(mudarStatusPagamentoUseCase, mudarStatusPedidoUseCase, checkoutRepository)
     }
 
     @Bean

@@ -8,16 +8,9 @@ import java.util.*
 
 data class PedidoPagamentoRequest(
     val id: UUID,
-    val cliente: ClientePedidoRequest,
+    val clienteId: UUID,
     val valor: BigDecimal,
     val destinatarioPix: DestinatarioPixRequest
-)
-
-data class ClientePedidoRequest(
-    val id: UUID,
-    val cpf: String,
-    val nome: String,
-    val email: String
 )
 
 data class DestinatarioPixRequest(
@@ -30,12 +23,7 @@ data class DestinatarioPixRequest(
 fun Pedido.toPagamentoRequest( destinatario: DestinatarioPixRequest) =
     PedidoPagamentoRequest(
         id = id!!,
-        cliente = ClientePedidoRequest(
-            id = cliente.id!!,
-            cpf = cliente.cpf!!.cpf,
-            nome = cliente.nome!!.nome,
-            email = cliente.email!!.email,
-        ),
+        clienteId = cliente.id!!,
         valor = valorTotal(),
         destinatarioPix = destinatario
     )
