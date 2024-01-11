@@ -8,10 +8,9 @@ import java.util.*
 @Entity(name="pedido")
 data class PedidoSchema(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: UUID? = null,
 
-    @OneToMany(mappedBy = "pedido", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "pedido", cascade = [CascadeType.ALL], fetch=FetchType.EAGER)
     var itens: List<ItemPedidoSchema> = mutableListOf(),
 
     @ManyToOne
@@ -27,4 +26,7 @@ data class PedidoSchema(
     @Column
     @Enumerated(EnumType.STRING)
     var status: StatusPedido,
+
+    @Column(name = "pagamento_id")
+    var pagamentoId: UUID? = null,
 )

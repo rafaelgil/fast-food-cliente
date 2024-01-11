@@ -8,6 +8,4 @@ import java.util.*
 @Repository
 interface PagamentoRepositoryJpa : JpaRepository<PagamentoSchema, UUID> {
 
-    fun findByQrCodeId(id: UUID): Optional<PagamentoSchema>
-
 }
