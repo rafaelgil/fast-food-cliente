@@ -24,18 +24,18 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-
 	implementation("org.postgresql:postgresql:42.2.1")
-
 	implementation("org.flywaydb:flyway-core:9.19.4")
-
 	implementation("io.jsonwebtoken:jjwt-api:0.11.1")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.1")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.1")
+
+	implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.1.3.RELEASE")
+	implementation("software.amazon.awssdk:sqs:2.16.24")
+	implementation("com.amazonaws:aws-java-sdk-core:1.11.589")
+	implementation("com.amazonaws:aws-java-sdk:1.11.584")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

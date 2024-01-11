@@ -15,10 +15,6 @@ class CheckoutSchema (
     @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     var pedido: PedidoSchema,
 
-    @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "pagamento_id", referencedColumnName = "id")
-    var pagamento: PagamentoSchema,
-
     var data: LocalDateTime
 
 )

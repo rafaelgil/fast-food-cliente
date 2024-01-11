@@ -12,7 +12,8 @@ data class Pedido(
     var itens: List<ItemPedido> = mutableListOf(),
     var data: LocalDateTime,
     var dataRecebimento: LocalDateTime? = null,
-    var status: StatusPedido
+    var status: StatusPedido,
+    var pagamentoId: UUID? = null,
 ){
     fun valorTotal() = itens.sumOf { BigDecimal(it.quantidade).multiply(it.preco) }
 
@@ -35,6 +36,10 @@ data class Pedido(
                 mudarStatusFinalizado()
             }
         }
+    }
+
+    fun atualizaPagamento(pagamento: Pagamento) {
+        pagamentoId = pagamento.id
     }
 
     private fun mudarStatusRecebido() {
