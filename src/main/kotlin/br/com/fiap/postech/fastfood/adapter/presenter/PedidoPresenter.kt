@@ -30,7 +30,8 @@ data class PedidoResponse(
     @JsonProperty("itens")
     var itens: List<ItemPedidoResponse>? = mutableListOf(),
     @JsonProperty("valor_total")
-    var valorTotal: BigDecimal? = BigDecimal.ZERO
+    var valorTotal: BigDecimal? = BigDecimal.ZERO,
+    var pagamentoId: UUID? = null
 )
 
 data class StatusPedidoResponse(
@@ -75,7 +76,7 @@ data class ItemPedidoSimpleResponse(
 
 fun PedidoRequest.toPedido(): Pedido {
     return Pedido(
-        id = this.id,
+        id = UUID.randomUUID(),
         cliente = Cliente(this.clienteId),
         data = LocalDateTime.now(),
         status = StatusPedido.AGUARDANDO_PAGAMENTO
@@ -97,7 +98,8 @@ fun Pedido.toResponse() =
         id = this.id,
         cliente = this.cliente.toClienteResponse(),
         status = this.status.status,
-        valorTotal = valorTotal()
+        valorTotal = valorTotal(),
+        pagamentoId = pagamentoId
     ).apply {
         itens = this@toResponse.itens.map { it.toResponse() }
     }
@@ -143,7 +145,8 @@ fun Pedido.toPedidoSchema() =
         data = this.data,
         cliente = ClienteSchema(this.cliente.id, this.cliente.cpf!!.cpf, this.cliente.nome!!.nome, this.cliente.email!!.email),
         status = this.status,
-        dataRecebimento = this.dataRecebimento
+        dataRecebimento = this.dataRecebimento,
+        pagamentoId = this.pagamentoId
     ).apply {
         itens = this@toPedidoSchema.itens.map { it.toItemPedidoSchema(this) }
     }
@@ -163,7 +166,8 @@ fun PedidoSchema.toPedido() =
         data = this.data,
         status = this.status,
         cliente = this.cliente.toCliente(),
-        dataRecebimento = this.dataRecebimento
+        dataRecebimento = this.dataRecebimento,
+        pagamentoId = this.pagamentoId
     ).apply {
         itens = this@toPedido.itens.map { it.toItemPedido() }
     }

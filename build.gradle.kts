@@ -31,7 +31,11 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.11.1")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.1")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.1")
-	implementation("software.amazon.awssdk:sqs:2.15.50")
+
+	implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.1.3.RELEASE")
+	implementation("software.amazon.awssdk:sqs:2.16.24")
+	implementation("com.amazonaws:aws-java-sdk-core:1.11.589")
+	implementation("com.amazonaws:aws-java-sdk:1.11.584")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

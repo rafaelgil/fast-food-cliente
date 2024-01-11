@@ -1,4 +1,4 @@
- version: '3'
+version: '3'
 
 services:
   postgres-compose:
@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres:/data/postgres
+      - fast-food-postgres:/data/postgres
     networks:
       - postgres-network
 
@@ -28,10 +28,10 @@ services:
       - postgres-network
 
   localstack:
-    image: localstack/localstack:3.0.0
+    image:  localstack/localstack:0.14.2
     ports:
       - "4566-4584:4566-4584"
-      - "8080:8080"
+      - "8081:8080"
     environment:
       - SERVICES=sqs
     volumes:
@@ -46,8 +46,8 @@ services:
     entrypoint: /bin/sh -c
     command: >
       "
-        sleep 20;
-        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name notificacao-pagamento-sync.fifo --attributes FifoQueue=true        
+        sleep 20;                
+        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name notificacao-pagamento-sync
       "
     depends_on:
       - localstack
@@ -60,7 +60,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_container:/data/db
+      - fast-food-mongodb:/data/db
 
 #  fast-food:
 #    image: rafaelcarmonagil/fast-food:1.1
@@ -78,5 +78,5 @@ networks:
     driver: bridge
 
 volumes:
-  postgres:
-  mongodb_data_container:
+  fast-food-postgres:
+  fast-food-mongodb:

@@ -9,6 +9,4 @@ import java.util.*
 @Repository
 interface CheckoutRepositoryJpa : JpaRepository<CheckoutSchema, UUID> {
 
-    fun findByPagamentoId(idPagamento: UUID): Optional<CheckoutSchema>
-
 }
