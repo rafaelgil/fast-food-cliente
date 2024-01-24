@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+	jacoco
 	id("org.springframework.boot") version "3.1.0"
 	id("io.spring.dependency-management") version "1.1.0"
 	kotlin("jvm") version "1.8.21"
@@ -37,7 +38,18 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-core:1.11.589")
 	implementation("com.amazonaws:aws-java-sdk:1.11.584")
 
+	testImplementation("io.cucumber:cucumber-java:6.10.4")
+	testImplementation("io.cucumber:cucumber-junit:6.10.4")
+
+	testImplementation("io.rest-assured:spring-mock-mvc:5.3.0")
+	testImplementation("io.rest-assured:json-schema-validator:5.3.1")
+	testImplementation("io.rest-assured:rest-assured:5.3.0") {
+		exclude(group = "org.codehaus.groovy", module = "groovy")
+		exclude(group = "org.codehaus.groovy", module = "groovy-xml")
+	}
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("junit:junit:4.13.1")
 }
 
 tasks.withType<KotlinCompile> {
@@ -49,10 +61,75 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+jacoco {
+	toolVersion = "0.8.9"
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+	reports {
+		xml.required = true
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir("jacoco")
+	}
+}
+
+tasks.withType<JacocoCoverageVerification> {
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.map {
+			fileTree(it).apply {
+				exclude(
+						"**/config/**",
+						"**/exception/**",
+						"**/ControllerAdvice.*",
+						"**/FastFoodApplication.*"
+				)
+			}
+		}))
+	}
+}
+
+tasks.withType<JacocoReport> {
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.map {
+			fileTree(it).apply {
+				exclude(
+						"**/config/**",
+						"**/exception/**",
+						"**/ControllerAdvice.*",
+						"**/FastFoodApplication.*"
+				)
+			}
+		}))
+	}
+}
+
+val cucumberRuntime by configurations.creating {
+	extendsFrom(configurations["testImplementation"])
+}
+
+task("cucumber") {
+	dependsOn("assemble", "compileTestJava")
+	doLast {
+		javaexec {
+			mainClass.set("io.cucumber.core.cli.Main")
+			classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
+			args = listOf(
+					"--plugin", "pretty",
+					"--plugin", "html:target/cucumber-report.html",
+					"--glue", "br.com.fiap.postech.fastfood.cliente.bdd",
+					"src/test/resources"
+			)
+			environment("CUCUMBER_PUBLISH_QUIET", true)
+		}
+	}
 }
 
 flyway {
-	url = "jdbc:postgresql://localhost:5432/fast-food"
+	url = "jdbc:postgresql://localhost:5432/fast-food-cliente"
 	user = "postgres"
 	password = "Postgres2023!"
 }
