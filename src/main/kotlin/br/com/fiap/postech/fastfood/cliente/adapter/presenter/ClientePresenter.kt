@@ -54,3 +54,8 @@ fun ClienteSchema.toCliente(): Cliente {
         email = Email(this.email)
     )
 }
+
+data class ClienteAutenticado (
+        var mensagem: String,
+        var token: String?
+)

@@ -1,3 +1,4 @@
+import br.com.fiap.postech.fastfood.cliente.adapter.presenter.ClienteAutenticado
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.ClienteRequest
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.ClienteResponse
 import junit.framework.TestCase.assertEquals
@@ -32,5 +33,16 @@ class ClientePresenterTest {
         assertEquals(clienteRequest.cpf, clienteRequest.cpf)
         assertEquals(clienteRequest.nome, clienteRequest.nome)
         assertEquals(clienteRequest.email, clienteRequest.email)
+    }
+
+    @Test
+    fun `precisaCriarInstanciaClienteAutenticado`() {
+        val clienteAutenticado = ClienteAutenticado("", "",)
+
+        clienteAutenticado.mensagem = "Clienteautenticado"
+        clienteAutenticado.token = "123"
+
+        assertEquals(clienteAutenticado.mensagem, clienteAutenticado.mensagem)
+        assertEquals(clienteAutenticado.token, clienteAutenticado.token)
     }
 }
