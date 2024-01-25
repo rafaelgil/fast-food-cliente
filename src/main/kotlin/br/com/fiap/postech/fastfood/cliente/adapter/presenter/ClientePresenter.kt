@@ -20,11 +20,6 @@ data class ClienteResponse (
     var email: String? = null
 )
 
-data class ClienteAutenticado (
-    var mensagem: String,
-    var token: String?
-)
-
 fun ClienteRequest.toCliente(): Cliente {
     return Cliente(
         cpf = CPF(this.cpf),

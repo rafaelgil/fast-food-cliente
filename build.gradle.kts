@@ -38,6 +38,8 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-core:1.11.589")
 	implementation("com.amazonaws:aws-java-sdk:1.11.584")
 
+	testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+
 	testImplementation("io.cucumber:cucumber-java:6.10.4")
 	testImplementation("io.cucumber:cucumber-junit:6.10.4")
 
@@ -71,9 +73,9 @@ jacoco {
 tasks.jacocoTestReport {
 	dependsOn(tasks.test)
 	reports {
-		xml.required = true
-		csv.required = false
-		html.outputLocation = layout.buildDirectory.dir("jacoco")
+		xml.isEnabled = true
+		csv.isEnabled = false
+		html.destination = file(layout.buildDirectory.dir("jacoco"))
 	}
 }
 
