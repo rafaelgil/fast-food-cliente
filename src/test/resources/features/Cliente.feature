@@ -27,3 +27,8 @@ Funcionalidade: API - Cliente
     Quando realizar a busca por cliente utilizando um CPF inexistente
     Então a API retorna uma mensagem informando que o cliente não foi encontrado
 
+  Cenário: Autenticar um cliente
+    Dado que existe um cliente cadastrado com o CPF "98765432109" e email "joao_autenticacao@gmail.com"
+    Quando realizar a autenticacao desse cliente
+    Então a API retorna uma mensagem informando que o cliente está autenticado
+

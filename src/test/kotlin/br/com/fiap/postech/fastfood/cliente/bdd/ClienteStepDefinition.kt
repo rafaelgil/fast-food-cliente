@@ -21,6 +21,7 @@ class ClienteStepDefinition {
     private var clienteResponse: ClienteResponse? = null
 
     private val ENDPOINT = "http://localhost:8094/cliente"
+    private val ENDPOINT_AUTENTICAR = "http://localhost:8094/autenticar"
 
     @Quando("submeter um novo cliente")
     fun `submeter um novo cliente`(): ClienteResponse {
@@ -131,6 +132,19 @@ class ClienteStepDefinition {
     @Então("a API retorna uma mensagem informando que o cliente não foi encontrado")
     fun `a API retorna uma mensagem informando que o cliente não foi encontrado`() {
         response!!.then().statusCode(HttpStatus.NOT_FOUND.value())
+    }
+
+    @Quando("realizar a autenticacao desse cliente")
+    fun `realizar a autenticacao desse cliente`() {
+        val cpfExistente = "98765432109"
+        response = given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .`when`().get("$ENDPOINT_AUTENTICAR?cpf=$cpfExistente")
+    }
+
+    @Então("a API retorna uma mensagem informando que o cliente está autenticado")
+    fun `a API retorna uma mensagem informando que o cliente está autenticado`() {
+        response!!.then().statusCode(HttpStatus.OK.value())
     }
 
     fun clienteRequest(cpf: String, nome: String, email: String): ClienteRequest {
