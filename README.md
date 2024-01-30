@@ -8,6 +8,8 @@ Sistema de controle de pedidos que permite aos clientes selecionar e fazer os pe
 * Spring Boot Web
 * Docker
 * Docker Compose
+* JaCoCo
+* Cucumber
 
 ## Banco de Dados
 * PostgreSQL
