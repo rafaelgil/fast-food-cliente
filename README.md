@@ -1,4 +1,4 @@
-# fast-food
+# fast-food-cliente
 Sistema de controle de pedidos que permite aos clientes selecionar e fazer os pedidos sem interagir com o atendente e integração com as areas da lanchonete como cozinha e o balcão para recebimento.
 
 ## Tecnologias
