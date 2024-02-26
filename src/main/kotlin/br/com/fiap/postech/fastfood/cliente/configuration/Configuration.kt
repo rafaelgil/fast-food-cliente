@@ -4,6 +4,7 @@ import br.com.fiap.postech.fastfood.cliente.adapter.gateway.*
 import br.com.fiap.postech.fastfood.cliente.adapter.gateway.jpa.*
 import br.com.fiap.postech.fastfood.cliente.domain.repository.*
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,6 +27,11 @@ class Configuration {
     @Bean
     fun buscarClientePorCPFUseCase(clienteRepository: ClienteRepository): BuscarClientePorCPFUseCase {
         return BuscarClientePorCPFUseCase(clienteRepository)
+    }
+
+    @Bean
+    fun buscarClientePorIdUseCase(clienteRepository: ClienteRepository): BuscarClientePorIdUseCase {
+        return BuscarClientePorIdUseCase(clienteRepository)
     }
 
     @Bean

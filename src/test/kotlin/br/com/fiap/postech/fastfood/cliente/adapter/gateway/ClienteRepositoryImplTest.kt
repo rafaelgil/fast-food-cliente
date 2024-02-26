@@ -1,19 +1,17 @@
 package br.com.fiap.postech.fastfood.cliente.adapter.gateway
 
 import br.com.fiap.postech.fastfood.cliente.adapter.gateway.jpa.ClienteRepositoryJpa
-import br.com.fiap.postech.fastfood.cliente.adapter.gateway.schema.ClienteSchema
-import br.com.fiap.postech.fastfood.cliente.adapter.presenter.toCliente
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.toClienteScheme
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
+import br.com.fiap.postech.fastfood.cliente.domain.exception.ClienteNotFoundException
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -44,10 +42,10 @@ class ClienteRepositoryImplTest {
 
         val result = clienteRepositoryImpl.buscarPorId(clienteId)
 
-        assertThat(result?.nome.toString()).isNotEmpty()
-        assertEquals(cliente.nome.toString(), result?.nome.toString())
-        assertEquals(cliente.email.toString(), result?.email.toString())
-        assertEquals(cliente.cpf.toString(), result?.cpf.toString())
+        assertThat(result.nome.toString()).isNotEmpty()
+        assertEquals(cliente.nome.toString(), result.nome.toString())
+        assertEquals(cliente.email.toString(), result.email.toString())
+        assertEquals(cliente.cpf.toString(), result.cpf.toString())
     }
 
     @Test
@@ -56,10 +54,10 @@ class ClienteRepositoryImplTest {
 
         val result = clienteRepositoryImpl.buscarClientePorCpf(clienteCpf)
 
-        assertThat(result?.nome.toString()).isNotEmpty()
-        assertEquals(cliente.nome.toString(), result?.nome.toString())
-        assertEquals(cliente.email.toString(), result?.email.toString())
-        assertEquals(cliente.cpf.toString(), result?.cpf.toString())
+        assertThat(result.nome.toString()).isNotEmpty()
+        assertEquals(cliente.nome.toString(), result.nome.toString())
+        assertEquals(cliente.email.toString(), result.email.toString())
+        assertEquals(cliente.cpf.toString(), result.cpf.toString())
     }
 
     @Test
@@ -81,9 +79,11 @@ class ClienteRepositoryImplTest {
         val nonExistingId = UUID.randomUUID()
         whenever(clienteRepositoryJpa.findById(nonExistingId)).thenReturn(Optional.empty())
 
-        val result = clienteRepositoryImpl.buscarPorId(nonExistingId)
+        Assertions.assertThatThrownBy {
+            clienteRepositoryImpl.buscarPorId(nonExistingId)
+        }.isInstanceOf(ClienteNotFoundException::class.java)
+         .hasMessage("Cliente ${nonExistingId} não encontrado")
 
-        assertEquals(null, result)
     }
 
 }

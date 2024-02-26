@@ -10,5 +10,5 @@ interface ClienteRepository {
 
     fun buscarCPFouEmailDuplicado(cpf: String, email: String): Boolean
 
-    fun buscarPorId(id: UUID): Cliente?
+    fun buscarPorId(id: UUID): Cliente
 }
