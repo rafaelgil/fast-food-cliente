@@ -3,6 +3,7 @@ package br.com.fiap.postech.fastfood.cliente.adapter.controller
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.ClienteRequest
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
@@ -32,6 +33,9 @@ class ClienteControllerTest {
     @Mock
     private lateinit var buscarClientePorCPFUseCase: BuscarClientePorCPFUseCase
 
+    @Mock
+    private lateinit var buscarClientePorIdUseCase: BuscarClientePorIdUseCase
+
     @InjectMocks
     private lateinit var clienteController: ClienteController
 
@@ -43,7 +47,8 @@ class ClienteControllerTest {
         openMocks = MockitoAnnotations.openMocks(this)
         var clienteController = ClienteController(
                 cadastrarClienteUseCase,
-                buscarClientePorCPFUseCase
+                buscarClientePorCPFUseCase,
+                buscarClientePorIdUseCase
         )
 
         mockMvc = MockMvcBuilders.standaloneSetup(clienteController)

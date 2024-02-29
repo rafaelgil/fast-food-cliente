@@ -4,6 +4,7 @@ import br.com.fiap.postech.fastfood.cliente.adapter.gateway.jpa.ClienteRepositor
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.toCliente
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.toClienteScheme
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
+import br.com.fiap.postech.fastfood.cliente.domain.exception.ClienteNotFoundException
 import br.com.fiap.postech.fastfood.cliente.domain.repository.ClienteRepository
 import java.util.*
 
@@ -23,13 +24,7 @@ class ClienteRepositoryImpl(
         return clienteRepositoryJpa.existsCpfOrEmail(cpf, email)
     }
 
-    override fun buscarPorId(id: UUID): Cliente? {
-        val opCliente = clienteRepositoryJpa.findById(id)
+    override fun buscarPorId(id: UUID) =
+        clienteRepositoryJpa.findById(id).orElseThrow{ ClienteNotFoundException("Cliente ${id} não encontrado") }.toCliente()
 
-        if(opCliente.isPresent){
-            return opCliente.get().toCliente()
-        }
-
-        return null
-    }
 }
