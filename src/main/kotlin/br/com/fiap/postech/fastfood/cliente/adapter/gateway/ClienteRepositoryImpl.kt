@@ -16,6 +16,10 @@ class ClienteRepositoryImpl(
         return clienteRepositoryJpa.save(cliente.toClienteScheme()).toCliente()
     }
 
+    override fun atualizar(cliente: Cliente): Cliente {
+        return clienteRepositoryJpa.save(cliente.toClienteScheme(id = cliente.id, status = cliente.status)).toCliente()
+    }
+
     override fun buscarClientePorCpf(cpf: String): Cliente {
         return clienteRepositoryJpa.findByCpf(cpf).toCliente()
     }

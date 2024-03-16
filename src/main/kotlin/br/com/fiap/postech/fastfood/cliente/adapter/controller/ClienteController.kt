@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.cliente.adapter.controller
 
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.*
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.AtualizarStatusClienteUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
@@ -13,7 +14,8 @@ import java.util.UUID
 class ClienteController (
     private val cadastrarClienteUseCase: CadastrarClienteUseCase,
     private val buscarClientePorCPFUseCase: BuscarClientePorCPFUseCase,
-    private val buscarClientePorIdUseCase: BuscarClientePorIdUseCase
+    private val buscarClientePorIdUseCase: BuscarClientePorIdUseCase,
+    private val atualizarStatusClienteUseCase: AtualizarStatusClienteUseCase
 ) {
 
     @PostMapping
@@ -30,5 +32,10 @@ class ClienteController (
     @GetMapping("/{id}")
     fun buscarCliente(@PathVariable id: UUID): ClienteResponse {
         return buscarClientePorIdUseCase.executa(id).toClienteResponse()
+    }
+
+    @PutMapping("/{id}/inativar")
+    fun inativarCliente(@PathVariable id: UUID): ClienteResponse {
+        return atualizarStatusClienteUseCase.executa(id, "INATIVO").toClienteResponse()
     }
 }

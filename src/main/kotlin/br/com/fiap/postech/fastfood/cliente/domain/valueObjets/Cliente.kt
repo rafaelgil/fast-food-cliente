@@ -29,6 +29,34 @@ class Nome(val nome: String) {
     }
 }
 
+class Endereco(val endereco: String) {
+    init {
+        require(!endereco.isNullOrEmpty()) {
+            "Endereco deve ser informado"
+        }
+    }
+
+    override fun toString(): String {
+        return endereco
+    }
+}
+
+class Telefone(val telefone: String) {
+    var regex = Regex("([1-9]{2})|([0-9]{3})?")
+    init {
+        require(!telefone.isNullOrEmpty()) {
+            "Telefone deve ser informado"
+        }
+        require(regex.containsMatchIn(telefone)) {
+            "Telefone deve ser válido"
+        }
+    }
+
+    override fun toString(): String {
+        return telefone
+    }
+}
+
 class Email(val email: String) {
     var regex = Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})")
     init {
