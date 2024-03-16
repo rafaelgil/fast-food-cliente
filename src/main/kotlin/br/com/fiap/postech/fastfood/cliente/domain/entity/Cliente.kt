@@ -9,7 +9,7 @@ data class Cliente (
     var cpf: CPF? = null,
     var nome: Nome? = null,
     var email: Email? = null,
-    var status: String,
+    var status: String = "ATIVO",
     var endereco: Endereco? = null,
     var telefone: Telefone? = null
 ) {

@@ -2,12 +2,11 @@ package br.com.fiap.postech.fastfood.cliente.adapter.controller
 
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.ClienteRequest
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.AtualizarStatusClienteUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
+import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
@@ -36,6 +35,9 @@ class ClienteControllerTest {
     @Mock
     private lateinit var buscarClientePorIdUseCase: BuscarClientePorIdUseCase
 
+    @Mock
+    private lateinit var atualizarStatusClienteUseCase: AtualizarStatusClienteUseCase
+
     @InjectMocks
     private lateinit var clienteController: ClienteController
 
@@ -48,7 +50,8 @@ class ClienteControllerTest {
         var clienteController = ClienteController(
                 cadastrarClienteUseCase,
                 buscarClientePorCPFUseCase,
-                buscarClientePorIdUseCase
+                buscarClientePorIdUseCase,
+                atualizarStatusClienteUseCase
         )
 
         mockMvc = MockMvcBuilders.standaloneSetup(clienteController)
@@ -162,12 +165,16 @@ class ClienteControllerTest {
 fun clienteRequest(
         cpf: String,
         nome: String,
-        email: String
+        email: String,
+        endereco: String = "Rua A, 123",
+        telefone: String = "11999999999"
 ): ClienteRequest {
     return ClienteRequest(
             cpf = cpf,
             nome = nome,
-            email = email
+            email = email,
+            endereco = endereco,
+            telefone = telefone
     )
 }
 
@@ -175,13 +182,17 @@ fun clienteResponse(
         id: UUID,
         cpf: String,
         nome: String,
-        email: String
+        email: String,
+        endereco: String = "Rua A, 123",
+        telefone: String = "11999999999"
 ): Cliente {
     return Cliente(
             id = id,
             cpf = CPF(cpf),
             nome = Nome(nome),
-            email = Email(email)
+            email = Email(email),
+            endereco = Endereco(endereco),
+            telefone = Telefone(telefone)
     )
 }
 

@@ -9,7 +9,7 @@ class ClientePresenterTest {
 
     @Test
     fun `precisaCriarInstanciaClienteRequest`() {
-        val clienteRequest = ClienteRequest("", "", "")
+        val clienteRequest = ClienteRequest("", "", "", "", "")
 
         clienteRequest.cpf = "99999999999"
         clienteRequest.nome = "Joao"
