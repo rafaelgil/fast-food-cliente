@@ -4,9 +4,7 @@ import br.com.fiap.postech.fastfood.cliente.adapter.gateway.jpa.ClienteRepositor
 import br.com.fiap.postech.fastfood.cliente.adapter.presenter.toClienteScheme
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
 import br.com.fiap.postech.fastfood.cliente.domain.exception.ClienteNotFoundException
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
+import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.*
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -29,7 +27,8 @@ class ClienteRepositoryImplTest {
     private val clienteCpf = "12345678901"
     private val clienteNome = "Joa"
     private val clienteEmail = "joao@email.com"
-    private val cliente = Cliente(clienteId, CPF( clienteCpf), Nome(clienteNome), Email(clienteEmail))
+    private val cliente = Cliente(clienteId, CPF( clienteCpf), Nome(clienteNome), Email(clienteEmail), "ATIVO",
+        Endereco("Rua 1"), Telefone("11999999999"))
 
     @BeforeEach
     fun setUp() {

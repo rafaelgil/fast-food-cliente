@@ -18,4 +18,10 @@ class ClienteSchema (
 
     @Column
     var email: String,
+
+    var status: String = "ATIVO",
+
+    var endereco: String,
+
+    var telefone: String
 )

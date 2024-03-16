@@ -151,7 +151,9 @@ class ClienteStepDefinition {
         return ClienteRequest(
             cpf = cpf,
             nome = nome,
-            email = email
+            email = email,
+            endereco = "Rua A, 123",
+            telefone = "11999999999"
         )
     }
 }

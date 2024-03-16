@@ -1,8 +1,10 @@
 package br.com.fiap.postech.fastfood.cliente.configuration
 
+import br.com.fiap.postech.fastfood.adapter.gateway.events.producer.SQSClienteProducer
 import br.com.fiap.postech.fastfood.cliente.adapter.gateway.*
 import br.com.fiap.postech.fastfood.cliente.adapter.gateway.jpa.*
 import br.com.fiap.postech.fastfood.cliente.domain.repository.*
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.AtualizarStatusClienteUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
@@ -22,6 +24,11 @@ class Configuration {
     @Bean
     fun cadastrarClienteUseCase(clienteRepository: ClienteRepository): CadastrarClienteUseCase {
         return CadastrarClienteUseCase(clienteRepository)
+    }
+
+    @Bean
+    fun atualizarClienteUseCase(clienteRepository: ClienteRepository, sqsClienteProducer: SQSClienteProducer): AtualizarStatusClienteUseCase {
+        return AtualizarStatusClienteUseCase(clienteRepository, sqsClienteProducer)
     }
 
     @Bean

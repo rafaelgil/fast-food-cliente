@@ -2,9 +2,7 @@ package br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente
 
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
 import br.com.fiap.postech.fastfood.cliente.domain.repository.ClienteRepository
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
-import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
+import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
 import org.mockito.InjectMocks
@@ -26,7 +24,9 @@ class BuscarClientePorCPFUseCaseTest {
     private val clienteCpf = "12345678901"
     private val clienteNome = "John Doe"
     private val clienteEmail = "john.doe@example.com"
-    private val cliente = Cliente(clienteId, CPF(clienteCpf), Nome(clienteNome), Email(clienteEmail))
+    private val cliente = Cliente(clienteId, CPF(clienteCpf), Nome(clienteNome), Email(clienteEmail), "ATIVO",
+        Endereco("Rua 1"), Telefone("11999999999")
+    )
 
     @BeforeEach
     fun setUp() {
