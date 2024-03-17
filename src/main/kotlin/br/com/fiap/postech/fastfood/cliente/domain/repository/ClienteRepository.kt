@@ -14,5 +14,5 @@ interface ClienteRepository {
 
     fun excluirCliente(cliente: Cliente): Int
 
-    fun buscarClientePorNomeCpfEmail(nome: String, cpf: String, email: String, endereco: String): Cliente
+    fun buscarClientePorNomeCpfEmail(nome: String, cpf: String, email: String, endereco: String, telefone: String): Cliente
 }

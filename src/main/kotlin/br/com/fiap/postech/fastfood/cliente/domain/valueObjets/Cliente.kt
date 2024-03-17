@@ -56,3 +56,15 @@ class Endereco(val endereco: String) {
         return endereco
     }
 }
+
+class Telefone(val telefone: String) {
+    init {
+        require(!telefone.isNullOrEmpty()) {
+            "Endereço deve ser informado"
+        }
+    }
+
+    override fun toString(): String {
+        return telefone
+    }
+}

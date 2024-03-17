@@ -25,7 +25,7 @@ class ClienteStepDefinition {
 
     @Quando("submeter um novo cliente")
     fun `submeter um novo cliente`(): ClienteResponse {
-        val clienteRequest: Any = clienteRequest("12345678901", "João da Silva", "joao@gmail.com", "Endereco")
+        val clienteRequest: Any = clienteRequest("12345678901", "João da Silva", "joao@gmail.com", "Endereco", "99999999999")
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -40,7 +40,7 @@ class ClienteStepDefinition {
 
     @Quando("submeter um novo cliente com email inválido")
     fun `submeter um novo cliente com email inválido`() {
-        val clienteRequest: ClienteRequest = clienteRequest("12345678902", "Maria Oliveira", "maria_email_invalido", "Endereco")
+        val clienteRequest: ClienteRequest = clienteRequest("12345678902", "Maria Oliveira", "maria_email_invalido", "Endereco", "99999999999")
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -54,7 +54,7 @@ class ClienteStepDefinition {
 
     @Dado("que existe um cliente cadastrado com o CPF {string}")
     fun `que existe um cliente cadastrado com o CPF`(cpf: String) {
-        val clienteRequest: ClienteRequest = clienteRequest(cpf, "João da Silva", "joao_cpf_invalido@gmail.com", "Endereco")
+        val clienteRequest: ClienteRequest = clienteRequest(cpf, "João da Silva", "joao_cpf_invalido@gmail.com", "Endereco", "99999999999")
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -64,7 +64,7 @@ class ClienteStepDefinition {
 
     @Quando("submeter um novo cliente com o mesmo CPF {string}")
     fun `submeter um novo cliente com o mesmo CPF`(cpf: String) {
-        val clienteRequest: ClienteRequest = clienteRequest(cpf, "Maria Oliveira", "maria_cpf_invalido@gmail.com", "Endereco")
+        val clienteRequest: ClienteRequest = clienteRequest(cpf, "Maria Oliveira", "maria_cpf_invalido@gmail.com", "Endereco", "99999999999")
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -78,7 +78,7 @@ class ClienteStepDefinition {
 
     @Dado("que existe um cliente cadastrado com o email {string}")
     fun `que existe um cliente cadastrado com o email`(email: String) {
-        val clienteRequest: ClienteRequest = clienteRequest("12345678904", "João da Silva", email, "Endereco")
+        val clienteRequest: ClienteRequest = clienteRequest("12345678904", "João da Silva", email, "Endereco", "99999999999")
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -88,7 +88,7 @@ class ClienteStepDefinition {
 
     @Quando("submeter um novo cliente com o mesmo email {string}")
     fun `submeter um novo cliente com o mesmo email`(email: String) {
-        val clienteRequest: ClienteRequest = clienteRequest("78901234567", "Maria Oliveira", email, "Endereco")
+        val clienteRequest: ClienteRequest = clienteRequest("78901234567", "Maria Oliveira", email, "Endereco", "99999999999")
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -102,7 +102,7 @@ class ClienteStepDefinition {
 
     @Dado("que existe um cliente cadastrado com o CPF {string} e email {string}")
     fun `que existe um cliente cadastrado com o CPF`(cpf: String, email: String) {
-        val clienteRequest: ClienteRequest = clienteRequest(cpf, "Cliente Existente", email, "Endereco")
+        val clienteRequest: ClienteRequest = clienteRequest(cpf, "Cliente Existente", email, "Endereco", "99999999999")
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(clienteRequest)
@@ -147,12 +147,13 @@ class ClienteStepDefinition {
         response!!.then().statusCode(HttpStatus.OK.value())
     }
 
-    fun clienteRequest(cpf: String, nome: String, email: String, endereco: String): ClienteRequest {
+    fun clienteRequest(cpf: String, nome: String, email: String, endereco: String, telefone: String): ClienteRequest {
         return ClienteRequest(
             cpf = cpf,
             nome = nome,
             email = email,
-            endereco = endereco
+            endereco = endereco,
+            telefone = telefone
         )
     }
 }

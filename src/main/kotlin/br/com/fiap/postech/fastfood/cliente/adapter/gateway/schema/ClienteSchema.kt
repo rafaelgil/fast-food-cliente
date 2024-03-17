@@ -24,5 +24,8 @@ class ClienteSchema (
     var endereco: String,
 
     @Column
+    var telefone: String,
+
+    @Column
     var excluidoEm: LocalDateTime? = null,
 )

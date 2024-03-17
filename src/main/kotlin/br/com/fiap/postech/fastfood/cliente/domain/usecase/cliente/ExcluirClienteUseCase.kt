@@ -8,7 +8,7 @@ class ExcluirClienteUseCase(
     private val clienteRepository: ClienteRepository
 ) {
     fun executa(cliente: Cliente): Int {
-        val clienteEncontrado = clienteRepository.buscarClientePorNomeCpfEmail(cliente.nome.toString(), cliente.cpf.toString(), cliente.email.toString(), cliente.endereco.toString())
+        val clienteEncontrado = clienteRepository.buscarClientePorNomeCpfEmail(cliente.nome.toString(), cliente.cpf.toString(), cliente.email.toString(), cliente.endereco.toString(), cliente.telefone.toString())
 
         if (clienteEncontrado == null) {
             throw ClienteNotFoundException("Cliente não encontrado.")
