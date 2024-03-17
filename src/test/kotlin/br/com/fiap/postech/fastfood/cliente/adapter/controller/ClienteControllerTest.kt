@@ -8,6 +8,7 @@ import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClie
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.ExcluirClienteUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
+import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Endereco
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
@@ -64,8 +65,8 @@ class ClienteControllerTest {
 
     @Test
     fun `deveCadastrarUmClienteComSucesso`() {
-        val request = clienteRequest("99999999999", "Joao", "email@email.com")
-        val response = clienteResponse(UUID.randomUUID(), "99999999999", "Joao", "email@email.com")
+        val request = clienteRequest("99999999999", "Joao", "email@email.com", "Endereco")
+        val response = clienteResponse(UUID.randomUUID(), "99999999999", "Joao", "email@email.com", "Endereco")
 
         Mockito.`when`(cadastrarClienteUseCase.executa(any()))
                 .thenReturn(response)
@@ -80,8 +81,8 @@ class ClienteControllerTest {
 
     @Test
     fun `deveBuscarUmClienteExistenteComSucesso`() {
-        val request = clienteRequest("99999999999", "Joao", "email@email.com")
-        val response = clienteResponse(UUID.randomUUID(), "99999999999", "Joao", "email@email.com")
+        val request = clienteRequest("99999999999", "Joao", "email@email.com", "Endereco")
+        val response = clienteResponse(UUID.randomUUID(), "99999999999", "Joao", "email@email.com", "Endereco")
 
         Mockito.`when`(buscarClientePorCPFUseCase.executa(any()))
                 .thenReturn(response)
@@ -97,7 +98,7 @@ class ClienteControllerTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun `deveGerarExcecaoQuandoCadastrarClienteComEmailInvalido`() {
-        val request = clienteRequest("99999999999", "Joao", "email_invalido")
+        val request = clienteRequest("99999999999", "Joao", "email_invalido", "Endereco")
 
         mockMvc.perform(
                 post("/cliente")
@@ -111,7 +112,7 @@ class ClienteControllerTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun `deveGerarExcecaoQuandoCadastrarClienteComEmailVazio`() {
-        val request = clienteRequest("99999999999", "Joao", "")
+        val request = clienteRequest("99999999999", "Joao", "", "Endereco")
 
         mockMvc.perform(
                 post("/cliente")
@@ -125,7 +126,7 @@ class ClienteControllerTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun `deveGerarExcecaoQuandoCadastrarClienteComCpfInvalido`() {
-        val request = clienteRequest("999", "Joao", "email@email.com")
+        val request = clienteRequest("999", "Joao", "email@email.com", "Endereco")
 
         mockMvc.perform(
                 post("/cliente")
@@ -139,7 +140,7 @@ class ClienteControllerTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun `deveGerarExcecaoQuandoCadastrarClienteComCpfVazio`() {
-        val request = clienteRequest("", "Joao", "email@email.com")
+        val request = clienteRequest("", "Joao", "email@email.com", "Endereco")
 
         mockMvc.perform(
                 post("/cliente")
@@ -153,7 +154,7 @@ class ClienteControllerTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun `deveGerarExcecaoQuandoCadastrarClienteComNomeVazio`() {
-        val request = clienteRequest("99999999999", "", "email@email.com")
+        val request = clienteRequest("99999999999", "", "email@email.com", "Endereco")
 
         mockMvc.perform(
                 post("/cliente")
@@ -167,7 +168,7 @@ class ClienteControllerTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun `deveGerarExcecaoQuandoTentaExcluirUmClienteInexistente`() {
-        val request = clienteRequest("99999999999", "JoãoUsuarioExcluido", "email@email.com")
+        val request = clienteRequest("99999999999", "JoãoUsuarioExcluido", "email@email.com", "Endereco")
 
         mockMvc.perform(
                 delete("/cliente/solicitar-exclusao")
@@ -181,12 +182,14 @@ class ClienteControllerTest {
 fun clienteRequest(
         cpf: String,
         nome: String,
-        email: String
+        email: String,
+        endereco: String
 ): ClienteRequest {
     return ClienteRequest(
             cpf = cpf,
             nome = nome,
-            email = email
+            email = email,
+            endereco = endereco
     )
 }
 
@@ -194,13 +197,15 @@ fun clienteResponse(
         id: UUID,
         cpf: String,
         nome: String,
-        email: String
+        email: String,
+        endereco: String
 ): Cliente {
     return Cliente(
             id = id,
             cpf = CPF(cpf),
             nome = Nome(nome),
-            email = Email(email)
+            email = Email(email),
+            endereco = Endereco(endereco)
     )
 }
 

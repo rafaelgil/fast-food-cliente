@@ -6,6 +6,7 @@ import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
 import br.com.fiap.postech.fastfood.cliente.domain.exception.ClienteNotFoundException
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
+import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Endereco
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
@@ -29,7 +30,8 @@ class ClienteRepositoryImplTest {
     private val clienteCpf = "12345678901"
     private val clienteNome = "Joa"
     private val clienteEmail = "joao@email.com"
-    private val cliente = Cliente(clienteId, CPF( clienteCpf), Nome(clienteNome), Email(clienteEmail))
+    private val clienteEndereco = "Endereco"
+    private val cliente = Cliente(clienteId, CPF( clienteCpf), Nome(clienteNome), Email(clienteEmail), Endereco(clienteEndereco))
 
     @BeforeEach
     fun setUp() {
@@ -46,6 +48,7 @@ class ClienteRepositoryImplTest {
         assertEquals(cliente.nome.toString(), result.nome.toString())
         assertEquals(cliente.email.toString(), result.email.toString())
         assertEquals(cliente.cpf.toString(), result.cpf.toString())
+        assertEquals(cliente.endereco.toString(), result.endereco.toString())
     }
 
     @Test
@@ -58,6 +61,7 @@ class ClienteRepositoryImplTest {
         assertEquals(cliente.nome.toString(), result.nome.toString())
         assertEquals(cliente.email.toString(), result.email.toString())
         assertEquals(cliente.cpf.toString(), result.cpf.toString())
+        assertEquals(cliente.endereco.toString(), result.endereco.toString())
     }
 
     @Test

@@ -30,8 +30,8 @@ class ClienteRepositoryImpl(
     override fun excluirCliente(cliente: Cliente): Int =
             clienteRepositoryJpa.excluirLogicamentePorCpf(cliente.cpf.toString())
 
-    override fun buscarClientePorNomeCpfEmail(nome: String, cpf: String, email: String): Cliente {
-        return clienteRepositoryJpa.buscarClientePorNomeCpfEmail(nome, cpf, email).toCliente()
+    override fun buscarClientePorNomeCpfEmail(nome: String, cpf: String, email: String, endereco: String): Cliente {
+        return clienteRepositoryJpa.buscarClientePorNomeCpfEmail(nome, cpf, email, endereco).toCliente()
     }
 
 }

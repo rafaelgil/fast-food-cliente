@@ -41,7 +41,7 @@ class AutenticarControllerTest {
     fun `deveAutenticarUmUsuarioExistente`() {
         val cpfInexistente = "99999999991"
 
-        val response = clienteResponse(UUID.randomUUID(), "99999999999", "Joao", "email@email.com")
+        val response = clienteResponse(UUID.randomUUID(), "99999999999", "Joao", "email@email.com", "Endereco")
 
         Mockito.`when`(buscarClientePorCPFUseCase.executa(any()))
                 .thenReturn(response)

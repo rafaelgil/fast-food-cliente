@@ -26,6 +26,6 @@ interface ClienteRepositoryJpa : JpaRepository<ClienteSchema, UUID> {
     @Query("update cliente c set c.excluidoEm = CURRENT_TIMESTAMP where c.cpf = :cpf")
     fun excluirLogicamentePorCpf(@Param("cpf") cpf: String): Int
 
-    @Query("SELECT c FROM cliente c WHERE c.nome = :nome AND c.cpf = :cpf AND c.email = :email AND c.excluidoEm IS NULL")
-    fun buscarClientePorNomeCpfEmail(@Param("nome") nome: String, @Param("cpf") cpf: String, @Param("email") email: String): ClienteSchema
+    @Query("SELECT c FROM cliente c WHERE c.nome = :nome AND c.cpf = :cpf AND c.email = :email AND c.endereco = :endereco AND c.excluidoEm IS NULL")
+    fun buscarClientePorNomeCpfEmail(@Param("nome") nome: String, @Param("cpf") cpf: String, @Param("email") email: String, @Param("endereco") endereco: String): ClienteSchema
 }

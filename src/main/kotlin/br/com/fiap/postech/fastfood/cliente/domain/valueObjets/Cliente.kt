@@ -44,3 +44,15 @@ class Email(val email: String) {
         return email
     }
 }
+
+class Endereco(val endereco: String) {
+    init {
+        require(!endereco.isNullOrEmpty()) {
+            "Endereço deve ser informado"
+        }
+    }
+
+    override fun toString(): String {
+        return endereco
+    }
+}

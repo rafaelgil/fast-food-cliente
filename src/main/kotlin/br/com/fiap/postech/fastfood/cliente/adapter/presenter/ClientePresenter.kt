@@ -4,27 +4,37 @@ import br.com.fiap.postech.fastfood.cliente.adapter.gateway.schema.ClienteSchema
 import br.com.fiap.postech.fastfood.cliente.domain.entity.Cliente
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.CPF
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Email
+import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Endereco
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.Nome
 import java.util.*
 
 data class ClienteRequest (
     var cpf: String,
     var nome: String,
-    var email: String
+    var email: String,
+    var endereco: String
 )
 
 data class ClienteResponse (
     var id: UUID? = null,
     var cpf: String? = null,
     var nome: String? = null,
-    var email: String? = null
+    var email: String? = null,
+    var endereco: String? = null
+)
+
+data class SolicitarExclusaoRequest (
+        var cpf: String,
+        var nome: String,
+        var endereco: String
 )
 
 fun ClienteRequest.toCliente(): Cliente {
     return Cliente(
         cpf = CPF(this.cpf),
         nome = Nome(this.nome),
-        email = Email(this.email)
+        email = Email(this.email),
+        endereco = Endereco(this.endereco)
     )
 }
 
@@ -33,7 +43,8 @@ fun Cliente.toClienteResponse(): ClienteResponse {
         id = this.id,
         nome = this.nome!!.nome,
         cpf = this.cpf!!.cpf,
-        email = this.email!!.email
+        email = this.email!!.email,
+        endereco = this.endereco!!.endereco
     )
 }
 
@@ -42,7 +53,8 @@ fun Cliente.toClienteScheme(id: UUID? = null): ClienteSchema {
         id = id,
         cpf = this.cpf!!.cpf,
         nome = this.nome!!.nome,
-        email = this.email!!.email
+        email = this.email!!.email,
+        endereco = this.endereco!!.endereco
     )
 }
 
@@ -51,7 +63,8 @@ fun ClienteSchema.toCliente(): Cliente {
         id = this.id,
         cpf = CPF(this.cpf),
         nome = Nome(this.nome),
-        email = Email(this.email)
+        email = Email(this.email),
+        endereco = Endereco(this.endereco)
     )
 }
 

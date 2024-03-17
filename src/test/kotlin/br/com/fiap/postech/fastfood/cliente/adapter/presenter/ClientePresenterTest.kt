@@ -9,15 +9,17 @@ class ClientePresenterTest {
 
     @Test
     fun `precisaCriarInstanciaClienteRequest`() {
-        val clienteRequest = ClienteRequest("", "", "")
+        val clienteRequest = ClienteRequest("", "", "", "")
 
         clienteRequest.cpf = "99999999999"
         clienteRequest.nome = "Joao"
         clienteRequest.email = "joao@email.com"
+        clienteRequest.endereco = "Endereco"
 
         assertEquals(clienteRequest.cpf, clienteRequest.cpf)
         assertEquals(clienteRequest.nome, clienteRequest.nome)
         assertEquals(clienteRequest.email, clienteRequest.email)
+        assertEquals(clienteRequest.endereco, clienteRequest.endereco)
     }
 
     @Test
@@ -28,11 +30,13 @@ class ClientePresenterTest {
         clienteRequest.cpf = "99999999999"
         clienteRequest.nome = "Joao"
         clienteRequest.email = "joao@email.com"
+        clienteRequest.endereco = "Endereco"
 
         assertEquals(clienteRequest.id, clienteRequest.id)
         assertEquals(clienteRequest.cpf, clienteRequest.cpf)
         assertEquals(clienteRequest.nome, clienteRequest.nome)
         assertEquals(clienteRequest.email, clienteRequest.email)
+        assertEquals(clienteRequest.endereco, clienteRequest.endereco)
     }
 
     @Test

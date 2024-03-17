@@ -21,5 +21,8 @@ class ClienteSchema (
     var email: String,
 
     @Column
+    var endereco: String,
+
+    @Column
     var excluidoEm: LocalDateTime? = null,
 )

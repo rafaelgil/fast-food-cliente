@@ -7,7 +7,7 @@ class ClienteSchemaTest {
 
     @Test
     fun `deveSetarAPropriedadeId`() {
-        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com")
+        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com", "Endereço")
 
         clienteSchema.id = UUID.randomUUID()
 
@@ -16,7 +16,7 @@ class ClienteSchemaTest {
 
     @Test
     fun `deveSetarAPropriedadeCpf`() {
-        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com")
+        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com", "Endereço")
 
         clienteSchema.cpf = "12345678901"
 
@@ -25,7 +25,7 @@ class ClienteSchemaTest {
 
     @Test
     fun `deveSetarAPropriedadeNome`() {
-        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com")
+        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com", "Endereço")
 
         clienteSchema.nome = "Maria"
 
@@ -35,7 +35,7 @@ class ClienteSchemaTest {
 
     @Test
     fun `deveSetarAPropriedadeEmail`() {
-        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com")
+        val clienteSchema = ClienteSchema(null, "99999999999", "João", "email@email.com", "Endereço")
 
         clienteSchema.email = "maria@email.com"
 
