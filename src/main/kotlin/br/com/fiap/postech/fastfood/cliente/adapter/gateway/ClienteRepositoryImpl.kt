@@ -31,4 +31,11 @@ class ClienteRepositoryImpl(
     override fun buscarPorId(id: UUID) =
         clienteRepositoryJpa.findById(id).orElseThrow{ ClienteNotFoundException("Cliente ${id} não encontrado") }.toCliente()
 
+    override fun excluirCliente(cliente: Cliente): Int =
+            clienteRepositoryJpa.excluirLogicamentePorCpf(cliente.cpf.toString())
+
+    override fun buscarClientePorNomeCpfEmail(nome: String, cpf: String, email: String): Cliente {
+        return clienteRepositoryJpa.buscarClientePorNomeCpfEmail(nome, cpf, email).toCliente()
+    }
+
 }

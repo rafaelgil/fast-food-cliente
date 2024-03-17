@@ -7,6 +7,7 @@ import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarCliente
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.*
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.ExcluirClienteUseCase
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
@@ -19,6 +20,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -37,6 +39,9 @@ class ClienteControllerTest {
 
     @Mock
     private lateinit var atualizarStatusClienteUseCase: AtualizarStatusClienteUseCase
+    
+    @Mock
+    private lateinit var excluirClienteUseCase: ExcluirClienteUseCase
 
     @InjectMocks
     private lateinit var clienteController: ClienteController
@@ -51,7 +56,8 @@ class ClienteControllerTest {
                 cadastrarClienteUseCase,
                 buscarClientePorCPFUseCase,
                 buscarClientePorIdUseCase,
-                atualizarStatusClienteUseCase
+                atualizarStatusClienteUseCase,
+                excluirClienteUseCase
         )
 
         mockMvc = MockMvcBuilders.standaloneSetup(clienteController)
@@ -159,6 +165,19 @@ class ClienteControllerTest {
         )
                 .andExpect(status().is4xxClientError)
                 .andExpect(MockMvcResultMatchers.jsonPath("$.mensagem").value("Nome deve ser informado"))
+    }
+
+    @Test
+    @Throws(java.lang.Exception::class)
+    fun `deveGerarExcecaoQuandoTentaExcluirUmClienteInexistente`() {
+        val request = clienteRequest("99999999999", "JoãoUsuarioExcluido", "email@email.com")
+
+        mockMvc.perform(
+                delete("/cliente/solicitar-exclusao")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(request))
+        )
+                .andExpect(status().isOk)
     }
 }
 

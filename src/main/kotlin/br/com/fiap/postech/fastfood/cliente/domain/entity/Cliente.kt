@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.cliente.domain.entity
 
 import br.com.fiap.postech.fastfood.cliente.domain.valueObjets.*
+
 import java.util.UUID
 
 data class Cliente (

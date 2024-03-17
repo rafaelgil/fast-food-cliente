@@ -49,3 +49,15 @@ curl --request GET \
   --url 'http://localhost:8080/autenticar?cpf=45612378952' \
   --header 'Content-Type: application/json'
 ```
+
+### Solicitar Exclusão
+ ```bash
+curl --request DELETE \
+  --url 'http://localhost:8080/cliente/solicitar-exclusao' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "cpf":"45612378952",
+    "nome":"João da Silva",
+    "email":"joao@mock.com"
+}'
+```

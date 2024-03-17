@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.cliente.adapter.gateway.schema
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 import java.util.*
 
 @Entity(name = "cliente")
@@ -23,5 +24,8 @@ class ClienteSchema (
 
     var endereco: String,
 
-    var telefone: String
+    var telefone: String,
+
+    @Column
+    var excluidoEm: LocalDateTime? = null
 )
