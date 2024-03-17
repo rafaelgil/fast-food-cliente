@@ -6,6 +6,7 @@ import br.com.fiap.postech.fastfood.cliente.domain.repository.*
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.ExcluirClienteUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.client.RestTemplate
@@ -32,6 +33,11 @@ class Configuration {
     @Bean
     fun buscarClientePorIdUseCase(clienteRepository: ClienteRepository): BuscarClientePorIdUseCase {
         return BuscarClientePorIdUseCase(clienteRepository)
+    }
+
+    @Bean
+    fun excluirClienteUseCase(clienteRepository: ClienteRepository): ExcluirClienteUseCase {
+        return ExcluirClienteUseCase(clienteRepository)
     }
 
     @Bean

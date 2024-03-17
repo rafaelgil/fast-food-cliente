@@ -4,7 +4,9 @@ import br.com.fiap.postech.fastfood.cliente.adapter.presenter.*
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorCPFUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.BuscarClientePorIdUseCase
 import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.CadastrarClienteUseCase
+import br.com.fiap.postech.fastfood.cliente.domain.usecase.cliente.ExcluirClienteUseCase
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.UUID
 
@@ -13,7 +15,8 @@ import java.util.UUID
 class ClienteController (
     private val cadastrarClienteUseCase: CadastrarClienteUseCase,
     private val buscarClientePorCPFUseCase: BuscarClientePorCPFUseCase,
-    private val buscarClientePorIdUseCase: BuscarClientePorIdUseCase
+    private val buscarClientePorIdUseCase: BuscarClientePorIdUseCase,
+    private val excluirClienteUseCase: ExcluirClienteUseCase,
 ) {
 
     @PostMapping
@@ -30,5 +33,19 @@ class ClienteController (
     @GetMapping("/{id}")
     fun buscarCliente(@PathVariable id: UUID): ClienteResponse {
         return buscarClientePorIdUseCase.executa(id).toClienteResponse()
+    }
+
+    @DeleteMapping("/solicitar-exclusao")
+    @ResponseStatus(HttpStatus.OK)
+    fun solicitarExclusaoCliente(@RequestBody dadosCliente: ClienteRequest): ResponseEntity<Map<String, Any>> {
+        excluirClienteUseCase.executa(dadosCliente.toCliente())
+
+        val response = mapOf(
+            "codigoHttp" to HttpStatus.OK.value(),
+            "mensagem" to "Cliente excluído com sucesso.",
+
+        )
+
+        return ResponseEntity.ok(response)
     }
 }

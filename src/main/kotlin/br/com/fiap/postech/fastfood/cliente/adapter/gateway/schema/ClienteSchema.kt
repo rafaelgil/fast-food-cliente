@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.cliente.adapter.gateway.schema
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 import java.util.*
 
 @Entity(name = "cliente")
@@ -18,4 +19,7 @@ class ClienteSchema (
 
     @Column
     var email: String,
+
+    @Column
+    var excluidoEm: LocalDateTime? = null,
 )
