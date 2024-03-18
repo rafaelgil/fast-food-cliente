@@ -32,7 +32,9 @@ docker compose down
 --data-raw '{
     "cpf":"45612378952",
     "nome":"João da Silva",
-    "email":"joao@mock.com"
+    "email":"joao@mock.com",
+    "telefone":"99999999999",
+    "endereco":"R. 10 Qd. 20 Lt. 14"
 }'
 ```
 
@@ -58,6 +60,8 @@ curl --request DELETE \
 --data-raw '{
     "cpf":"45612378952",
     "nome":"João da Silva",
-    "email":"joao@mock.com"
+    "email":"joao@mock.com",
+    "telefone":"99999999999",
+    "endereco":"R. 10 Qd. 20 Lt. 14"
 }'
 ```
